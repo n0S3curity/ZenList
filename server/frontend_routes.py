@@ -1,5 +1,5 @@
 # frontend_routes.py
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, render_template
 
 # Create a Blueprint for frontend routes
 # We'll set a url_prefix of '/' to indicate these are root-level routes,
@@ -22,17 +22,7 @@ def home_page():
 
 @frontend_bp.route('/list', methods=['GET'])
 def shopping_list_page():
-    """
-    Displays the shopping list.
-    In a real app, this would fetch data from /api/list and /api/products
-    and then render an HTML template.
-    """
-    # Example: You would typically fetch data from your backend API here
-    # response = requests.get(f"{request.host_url}api/list")
-    # shopping_list = response.json() if response.status_code == 200 else []
-    # return render_template('list.html', shopping_list=shopping_list)
-    return "<h1>Shopping List</h1><p>Displaying your shopping list here. (Frontend)</p>"
-
+    return render_template('list.html')
 
 @frontend_bp.route('/stats', methods=['GET'])
 def overall_stats_page():
