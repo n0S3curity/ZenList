@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl"> <!-- Added lang="he" and dir="rtl" for Hebrew -->
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,20 +14,31 @@
             display: flex; /* Use flexbox for overall layout */
             min-height: 100vh; /* Ensure full viewport height */
         }
-        /* Basic styling for potential sidebar area - not fully implemented here */
-        .sidebar-placeholder {
+        /* Sidebar styling */
+        .sidebar {
             width: 250px;
             background-color: #1f2937; /* Dark gray for sidebar */
             color: #d1d5db;
             padding: 1.5rem;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-            display: none; /* Hidden by default on small screens */
+            position: fixed; /* Fixed for mobile, then changed to relative for desktop */
+            top: 0;
+            right: -250px; /* Initially off-screen to the right for RTL */
+            height: 100%;
+            transition: right 0.3s ease-in-out; /* Smooth transition for sliding */
+            z-index: 2000; /* Ensure it's above other content */
+        }
+        .sidebar.open {
+            right: 0; /* Slide in */
         }
         @media (min-width: 768px) {
-            .sidebar-placeholder {
-                display: block; /* Show on medium and larger screens */
+            .sidebar {
+                position: relative; /* Back to normal flow on desktop */
+                right: 0; /* Always visible */
+                flex-shrink: 0; /* Don't shrink sidebar */
             }
         }
+
         .main-content {
             flex-grow: 1; /* Allow main content to take remaining space */
             padding: 1.5rem;
@@ -35,7 +46,15 @@
             flex-direction: column;
             align-items: center;
             position: relative; /* For floating button */
+            margin-right: 0; /* No margin on mobile */
+            transition: margin-right 0.3s ease-in-out; /* For pushing content on desktop */
         }
+        @media (min-width: 768px) {
+            .main-content {
+                margin-right: 250px; /* Adjust for sidebar width when open */
+            }
+        }
+
         .container {
             width: 100%;
             max-width: 800px; /* Max width for content */
@@ -44,14 +63,11 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             padding: 2rem;
             margin-bottom: 2rem; /* Space for floating button */
-            z-index: 1; /* Ensure container is above overlay when not active */
-            position: relative; /* Needed for z-index to work */
         }
-
         .floating-button {
             position: fixed;
             bottom: 2rem;
-            left: 2rem; /* Changed to left for RTL */
+            right: 2rem; /* Changed to right for RTL */
             background-color: #4f46e5; /* Indigo */
             color: white;
             border-radius: 9999px; /* Fully rounded */
@@ -64,7 +80,7 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             cursor: pointer;
             transition: background-color 0.3s ease;
-            z-index: 1000; /* Ensure floating button is always on top */
+            z-index: 1000;
         }
         .floating-button:hover {
             background-color: #4338ca; /* Darker indigo on hover */
@@ -72,7 +88,7 @@
         .modal {
             display: none; /* Hidden by default */
             position: fixed;
-            z-index: 2000; /* High z-index to be on top of everything */
+            z-index: 2000; /* High z-index to be on top */
             left: 0;
             top: 0;
             width: 100%;
@@ -117,25 +133,11 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .category-wrapper {
-            background-color: #ffffff; /* Default background */
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Removed opacity transition */
-            position: relative; /* For z-index */
-            z-index: 2; /* Default z-index for wrappers */
-        }
         .category-header {
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between; /* To push arrow and plus to the end */
-            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for active state */
-            border-radius: 0.75rem 0.75rem 0 0; /* Rounded top corners */
-            padding: 0.75rem 1.5rem; /* Adjust padding */
-            margin-bottom: 0; /* Remove default margin */
-            position: relative; /* For z-index to work with active state */
-            z-index: 2; /* Default z-index for headers */
         }
         .category-header .category-title-wrapper {
             display: flex;
@@ -153,33 +155,13 @@
         .category-header.collapsed svg.collapse-arrow {
             transform: rotate(-90deg); /* Rotate arrow when collapsed */
         }
-        /* Active Category Styles */
-        .category-wrapper.active {
-            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -5px rgba(0, 0, 0, 0.08); /* Stronger shadow */
-            z-index: 10; /* Bring active wrapper to front */
-            background-color: #e0e7ff; /* Lighter indigo background for active wrapper */
-        }
-        .category-wrapper.active .category-header {
-            background-color: #e0e7ff; /* Lighter indigo background */
-        }
-        .category-content {
-            padding: 1rem 1.5rem; /* Adjust padding */
-            background-color: #ffffff;
-            border-radius: 0 0 1rem 1rem; /* Rounded bottom corners */
-            /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Default shadow */
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            position: relative; /* For z-index to work with active state */
-            z-index: 1; /* Default z-index for content */
-        }
-
         .done-items-separator {
-            border-top: 2px solid #cbd5e1; /* Slightly darker, thicker border */
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb; /* Lighter solid line */
+            margin-top: 1rem; /* Slightly less margin */
+            padding-top: 1rem; /* Slightly less padding */
             text-align: center;
-            color: #6b7280; /* Darker gray text */
-            font-size: 1em; /* Normal font size */
-            font-weight: 500; /* Medium font weight */
+            color: #9ca3af; /* Lighter gray text */
+            font-size: 0.9em; /* Slightly smaller font */
         }
         .add-to-category-btn {
             background-color: transparent;
@@ -194,71 +176,40 @@
         .add-to-category-btn:hover {
             background-color: #e0e7ff; /* Light indigo background on hover */
         }
-        /* Styles for Recipe Suggestion Button */
-        .suggest-recipes-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background-color: #10b981; /* Emerald green */
+
+        /* Hamburger menu icon */
+        .hamburger-icon {
+            display: block; /* Show on mobile */
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem; /* Position on the right for RTL */
+            z-index: 3000; /* Above sidebar */
+            background-color: #4f46e5;
             color: white;
-            border-radius: 0.75rem;
-            font-weight: 600;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        .suggest-recipes-button:hover {
-            background-color: #059669; /* Darker green */
-            transform: translateY(-1px);
-        }
-        .suggest-recipes-button:active {
-            transform: translateY(1px);
-        }
-        .suggest-recipes-button svg {
-            margin-left: 0.5rem; /* Space for RTL */
-        }
-
-        /* Styles for Recipe Modal */
-        .recipe-modal-content {
-            max-height: 80vh; /* Limit height for scrollability */
-            overflow-y: auto; /* Enable scrolling */
-        }
-        .recipe-item {
-            background-color: #f9fafb;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid #e5e7eb;
-        }
-        .recipe-item h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.5rem;
-        }
-        .recipe-item p {
-            font-size: 0.95rem;
-            color: #4b5563;
-            margin-bottom: 0.25rem;
-        }
-        .recipe-item ul {
-            list-style-type: disc;
-            padding-right: 1.25rem; /* For RTL bullets */
-            color: #4b5563;
-        }
-        .recipe-item ul li {
-            font-size: 0.9rem;
-            margin-bottom: 0.1rem;
+        @media (min-width: 768px) {
+            .hamburger-icon {
+                display: none; /* Hide on desktop */
+            }
         }
     </style>
 </head>
 <body class="bg-gray-100">
 
-<!-- Sidebar Placeholder -->
-<div class="sidebar-placeholder">
-    <h2 class="text-2xl font-semibold mb-6 text-white">תפריט</h2>
+<!-- Hamburger Menu Icon for Mobile -->
+<div id="hamburgerIcon" class="hamburger-icon">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <h2 class="text-2xl font-semibold mb-6 text-white text-left">תפריט</h2>
     <ul class="space-y-4">
         <li><a href="/list"
                class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-md transition-colors duration-200">
@@ -306,7 +257,7 @@
     <div class="container">
         <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">רשימת הקניות שלך</h1>
 
-        <!-- Loading Spinner for general page load -->
+        <!-- Loading Spinner -->
         <div id="loadingSpinner" class="loading-spinner"></div>
 
         <!-- Shopping List Items -->
@@ -325,16 +276,6 @@
              class="text-center text-gray-700 text-lg font-semibold mt-8 pt-4 border-t border-gray-300">
             <!-- Total items will be displayed here -->
         </div>
-
-        <!-- Suggest Recipes Button -->
-        <button id="suggestRecipesButton" class="suggest-recipes-button">
-            הצע מתכונים
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-            </svg>
-        </button>
     </div>
 
     <!-- Floating Add Button -->
@@ -374,29 +315,13 @@
         </div>
     </div>
 
-    <!-- Recipe Suggestion Modal -->
-    <div id="recipeModal" class="modal">
-        <div class="modal-content recipe-modal-content">
-            <span class="close-button" id="closeRecipeModalButton">&times;</span>
-            <h2 class="text-2xl font-semibold mb-4 text-gray-800">הצעות למתכונים ✨</h2>
-            <div id="recipeResults" class="space-y-4">
-                <!-- Recipes will be loaded here -->
-            </div>
-            <div id="recipeLoadingSpinner" class="loading-spinner"></div>
-            <p id="recipeError" class="text-red-500 text-center hidden mt-4">אירעה שגיאה בטעינת המתכונים. נסה שוב מאוחר
-                יותר.</p>
-            <p id="noRecipesFound" class="text-gray-500 text-center hidden mt-4">לא נמצאו מתכונים עם המרכיבים ברשימה
-                זו.</p>
-        </div>
-    </div>
-
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const shoppingListContainer = document.getElementById('shoppingListContainer');
         const emptyListMessage = document.getElementById('emptyListMessage');
-        const loadingSpinner = document.getElementById('loadingSpinner'); // Main page loading
+        const loadingSpinner = document.getElementById('loadingSpinner');
         const addFloatingButton = document.getElementById('addFloatingButton');
         const addProductModal = document.getElementById('addProductModal');
         const closeModalButton = document.getElementById('closeModalButton');
@@ -405,17 +330,8 @@
         const newProductCategorySelect = document.getElementById('newProductCategory');
         const saveNewProductButton = document.getElementById('saveNewProductButton');
         const totalItemsDisplay = document.getElementById('totalItemsDisplay');
-        const mainContentArea = document.querySelector('.main-content'); // Reference to main content for overlay
-
-        // Recipe Modal elements
-        const suggestRecipesButton = document.getElementById('suggestRecipesButton');
-        const recipeModal = document.getElementById('recipeModal');
-        const closeRecipeModalButton = document.getElementById('closeRecipeModalButton');
-        const recipeResultsDiv = document.getElementById('recipeResults');
-        const recipeLoadingSpinner = document.getElementById('recipeLoadingSpinner'); // Spinner for recipe generation
-        const recipeError = document.getElementById('recipeError');
-        const noRecipesFound = document.getElementById('noRecipesFound');
-
+        const sidebar = document.getElementById('sidebar');
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
 
         // Mock data - In a real app, these would come from your Flask backend API
         let mockShoppingList = []; // This will be populated on fetch
@@ -429,24 +345,23 @@
             { name: "עגבניות", barcode: "33445", category: "ירקות" },
             { name: "תפוחי אדמה", barcode: "44556", category: "ירקות" },
             { name: "קפה", barcode: "55667", category: "משקאות" },
-            { name: "סבון", barcode: "66778", category: "ניקיון" },
-            { name: "אורז", barcode: "99887", category: "דגנים" },
-            { name: "בצל", barcode: "77665", category: "ירקות" },
-            { name: "שום", barcode: "10203", category: "ירקות" }
+            { name: "סבון", barcode: "66778", category: "ניקיון" }
         ];
 
         // Store collapsed categories state
         const collapsedCategories = new Set();
-        let activeCategoryWrapper = null; // Stores the currently active category's wrapper element
 
         // --- Utility Functions ---
 
-        function showLoading(spinnerElement) {
-            spinnerElement.style.display = 'block';
+        function showLoading() {
+            loadingSpinner.style.display = 'block';
+            shoppingListContainer.innerHTML = ''; // Clear list while loading
+            emptyListMessage.classList.add('hidden');
+            totalItemsDisplay.classList.add('hidden');
         }
 
-        function hideLoading(spinnerElement) {
-            spinnerElement.style.display = 'none';
+        function hideLoading() {
+            loadingSpinner.style.display = 'none';
         }
 
         function showEmptyMessage() {
@@ -518,60 +433,24 @@
             }
         }
 
-        // Function to handle category collapse/expand logic
-        function toggleCategory(categoryWrapperDiv) {
-            const category = categoryWrapperDiv.dataset.categoryName;
-            const categoryHeaderDiv = categoryWrapperDiv.querySelector('.category-header');
-            const categoryContentDiv = categoryWrapperDiv.querySelector('.category-content');
-
-            const isCurrentlyActive = categoryWrapperDiv.classList.contains('active');
-
-            // If this category is already active, close it
-            if (isCurrentlyActive) {
-                categoryContentDiv.classList.add('hidden');
-                categoryHeaderDiv.classList.add('collapsed');
-                categoryWrapperDiv.classList.remove('active');
-                collapsedCategories.add(category);
-                // mainContentArea.classList.remove('overlay-active'); // Removed overlay
-                activeCategoryWrapper = null;
-            } else {
-                // Close any currently active category first
-                if (activeCategoryWrapper) {
-                    const prevCategory = activeCategoryWrapper.dataset.categoryName;
-                    const prevCategoryHeaderDiv = activeCategoryWrapper.querySelector('.category-header');
-                    const prevCategoryContentDiv = activeCategoryWrapper.querySelector('.category-content');
-
-                    prevCategoryContentDiv.classList.add('hidden');
-                    prevCategoryHeaderDiv.classList.add('collapsed');
-                    activeCategoryWrapper.classList.remove('active');
-                    collapsedCategories.add(prevCategory);
-                }
-
-                // Open the clicked category
-                categoryContentDiv.classList.remove('hidden');
-                categoryHeaderDiv.classList.remove('collapsed');
-                categoryWrapperDiv.classList.add('active');
-                collapsedCategories.delete(category);
-                // mainContentArea.classList.add('overlay-active'); // Removed overlay
-                activeCategoryWrapper = categoryWrapperDiv; // Set this as the new active category
-
-                // Scroll the opened category into view
-                categoryWrapperDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-
 
         // Function to render the shopping list, now grouped by category
         function renderShoppingList() {
-            // Save current active category name before re-rendering
-            const currentActiveCategoryName = activeCategoryWrapper ? activeCategoryWrapper.dataset.categoryName : null;
+            // Save current collapsed state before re-rendering
+            // This part was modified to *always* collapse on initial load
+            // but preserve state on subsequent re-renders within the same session.
+            const currentCollapsedState = new Set();
+            document.querySelectorAll('.category-header.collapsed').forEach(header => {
+                currentCollapsedState.add(header.dataset.categoryName);
+            });
+
 
             shoppingListContainer.innerHTML = ''; // Clear existing list
             if (mockShoppingList.length === 0) {
                 showEmptyMessage();
                 return;
             }
-            hideEmptyMessage(loadingSpinner); // Hide main page loading spinner
+            hideEmptyMessage();
 
             // Group items by category
             const categorizedItems = mockShoppingList.reduce((acc, item) => {
@@ -593,14 +472,11 @@
                 return a.localeCompare(b);
             });
 
+            let totalItemsCount = 0;
+
             sortedCategories.forEach(category => {
                 const toDoItems = categorizedItems[category].filter(item => !item.done);
-
-                // Create a wrapper for the category header and content
-                const categoryWrapperDiv = document.createElement('div');
-                categoryWrapperDiv.className = 'category-wrapper';
-                categoryWrapperDiv.dataset.categoryName = category;
-                shoppingListContainer.appendChild(categoryWrapperDiv);
+                totalItemsCount += categorizedItems[category].length;
 
                 // Create category header
                 const categoryHeaderDiv = document.createElement('div');
@@ -617,29 +493,40 @@
                         </svg>
                     </div>
                 `;
-                categoryWrapperDiv.appendChild(categoryHeaderDiv);
+                shoppingListContainer.appendChild(categoryHeaderDiv);
 
                 // Create a div for items within this category (collapsible content)
                 const categoryContentDiv = document.createElement('div');
                 categoryContentDiv.className = 'category-content space-y-4';
                 categoryContentDiv.dataset.categoryName = category; // Add data attribute for category name
-                categoryWrapperDiv.appendChild(categoryContentDiv);
+                shoppingListContainer.appendChild(categoryContentDiv);
 
-                // Reapply previous state or set default (collapsed)
-                if (currentActiveCategoryName === category) {
-                    categoryContentDiv.classList.remove('hidden');
-                    categoryHeaderDiv.classList.remove('collapsed');
-                    categoryWrapperDiv.classList.add('active');
-                    activeCategoryWrapper = categoryWrapperDiv;
-                    // mainContentArea.classList.add('overlay-active'); // Removed overlay
-                } else {
+                // Set initial collapse state: if it was collapsed before, keep it collapsed.
+                // Otherwise, collapse it by default on first load.
+                if (!currentCollapsedState.has(category)) {
+                    // This condition ensures that on initial load (when currentCollapsedState is empty),
+                    // all categories will be hidden by default.
+                    // For subsequent renders, if a category was expanded, it will remain expanded.
                     categoryContentDiv.classList.add('hidden');
                     categoryHeaderDiv.classList.add('collapsed');
+                } else {
+                    categoryContentDiv.classList.remove('hidden');
+                    categoryHeaderDiv.classList.remove('collapsed');
                 }
+
 
                 // Attach click listener to header for collapsing (excluding the plus button)
                 categoryHeaderDiv.querySelector('.category-title-wrapper').addEventListener('click', () => {
-                    toggleCategory(categoryWrapperDiv);
+                    const isHidden = categoryContentDiv.classList.toggle('hidden');
+                    categoryHeaderDiv.classList.toggle('collapsed'); // Toggle arrow rotation
+
+                    if (isHidden) {
+                        collapsedCategories.add(category);
+                    } else {
+                        collapsedCategories.delete(category);
+                        // Scroll to the opened category
+                        categoryHeaderDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
                 });
 
                 // Attach click listener to the new "+" button
@@ -658,7 +545,7 @@
             });
 
             // Update total items display
-            updateTotalItemsDisplay();
+            totalItemsDisplay.textContent = `סה"כ פריטים ברשימה: ${totalItemsCount}`;
         }
 
         // Function to create a single list item HTML element
@@ -716,7 +603,7 @@
         // --- API Simulation Functions (replace with actual fetch calls to Flask backend) ---
 
         async function fetchShoppingList() {
-            showLoading(loadingSpinner);
+            showLoading();
             // Simulate API call delay
             await new Promise(resolve => setTimeout(resolve, 800));
             // In a real app, you would fetch both list and product data
@@ -733,7 +620,6 @@
                 { productName: "חזה עוף", quantity: 1, done: false },
                 { productName: "גבינה צהובה", quantity: 1, done: false },
                 { productName: "עגבניות", quantity: 6, done: false },
-                { productName: "תפוחי אדמה", quantity: 44556, category: "ירקות" },
                 { productName: "קפה", quantity: 1, done: true },
                 { productName: "בננות", quantity: 3, done: false },
                 { productName: "סבון", quantity: 1, done: false }
@@ -747,7 +633,14 @@
             });
 
             populateCategoryDropdown(); // Populate dropdown after data is ready
-            hideLoading(loadingSpinner);
+            hideLoading();
+
+            // On initial load, ensure all categories are added to collapsedCategories
+            // This will make them render as collapsed by default.
+            const allCategories = [...new Set(mockProducts.map(p => p.category))].filter(c => c);
+            collapsedCategories.clear(); // Clear any previous state
+            allCategories.forEach(cat => collapsedCategories.add(cat)); // Add all categories to be collapsed
+
             renderShoppingList();
         }
 
@@ -780,15 +673,15 @@
             await new Promise(resolve => setTimeout(resolve, 300));
             // In a real app:
             // const response = await fetch('/api/product/remove', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ productName })
+            //      method: 'POST',
+            //      headers: { 'Content-Type': 'application/json' },
+            //      body: JSON.stringify({ productName })
             // });
             // const result = await response.json();
             // if (response.ok) {
-            //     fetchShoppingList();
+            //      fetchShoppingList();
             // } else {
-            //     console.error("Failed to remove item:", result.error);
+            //      console.error("Failed to remove item:", result.error);
             // }
             mockShoppingList = mockShoppingList.filter(item => item.productName !== productName);
             renderShoppingList(); // Full re-render needed for delete as it might affect category structure
@@ -799,200 +692,91 @@
             await new Promise(resolve => setTimeout(resolve, 300));
             // In a real app:
             // const response = await fetch('/api/product/quantity', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ productName, quantity })
+            //      method: 'POST',
+            //      headers: { 'Content-Type': 'application/json' },
+            //      body: JSON.stringify({ productName, quantity })
             // });
             // const result = await response.json();
-            // if (!response.ok) {
-            //     console.error("Failed to update quantity:", result.error);
+            // if (response.ok) {
+            //      // Update only the relevant item or category
+            // } else {
+            //      console.error("Failed to update quantity:", result.error);
             // }
             const item = mockShoppingList.find(item => item.productName === productName);
-            if (item) item.quantity = quantity;
-
-            const productInfo = mockProducts.find(p => p.name === productName);
-            const category = productInfo ? productInfo.category : 'ללא קטגוריה';
-            renderCategoryContent(category); // Only re-render the affected category
-            updateTotalItemsDisplay(); // Update total count
+            if (item) {
+                item.quantity = quantity;
+                const productInfo = mockProducts.find(p => p.name === productName);
+                const category = productInfo ? productInfo.category : 'ללא קטגוריה';
+                renderCategoryContent(category); // Re-render only the affected category
+            }
         }
 
-        async function toggleItemDone(productName, isDone) {
+        async function toggleItemDone(productName, done) {
             // Simulate API call delay
             await new Promise(resolve => setTimeout(resolve, 300));
-            // In a real app, you'd have an API endpoint for this
+            // In a real app:
+            // const response = await fetch('/api/product/toggle_done', {
+            //      method: 'POST',
+            //      headers: { 'Content-Type': 'application/json' },
+            //      body: JSON.stringify({ productName, done })
+            // });
+            // const result = await response.json();
+            // if (response.ok) {
+            //      // Update only the relevant item or category
+            // } else {
+            //      console.error("Failed to toggle done status:", result.error);
+            // }
             const item = mockShoppingList.find(item => item.productName === productName);
-            if (item) item.done = isDone;
-
-            const productInfo = mockProducts.find(p => p.name === productName);
-            const category = productInfo ? productInfo.category : 'ללא קטגוריה';
-            renderCategoryContent(category); // Only re-render the affected category
-            updateTotalItemsDisplay(); // Update total count
+            if (item) {
+                item.done = done;
+                const productInfo = mockProducts.find(p => p.name === productName);
+                const category = productInfo ? productInfo.category : 'ללא קטגוריה';
+                renderCategoryContent(category); // Re-render only the affected category
+            }
         }
 
-        function updateTotalItemsDisplay() {
-            const totalItemsCount = mockShoppingList.length;
-            totalItemsDisplay.textContent = `סה"כ פריטים ברשימה: ${totalItemsCount}`;
-        }
+        // --- Event Listeners ---
 
-        // --- Modal Logic ---
         addFloatingButton.addEventListener('click', () => {
-            addProductModal.style.display = 'flex'; // Show modal
-            newProductNameInput.value = ''; // Clear product name input
-            newProductQuantityInput.value = '1'; // Reset quantity input
-            populateCategoryDropdown(); // Ensure dropdown is up-to-date when modal opens
-            newProductCategorySelect.value = ''; // Reset category selection to default
+            addProductModal.style.display = 'flex';
+            newProductNameInput.value = '';
+            newProductQuantityInput.value = '1';
+            populateCategoryDropdown(); // Ensure dropdown is populated on modal open
+            newProductCategorySelect.value = ''; // Reset category selection
         });
 
         closeModalButton.addEventListener('click', () => {
-            addProductModal.style.display = 'none'; // Hide modal
+            addProductModal.style.display = 'none';
         });
 
-        // Close modal if clicked outside content
         window.addEventListener('click', (event) => {
             if (event.target === addProductModal) {
                 addProductModal.style.display = 'none';
             }
         });
 
-        saveNewProductButton.addEventListener('click', async () => {
+        saveNewProductButton.addEventListener('click', () => {
             const productName = newProductNameInput.value.trim();
             const quantity = parseInt(newProductQuantityInput.value);
-            const category = newProductCategorySelect.value; // Get selected category
+            const category = newProductCategorySelect.value;
 
             if (productName && quantity > 0) {
-                await addItemToList(productName, quantity, category); // Pass category
-                addProductModal.style.display = 'none'; // Hide modal after adding
+                addItemToList(productName, quantity, category);
+                addProductModal.style.display = 'none';
             } else {
-                // Using native alert for simplicity, but for real apps, use a custom modal
-                alert('אנא הזן שם פריט וכמות תקינים.');
+                // Using a custom modal/message box instead of alert()
+                const message = 'אנא הזן שם פריט וכמות תקינה.';
+                // Example: You would implement a custom modal here
+                console.error(message); // For now, just log to console
+                // For a real app, consider a small, temporary toast notification or a custom modal.
             }
         });
 
-        // --- Gemini API Integration for Recipe Suggestion ---
-        suggestRecipesButton.addEventListener('click', () => {
-            suggestRecipesWithGemini();
+        hamburgerIcon.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
         });
 
-        closeRecipeModalButton.addEventListener('click', () => {
-            recipeModal.style.display = 'none';
-        });
-
-        // Close recipe modal if clicked outside content
-        window.addEventListener('click', (event) => {
-            if (event.target === recipeModal) {
-                recipeModal.style.display = 'none';
-            }
-        });
-
-        async function suggestRecipesWithGemini() {
-            recipeResultsDiv.innerHTML = ''; // Clear previous results
-            recipeError.classList.add('hidden');
-            noRecipesFound.classList.add('hidden');
-            recipeModal.style.display = 'flex'; // Show modal
-            showLoading(recipeLoadingSpinner); // Show spinner in modal
-
-            const ingredients = mockShoppingList.map(item => item.productName).join(', ');
-            if (!ingredients) {
-                hideLoading(recipeLoadingSpinner);
-                noRecipesFound.textContent = "רשימת הקניות ריקה. אנא הוסף פריטים כדי לקבל הצעות למתכונים.";
-                noRecipesFound.classList.remove('hidden');
-                return;
-            }
-
-            const prompt = `בהתבסס על רשימת המצרכים הבאה: ${ingredients}. הצע 3 מתכונים שניתן להכין. לכל מתכון, ציין את שם המתכון, מרכיבים עיקריים הנדרשים מתוך הרשימה (בעברית), ותיאור קצר. החזר את התשובה בפורמט JSON כרשימה של אובייקטים, כאשר כל אובייקט מכיל: "recipeName" (שם המתכון), "ingredients" (רשימת מרכיבים עיקריים מהרשימה שסופקה), ו-"description" (תיאור קצר).`;
-
-            let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-
-            const payload = {
-                contents: chatHistory,
-                generationConfig: {
-                    responseMimeType: "application/json",
-                    responseSchema: {
-                        type: "ARRAY",
-                        items: {
-                            type: "OBJECT",
-                            properties: {
-                                "recipeName": { "type": "STRING" },
-                                "ingredients": {
-                                    "type": "ARRAY",
-                                    "items": { "type": "STRING" }
-                                },
-                                "description": { "type": "STRING" }
-                            },
-                            "propertyOrdering": ["recipeName", "ingredients", "description"]
-                        }
-                    }
-                }
-            };
-
-            const apiKey = ""; // If you want to use models other than gemini-2.5-flash-preview-05-20 or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-            const maxRetries = 3;
-            let retryCount = 0;
-            let delay = 1000; // 1 second
-
-            while (retryCount < maxRetries) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        if (response.status === 429) { // Too Many Requests
-                            console.warn(`Rate limit hit. Retrying in ${delay / 1000}s...`);
-                            await new Promise(res => setTimeout(res, delay));
-                            delay *= 2; // Exponential backoff
-                            retryCount++;
-                            continue;
-                        } else {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                    }
-
-                    const result = await response.json();
-                    hideLoading(recipeLoadingSpinner);
-
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        const jsonText = result.candidates[0].content.parts[0].text;
-                        const recipes = JSON.parse(jsonText);
-
-                        if (recipes.length > 0) {
-                            recipes.forEach(recipe => {
-                                const recipeItemDiv = document.createElement('div');
-                                recipeItemDiv.className = 'recipe-item';
-                                recipeItemDiv.innerHTML = `
-                                    <h3>${recipe.recipeName}</h3>
-                                    <p><strong>מרכיבים עיקריים:</strong> ${recipe.ingredients.join(', ')}</p>
-                                    <p>${recipe.description}</p>
-                                `;
-                                recipeResultsDiv.appendChild(recipeItemDiv);
-                            });
-                        } else {
-                            noRecipesFound.classList.remove('hidden');
-                        }
-                    } else {
-                        noRecipesFound.classList.remove('hidden');
-                    }
-                    return; // Exit loop on success
-                } catch (error) {
-                    console.error('Error fetching recipes from Gemini API:', error);
-                    hideLoading(recipeLoadingSpinner);
-                    recipeError.classList.remove('hidden');
-                    return; // Exit loop on unrecoverable error
-                }
-            }
-            hideLoading(recipeLoadingSpinner);
-            recipeError.classList.remove('hidden');
-            console.error("Max retries reached. Failed to fetch recipes.");
-        }
-
-        // Initial fetch of the shopping list when the page loads
+        // Initial fetch of shopping list
         fetchShoppingList();
     });
 </script>
