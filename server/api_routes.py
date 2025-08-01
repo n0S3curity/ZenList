@@ -202,6 +202,7 @@ def fetch_receipt():
                 filename_value = receipt_json['additionalInfo'][0]['value'].replace("@", "")
                 print(f"Extracted filename value: {filename_value}")
                 receipt_filename = f"{filename_value}.json"
+
             except (KeyError, TypeError):
                 # Handle cases where the key might not exist or the structure is different
                 return jsonify({"error": "Could not find 'additionalInfo.value' in receipt data."}), 500
@@ -225,6 +226,11 @@ def fetch_receipt():
 
             # Step 5: Save the receipt to the designated path
             save_path = f"../receipts/{company_name}/{city_english}/{receipt_filename}".lower()
+            if os.path.exists(save_path):
+                # If the file already exists, we can either overwrite or skip
+                print(f"File {save_path} already exists. exiting")
+                return jsonify({"error": f"receipt number {receipt_filename} already exists."}), 400
+
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
             with open(save_path, 'w', encoding='utf-8') as f:
                 json.dump(receipt_json, f, ensure_ascii=False, indent=4)
