@@ -1,201 +1,44 @@
 {
-    "total_receipts": 4,
-    "total_spent": 3411.86,
-    "total_items": 259,
-    "average_spend_per_receipt": 852.965,
+    "total_receipts": 7,
+    "total_spent": 5140.2,
+    "total_items": 424,
+    "average_spend_per_receipt": 734.3142857142857,
     "top_10_product_purchased": [
-        {
-            "barcode": "901046",
-            "name": "מיחזור אריזה",
-            "price": 0.3,
-            "total_quantity": 27,
-            "total_price": 8.099999999999998,
-            "history": [
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 3,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 2,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 1,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 2,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 2,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 3,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 2,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 1,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 2,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 2,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-10 16:12:33",
-                    "quantity": 1,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-10 16:12:33",
-                    "quantity": 1,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-10 16:12:33",
-                    "quantity": 2,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-29 16:46:10",
-                    "quantity": 2,
-                    "price": 0.3
-                },
-                {
-                    "date": "2025-07-29 16:46:10",
-                    "quantity": 1,
-                    "price": 0.3
-                }
-            ],
-            "cheapest_price": 0.3,
-            "highest_price": 0.3,
-            "price_increase": 0.0,
-            "last_price": 0.3
-        },
-        {
-            "barcode": "2111085",
-            "name": "רוטב עגבניות מרוכז מ",
-            "price": 1.88,
-            "total_quantity": 16,
-            "total_price": 30.0,
-            "history": [
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 7,
-                    "price": 1.88
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 1,
-                    "price": 1.84
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 7,
-                    "price": 1.88
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 1,
-                    "price": 1.84
-                }
-            ],
-            "cheapest_price": 1.84,
-            "highest_price": 1.88,
-            "price_increase": 2.1739130434782505,
-            "last_price": 1.84
-        },
-        {
-            "barcode": "8005110191015",
-            "name": "מחית עגבניות מוטי  ב",
-            "price": 12.9,
-            "total_quantity": 10,
-            "total_price": 129.0,
-            "history": [
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 5,
-                    "price": 12.9
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 5,
-                    "price": 12.9
-                }
-            ],
-            "cheapest_price": 12.9,
-            "highest_price": 12.9,
-            "price_increase": 0.0,
-            "last_price": 12.9
-        },
-        {
-            "barcode": "7290013536471",
-            "name": "קמח פיצה מנופה הנחתו",
-            "price": 7.9,
-            "total_quantity": 9,
-            "total_price": 71.1,
-            "history": [
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 3,
-                    "price": 7.9
-                },
-                {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 3,
-                    "price": 7.9
-                },
-                {
-                    "date": "2025-07-10 16:12:33",
-                    "quantity": 1,
-                    "price": 7.9
-                },
-                {
-                    "date": "2025-07-29 16:46:10",
-                    "quantity": 2,
-                    "price": 7.9
-                }
-            ],
-            "cheapest_price": 7.9,
-            "highest_price": 7.9,
-            "price_increase": 0.0,
-            "last_price": 7.9
-        },
         {
             "barcode": "7290011499365",
             "name": "גבינה חלומי 24% גד 2",
             "price": 13.9,
-            "total_quantity": 7,
-            "total_price": 97.30000000000001,
+            "total_quantity": 20,
+            "total_price": 278.0,
             "history": [
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 13.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 13.9
+                },
                 {
                     "date": "2025-07-23 18:33:53",
                     "quantity": 2,
                     "price": 13.9
                 },
                 {
-                    "date": "2025-07-23 18:33:53",
-                    "quantity": 2,
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 13.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 13.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
                     "price": 13.9
                 },
                 {
@@ -210,42 +53,289 @@
             "last_price": 13.9
         },
         {
-            "barcode": "4030292",
-            "name": "מיץ תפוזים משכוכית",
-            "price": 7.6,
-            "total_quantity": 6,
-            "total_price": 45.6,
+            "barcode": "522319",
+            "name": "חלב 3% רמת הגולן 1 ל",
+            "price": 7.1,
+            "total_quantity": 18,
+            "total_price": 127.8,
             "history": [
                 {
-                    "date": "2025-07-23 18:33:53",
+                    "date": "2025-07-29 16:46:10",
                     "quantity": 3,
-                    "price": 7.6
+                    "price": 7.1
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 7.1
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 7.1
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 7.1
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 7.1
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 7.1
+                }
+            ],
+            "cheapest_price": 7.1,
+            "highest_price": 7.1,
+            "price_increase": 0.0,
+            "last_price": 7.1
+        },
+        {
+            "barcode": "7290019056355",
+            "name": "תפוזינה לימונענע 1.5",
+            "price": 6.37,
+            "total_quantity": 18,
+            "total_price": 114.6,
+            "history": [
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 6.37
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 1,
+                    "price": 6.36
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 6.37
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 1,
+                    "price": 6.36
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 6.37
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 1,
+                    "price": 6.36
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 6.37
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 1,
+                    "price": 6.36
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 6.37
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 1,
+                    "price": 6.36
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 6.37
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 1,
+                    "price": 6.36
+                }
+            ],
+            "cheapest_price": 6.36,
+            "highest_price": 6.37,
+            "price_increase": 0.15723270440251236,
+            "last_price": 6.36
+        },
+        {
+            "barcode": "7290118423669",
+            "name": "אפרופו טיובס טבעות ב",
+            "price": 3.67,
+            "total_quantity": 18,
+            "total_price": 66.06,
+            "history": [
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.67
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.67
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.67
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.67
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.67
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.67
+                }
+            ],
+            "cheapest_price": 3.67,
+            "highest_price": 3.67,
+            "price_increase": 0.0,
+            "last_price": 3.67
+        },
+        {
+            "barcode": "66264",
+            "name": "דובונים 40 גרם",
+            "price": 3.07,
+            "total_quantity": 18,
+            "total_price": 55.260000000000005,
+            "history": [
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.07
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.07
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.07
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.07
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.07
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 3,
+                    "price": 3.07
+                }
+            ],
+            "cheapest_price": 3.07,
+            "highest_price": 3.07,
+            "price_increase": 0.0,
+            "last_price": 3.07
+        },
+        {
+            "barcode": "7290013536471",
+            "name": "קמח פיצה מנופה הנחתו",
+            "price": 7.9,
+            "total_quantity": 15,
+            "total_price": 118.49999999999999,
+            "history": [
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 7.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 7.9
                 },
                 {
                     "date": "2025-07-23 18:33:53",
                     "quantity": 3,
-                    "price": 7.6
+                    "price": 7.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 7.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 7.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 7.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 7.9
                 }
             ],
-            "cheapest_price": 7.6,
-            "highest_price": 7.6,
+            "cheapest_price": 7.9,
+            "highest_price": 7.9,
             "price_increase": 0.0,
-            "last_price": 7.6
+            "last_price": 7.9
         },
         {
             "barcode": "7290018908006",
             "name": "ליצי פירות שלי יח'",
             "price": 12.5,
-            "total_quantity": 6,
-            "total_price": 75.0,
+            "total_quantity": 14,
+            "total_price": 175.0,
             "history": [
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 12.5
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 12.5
+                },
                 {
                     "date": "2025-07-23 18:33:53",
                     "quantity": 2,
                     "price": 12.5
                 },
                 {
-                    "date": "2025-07-23 18:33:53",
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 12.5
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 12.5
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
                     "quantity": 2,
                     "price": 12.5
                 },
@@ -261,73 +351,133 @@
             "last_price": 12.5
         },
         {
-            "barcode": "7290016334494",
-            "name": "חסה יח",
-            "price": 3.9,
-            "total_quantity": 4,
-            "total_price": 15.6,
+            "barcode": "7290015603522",
+            "name": "נוזל קוקוס 5-7% מזרח",
+            "price": 5.9,
+            "total_quantity": 12,
+            "total_price": 70.8,
             "history": [
                 {
-                    "date": "2025-07-23 18:33:53",
+                    "date": "2025-07-29 16:46:10",
                     "quantity": 2,
-                    "price": 3.9
+                    "price": 5.9
                 },
                 {
-                    "date": "2025-07-23 18:33:53",
+                    "date": "2025-07-29 16:46:10",
                     "quantity": 2,
-                    "price": 3.9
+                    "price": 5.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 5.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 5.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 5.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 5.9
                 }
             ],
-            "cheapest_price": 3.9,
-            "highest_price": 3.9,
+            "cheapest_price": 5.9,
+            "highest_price": 5.9,
             "price_increase": 0.0,
-            "last_price": 3.9
+            "last_price": 5.9
         },
         {
-            "barcode": "7290019462002",
-            "name": "בזילקום-יח",
-            "price": 7.0,
-            "total_quantity": 4,
-            "total_price": 28.0,
+            "barcode": "7290010984572",
+            "name": "זית טבעות בני דרום 8",
+            "price": 11.9,
+            "total_quantity": 12,
+            "total_price": 142.8,
             "history": [
                 {
-                    "date": "2025-07-23 18:33:53",
+                    "date": "2025-07-29 16:46:10",
                     "quantity": 2,
-                    "price": 7.0
+                    "price": 11.9
                 },
                 {
-                    "date": "2025-07-23 18:33:53",
+                    "date": "2025-07-29 16:46:10",
                     "quantity": 2,
-                    "price": 7.0
+                    "price": 11.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 11.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 11.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 11.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 11.9
                 }
             ],
-            "cheapest_price": 7.0,
-            "highest_price": 7.0,
+            "cheapest_price": 11.9,
+            "highest_price": 11.9,
             "price_increase": 0.0,
-            "last_price": 7.0
+            "last_price": 11.9
         },
         {
-            "barcode": "7290014256637",
-            "name": "יין באז מוסקטו מבעבע",
-            "price": 24.7,
-            "total_quantity": 4,
-            "total_price": 98.8,
+            "barcode": "5437502",
+            "name": "פטריות חתוכות טעמן 4",
+            "price": 4.9,
+            "total_quantity": 12,
+            "total_price": 58.8,
             "history": [
                 {
-                    "date": "2025-07-23 18:33:53",
+                    "date": "2025-07-29 16:46:10",
                     "quantity": 2,
-                    "price": 24.7
+                    "price": 4.9
                 },
                 {
-                    "date": "2025-07-23 18:33:53",
+                    "date": "2025-07-29 16:46:10",
                     "quantity": 2,
-                    "price": 24.7
+                    "price": 4.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 4.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 4.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 4.9
+                },
+                {
+                    "date": "2025-07-29 16:46:10",
+                    "quantity": 2,
+                    "price": 4.9
                 }
             ],
-            "cheapest_price": 24.7,
-            "highest_price": 24.7,
+            "cheapest_price": 4.9,
+            "highest_price": 4.9,
             "price_increase": 0.0,
-            "last_price": 24.7
+            "last_price": 4.9
         }
     ],
     "top_10_price_increase": [
@@ -339,27 +489,6 @@
             "new_price": 4.9
         },
         {
-            "name": "פילה סלמון טרי אושר",
-            "barcode": "2345299",
-            "price_increase": 11.123470522803114,
-            "old_price": 89.9,
-            "new_price": 99.9
-        },
-        {
-            "name": "חיתולי האגיס 40 יח ש",
-            "barcode": "263359",
-            "price_increase": 5.0909090909090855,
-            "old_price": 27.5,
-            "new_price": 28.9
-        },
-        {
-            "name": "מחית עגבניות מוטי  ב",
-            "barcode": "8005110191015",
-            "price_increase": 0.0,
-            "old_price": 12.9,
-            "new_price": 12.9
-        },
-        {
             "name": "גבינה צהובה גאודה פר",
             "barcode": "7290112126320",
             "price_increase": 0.0,
@@ -367,18 +496,11 @@
             "new_price": 34.0
         },
         {
-            "name": "גבינה פקורינו יעקבס",
-            "barcode": "7290014890718",
+            "name": "שרפרף מתקפל איי פלסט",
+            "barcode": "7296102181942",
             "price_increase": 0.0,
-            "old_price": 19.5,
-            "new_price": 19.5
-        },
-        {
-            "name": "גבינה מנצגו יעקבס 16",
-            "barcode": "7290014890770",
-            "price_increase": 0.0,
-            "old_price": 16.5,
-            "new_price": 16.5
+            "old_price": 19.9,
+            "new_price": 19.9
         },
         {
             "name": "גבינה חלומי 24% גד 2",
@@ -388,32 +510,56 @@
             "new_price": 13.9
         },
         {
-            "name": "גבינה גאודה עיזים  מ",
-            "barcode": "4480349",
+            "name": "חסה לליק ערוגות המוש",
+            "barcode": "9009484",
             "price_increase": 0.0,
-            "old_price": 119.0,
-            "new_price": 119.0
+            "old_price": 13.9,
+            "new_price": 13.9
         },
         {
-            "name": "מיץ תפוזים משכוכית",
-            "barcode": "4030292",
+            "name": "פטריות צמד חמד איטלק",
+            "barcode": "7290018192658",
             "price_increase": 0.0,
-            "old_price": 7.6,
-            "new_price": 7.6
+            "old_price": 17.9,
+            "new_price": 17.9
+        },
+        {
+            "name": "ליצי פירות שלי יח'",
+            "barcode": "7290018908006",
+            "price_increase": 0.0,
+            "old_price": 12.5,
+            "new_price": 12.5
+        },
+        {
+            "name": "אננס יחידה",
+            "barcode": "9006803",
+            "price_increase": 0.0,
+            "old_price": 14.9,
+            "new_price": 14.9
+        },
+        {
+            "name": "פלפל אדום",
+            "barcode": "9001501",
+            "price_increase": 0.0,
+            "old_price": 4.9,
+            "new_price": 4.9
+        },
+        {
+            "name": "לימון",
+            "barcode": "9005301",
+            "price_increase": 0.0,
+            "old_price": 8.9,
+            "new_price": 8.9
         }
     ],
     "receipts": {
-        "2307250025100141": {
-            "total_price": 938.94,
-            "date_and_time": "2025-07-23 18:33:53"
-        },
-        "1007250025096927": {
-            "total_price": 833.77,
-            "date_and_time": "2025-07-10 16:12:33"
-        },
         "2907250020099080": {
             "total_price": 700.21,
             "date_and_time": "2025-07-29 16:46:10"
+        },
+        "2307250025100141": {
+            "total_price": 938.94,
+            "date_and_time": "2025-07-23 18:33:53"
         }
     }
 }

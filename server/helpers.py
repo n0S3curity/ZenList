@@ -75,8 +75,12 @@ def process_receipt_file(file_path):
 
     date_and_time = receipt_content.get('createdDate', 'Unknown Date and Time').replace("T", " ")
 
+    receipt_items = receipt_content.get('items', [])
+    # pop out of the list the item that has barcode "901046" or name "מיחזור אריזה"
+    receipt_items = [item for item in receipt_items if
+                     item.get('code') != "901046" and item.get('name') != "מיחזור אריזה"]
     # Process each item in the receipt
-    for item in receipt_content.get('items', []):
+    for item in receipt_items:
         barcode = item.get('code')
         product_name = item.get('name')
         price = item.get('price')
@@ -99,6 +103,9 @@ def process_receipt_file(file_path):
 
         # Check if product exists in the products database
         if barcode in products:
+            if barcode == "901046":
+                # Skip the product with barcode "901046"
+                continue
             # Update existing product
             product_data = products[barcode]
             product_data['total_quantity'] = int(product_data.get('total_quantity', 0)) + quantity

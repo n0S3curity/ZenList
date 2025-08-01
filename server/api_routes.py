@@ -10,26 +10,6 @@ from server.helpers import *
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
-# For demonstration purposes, let's assume these are loaded from your JSON files
-products_data = [
-    {"id": "1", "name": "Milk", "barcode": "12345", "category": "Dairy"},
-    {"id": "2", "name": "Bread", "barcode": "67890", "category": "Bakery"},
-    {"id": "3", "name": "Apples", "barcode": "11223", "category": "Fruits"}
-]
-
-shopping_list_data = [
-    {"productName": "Milk", "quantity": 1, "done": False},
-    {"productName": "Bread", "quantity": 1, "done": False}
-]
-
-receipts_folder_content = {
-    "osherad": ["receipt1.json", "receipt2.json"],
-    "yohananof": ["receiptA.json"]
-}
-
-
-# --- API Endpoints ---
-
 @api_bp.route('/list', methods=['GET'])
 def get_shopping_list():
     """Returns the content of list.json (the shopping list)."""
@@ -226,10 +206,10 @@ def fetch_receipt():
 
             # Step 5: Save the receipt to the designated path
             save_path = f"../receipts/{company_name}/{city_english}/{receipt_filename}".lower()
-            if os.path.exists(save_path):
-                # If the file already exists, we can either overwrite or skip
-                print(f"File {save_path} already exists. exiting")
-                return jsonify({"error": f"receipt number {receipt_filename} already exists."}), 400
+            # if os.path.exists(save_path):
+            #     # If the file already exists, we can either overwrite or skip
+            #     print(f"File {save_path} already exists. exiting")
+            #     return jsonify({"error": f"receipt number {receipt_filename} already exists."}), 400
 
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
             with open(save_path, 'w', encoding='utf-8') as f:
