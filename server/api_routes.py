@@ -1,12 +1,14 @@
 # api_routes.py
-from flask import Blueprint, jsonify, request
+import json
+import os
+from urllib.parse import urlparse, parse_qs
 
-# Create a Blueprint instance
-# The first argument is the blueprint's name (used internally)
-# The second argument is the import name, which Flask uses to locate resources
+import requests
+from flask import Blueprint
+from flask import request, jsonify
+
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
-# Example data (replace with actual database/file loading)
 # For demonstration purposes, let's assume these are loaded from your JSON files
 products_data = [
     {"id": "1", "name": "Milk", "barcode": "12345", "category": "Dairy"},
@@ -148,80 +150,142 @@ def download_receipt_pdf():
 
 @api_bp.route('/fetchReceipt', methods=['POST'])
 def fetch_receipt():
-    """
-    Gets a URL from the body, converts it, downloads the receipt,
-    saves it, and triggers processing.
-    """
+
     data = request.get_json()
     raw_url = data.get('url')
     if not raw_url:
+        # Return an error if no URL is provided in the request
         return jsonify({"error": "URL is required in the request body."}), 400
 
-    # Example URL conversion logic
-    # This is a simplified example; real parsing might be more complex
     try:
-        # Extract ID and p parameter from the original URL
-        from urllib.parse import urlparse, parse_qs
-        parsed_url = urlparse(raw_url)
+        # Step 1: Follow the redirect to get the actual document URL
+        redirect_response = requests.get(raw_url, allow_redirects=True)
+        final_url = redirect_response.url
+
+        # Step 2: Parse the redirected URL to extract query parameters
+        parsed_url = urlparse(final_url)
         query_params = parse_qs(parsed_url.query)
         doc_id = query_params.get('id', [''])[0]
         p_param = query_params.get('p', [''])[0]
 
         if not doc_id:
-            return jsonify({"error": "Could not extract document ID from URL."}), 400
+            return jsonify({"error": "Could not extract document ID from redirected URL."}), 400
 
-        # Construct the new URL
+        # Step 3: Construct the final document fetch URL
         base_domain = f"{parsed_url.scheme}://{parsed_url.netloc}"
         converted_url = f"{base_domain}/v1.0/documents/{doc_id}"
         if p_param:
             converted_url += f"?p={p_param}"
 
-        # Simulate downloading and saving the file
-        # In a real application, you would use requests.get() to download
-        # and then save the content to your 'receipts' folder.
-        # Example:
-        # import requests
-        # response = requests.get(converted_url)
-        # if response.status_code == 200:
-        #     company_name = "osherad" # You'd extract this from the URL or receipt content
-        #     receipt_filename = f"{doc_id}.json"
-        #     save_path = f"Receipts/{company_name}/{receipt_filename}"
-        #     os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        #     with open(save_path, 'w', encoding='utf-8') as f:
-        #         json.dump(response.json(), f, ensure_ascii=False, indent=4)
-        #     # Trigger processing flow (mocked here)
-        #     process_receipt_file(save_path)
-        #     return jsonify({"message": "Receipt fetched and processed successfully.", "converted_url": converted_url}), 200
-        # else:
-        #     return jsonify({"error": f"Failed to download receipt from {converted_url}", "status_code": response.status_code}), response.status_code
+        # Step 4: Fetch the receipt data from the converted URL
+        response = requests.get(converted_url)
 
-        # For demonstration, just return the converted URL
-        return jsonify({"message": "Simulated receipt fetch and processing.", "converted_url": converted_url}), 200
+        if response.status_code == 200:
+            # Parse the JSON content from the response
+            receipt_json = response.json()
+            print(f"Fetched receipt data: {receipt_json}")
+            company_name = ""
+            if 'osher' in final_url:
+                company_name = "osherad"
+            elif 'yohananof' in final_url:
+                company_name = "yohananof"
 
+            # Use the value from 'additionalInfo' as the filename, as requested
+            try:
+                filename_value = receipt_json['additionalInfo'][0]['value'].replace("@", "")
+                print(f"Extracted filename value: {filename_value}")
+                receipt_filename = f"{filename_value}.json"
+            except (KeyError, TypeError):
+                # Handle cases where the key might not exist or the structure is different
+                return jsonify({"error": "Could not find 'additionalInfo.value' in receipt data."}), 500
+            city_english = "Unknown City"  # Default value in case we can't determine the city
+            try:
+                # Identify the store name from the receipt
+                city_hebrew = receipt_json['store']['name']
+                print(f"Branch identified: {city_hebrew}")
+
+                # using a dictionary, which is more reliable than a generic web search
+                with open('../databases/cities.json', 'r', encoding='utf-8') as f:
+                    city_translation_map = json.load(f)
+
+                # Look up the city in the translation map
+                city_english = city_translation_map.get(city_hebrew, "Unknown City")
+                print(f"Hebrew city '{city_hebrew}' translated to English city '{city_english}'.")
+
+            except KeyError:
+                # Handle cases where the branch name is not available in the JSON
+                print("Branch name not found in receipt data.")
+
+            # Step 5: Save the receipt to the designated path
+            save_path = f"Receipts/{company_name}/{city_english}/{receipt_filename}".lower()
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            with open(save_path, 'w', encoding='utf-8') as f:
+                json.dump(receipt_json, f, ensure_ascii=False, indent=4)
+
+            process_receipt_file(save_path)  # This is a placeholder function, you need to implement it.
+
+            return jsonify({
+                "message": "Receipt fetched and processed successfully.",
+                "converted_url": converted_url,
+                "saved_filename": receipt_filename.split('.')[0],  # Return the filename without extension  ),
+            }), 200
+        else:
+            # Handle cases where the fetch from the converted URL failed
+            return jsonify({
+                "error": f"Failed to download receipt from {converted_url}",
+                "status_code": response.status_code
+            }), response.status_code
+
+    except requests.exceptions.RequestException as e:
+        # Catch network-related errors during the fetch
+        return jsonify({"error": f"Network error during receipt fetch: {str(e)}"}), 500
     except Exception as e:
-        return jsonify({"error": f"Error processing URL: {str(e)}"}), 500
+        # Catch any other unexpected errors
+        return jsonify({"error": f"Error processing receipt: {str(e)}"}), 500
 
 
 def process_receipt_file(file_path):
-    """
-    Simulates the processing flow for a receipt file.
-    Opens the receipt file and for each item, if barcode doesn't exist
-    on products.json, adds to products.json.
-    """
     print(f"Processing receipt file: {file_path}")
-    # In a real app:
-    # 1. Load receipt JSON from file_path
-    # 2. Iterate through 'items'
-    # 3. Check if barcode exists in products_data (or actual products.json)
-    # 4. If not, add new product to products_data (and save to products.json)
-    # Example:
-    # with open(file_path, 'r', encoding='utf-8') as f:
-    #     receipt_content = json.load(f)
-    # for item in receipt_content.get('items', []):
-    #     barcode = item.get('barcode')
-    #     product_name = item.get('productName')
-    #     if barcode and product_name and not any(p['barcode'] == barcode for p in products_data):
-    #         products_data.append({"id": str(len(products_data) + 1), "name": product_name, "barcode": barcode, "category": ""})
-    #         # Save updated products_data to Products.json
-    #         print(f"Added new product: {product_name} ({barcode})")
-    pass  # Placeholder for actual processing logic
+    with open(file_path, 'r', encoding='utf-8') as f:
+        receipt_content = json.load(f)
+    with open('../databases/products.json', 'w', encoding='utf-8') as f:
+        products = json.load(f, ensure_ascii=False, indent=4)
+
+    with open('../databases/stats.json', 'w', encoding='utf-8') as f:
+        stats = json.load(f, ensure_ascii=False, indent=4)
+    date_and_time = receipt_content.get('createdDate', 'Unknown Date an Time').replace("T", " ")
+    for item in receipt_content.get('items', []):
+        barcode = item.get('code')
+        product_name = item.get('name')
+        price = item.get('price')
+        quantity = item.get('quantity')
+        total = item.get('total')
+        # check by barcode if product exists on products.json,
+        # if yes:
+        # update total_quantity,history, total_price (which are total of all time consumption)
+        # if no:
+        # add new product to products.json with the barcode as key
+        new_product = {
+            "barcode": barcode,
+            "name": product_name,
+            "price": price,
+            "total_quantity": quantity,
+            "total_price": total,
+            "history": [{
+                "date": date_and_time,
+                "quantity": quantity,
+                "price": price
+            }],
+            "last_price": price
+
+        }
+
+    total_receipt_price = receipt_content.get('total', 0)
+    number_of_items = receipt_content.get('numberOfItems', 0)
+
+    receipt_barcode = receipt_content.get('barcode', 'Unknown Barcode')
+
+    # Update stats.json
+    stats['total_receipts'] += 1
+    stats['total_spent'] += total_receipt_price
+    stats['total_items'] += number_of_items
