@@ -160,60 +160,66 @@
     <div class="container">
         <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">סטטיסטיקות</h1>
 
-        <!-- Statistics Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <!-- Card 1: Average Receipt Price -->
-            <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
-                <div class="text-2xl font-bold text-indigo-700" id="avgPrice">₪0.00</div>
-                <div class="text-sm text-indigo-500 mt-2">מחיר קבלה ממוצע</div>
-            </div>
-            <!-- Card 2: Average Shopping Frequency -->
-            <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
-                <div class="text-2xl font-bold text-indigo-700" id="avgFrequency">0</div>
-                <div class="text-sm text-indigo-500 mt-2">קניות לחודש (ממוצע)</div>
-            </div>
-            <!-- Card 3: Total Items Purchased -->
-            <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
-                <div class="text-2xl font-bold text-indigo-700" id="totalItems">0</div>
-                <div class="text-sm text-indigo-500 mt-2">סה"כ פריטים שנקנו</div>
-            </div>
-            <!-- Card 4: Most Purchased Item -->
-            <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
-                <div class="text-2xl font-bold text-indigo-700 text-center" id="mostPurchasedItem"></div>
-                <div class="text-sm text-indigo-500 mt-2">פריט שנרכש הכי הרבה</div>
-            </div>
-            <!-- Card 5: Average Items per Receipt -->
-            <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
-                <div class="text-2xl font-bold text-indigo-700" id="avgItemsPerReceipt">0</div>
-                <div class="text-sm text-indigo-500 mt-2">פריטים לקבלה (ממוצע)</div>
-            </div>
+        <!-- Loading spinner -->
+        <div id="loading" class="flex justify-center items-center h-64">
+            <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
         </div>
 
-        <!-- Graphs Section and Price Increase List -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- New section: Highest Price Increase (Moved to the top) -->
-            <div class="bg-red-100 p-6 rounded-lg shadow-md lg:col-span-2">
-                <h2 class="text-xl font-bold text-red-700 mb-4 text-center">התייקרות מוצרים בולטת</h2>
-                <ul id="priceIncreaseList" class="space-y-2 text-right">
-                    <!-- Items will be inserted here by JavaScript -->
-                </ul>
+        <div id="content" class="hidden">
+            <!-- Statistics Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Card 1: Average Receipt Price -->
+                <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                    <div class="text-2xl font-bold text-indigo-700" id="avgPrice">...</div>
+                    <div class="text-sm text-indigo-500 mt-2">מחיר קבלה ממוצע</div>
+                </div>
+                <!-- Card 2: Average Shopping Frequency -->
+                <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                    <div class="text-2xl font-bold text-indigo-700" id="avgFrequency">...</div>
+                    <div class="text-sm text-indigo-500 mt-2">קניות לחודש (ממוצע)</div>
+                </div>
+                <!-- Card 3: Total Items Purchased -->
+                <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                    <div class="text-2xl font-bold text-indigo-700" id="totalItems">...</div>
+                    <div class="text-sm text-indigo-500 mt-2">סה"כ פריטים שנקנו</div>
+                </div>
+                <!-- Card 4: Most Purchased Item -->
+                <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                    <div class="text-2xl font-bold text-indigo-700 text-center" id="mostPurchasedItem">...</div>
+                    <div class="text-sm text-indigo-500 mt-2">פריט שנרכש הכי הרבה</div>
+                </div>
+                <!-- Card 5: Average Items per Receipt -->
+                <div class="bg-indigo-100 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                    <div class="text-2xl font-bold text-indigo-700" id="avgItemsPerReceipt">...</div>
+                    <div class="text-sm text-indigo-500 mt-2">פריטים לקבלה (ממוצע)</div>
+                </div>
             </div>
-            <!-- List of Top 5 Items (Moved to second place) -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">5 הפריטים הנרכשים ביותר</h2>
-                <ul id="topItemsList" class="space-y-2 text-right">
-                    <!-- Items will be inserted here by JavaScript -->
-                </ul>
-            </div>
-            <!-- Chart 1: Monthly Expenses (Moved to the end) -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">הוצאות חודשיות</h2>
-                <div class="relative h-96">
-                    <canvas id="monthlyExpensesChart"></canvas>
+
+            <!-- Graphs Section and Price Increase List -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- New section: Highest Price Increase (Moved to the top) -->
+                <div class="bg-red-100 p-6 rounded-lg shadow-md lg:col-span-2">
+                    <h2 class="text-xl font-bold text-red-700 mb-4 text-center">התייקרות מוצרים בולטת</h2>
+                    <ul id="priceIncreaseList" class="space-y-2 text-right">
+                        <!-- Items will be inserted here by JavaScript -->
+                    </ul>
+                </div>
+                <!-- List of Top 5 Items (Moved to second place) -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">5 הפריטים הנרכשים ביותר</h2>
+                    <ul id="topItemsList" class="space-y-2 text-right">
+                        <!-- Items will be inserted here by JavaScript -->
+                    </ul>
+                </div>
+                <!-- Chart 1: Monthly Expenses (Moved to the end) -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">הוצאות חודשיות</h2>
+                    <div class="relative h-96">
+                        <canvas id="monthlyExpensesChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -221,6 +227,8 @@
     document.addEventListener('DOMContentLoaded', () => {
         const sidebar = document.getElementById('sidebar');
         const hamburgerIcon = document.getElementById('hamburgerIcon');
+        const loading = document.getElementById('loading');
+        const content = document.getElementById('content');
 
         // Toggles the 'open' class on the sidebar when the hamburger icon is clicked
         hamburgerIcon.addEventListener('click', () => {
@@ -238,147 +246,6 @@
             }
         });
 
-        // Mock data for statistics
-        const statsData = {
-            avgReceiptPrice: 155.75,
-            avgShoppingFrequency: 4,
-            totalItemsPurchased: 562,
-            mostPurchasedItem: 'חלב 3%',
-            avgItemsPerReceipt: 12.5,
-            monthlyExpenses: {
-                labels: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני'],
-                data: [1200, 1500, 1350, 1600, 1450, 1750]
-            },
-            topItems: [
-                { name: 'חלב 3%', quantity: 50, barcode: '12345' },
-                { name: 'לחם אחיד', quantity: 45, barcode: '67890' },
-                { name: 'ביצים', quantity: 40, barcode: '11223' },
-                { name: 'גבינה צהובה', quantity: 35, barcode: '44556' },
-                { name: 'עגבניות', quantity: 30, barcode: '77889' }
-            ],
-            priceIncreaseData: [
-                { name: 'קפה נמס', increase: 15.2, oldPrice: 24.50, newPrice: 28.22, barcode: '98765' },
-                { name: 'שמן זית', increase: 12.8, oldPrice: 39.90, newPrice: 45.01, barcode: '54321' },
-                { name: 'גבינה לבנה 5%', increase: 8.5, oldPrice: 6.90, newPrice: 7.49, barcode: '99887' },
-                { name: 'אורז בסמטי', increase: 7.1, oldPrice: 19.90, newPrice: 21.31, barcode: '66554' },
-                { name: 'פסטרמה', increase: 6.9, oldPrice: 18.50, newPrice: 19.78, barcode: '33221' }
-            ]
-        };
-
-        // Populate the stats cards with mock data
-        document.getElementById('avgPrice').textContent = `₪${statsData.avgReceiptPrice.toFixed(2)}`;
-        document.getElementById('avgFrequency').textContent = statsData.avgShoppingFrequency;
-        document.getElementById('totalItems').textContent = statsData.totalItemsPurchased;
-        document.getElementById('mostPurchasedItem').textContent = statsData.mostPurchasedItem;
-        document.getElementById('avgItemsPerReceipt').textContent = statsData.avgItemsPerReceipt;
-
-        // Render the top items list
-        const topItemsList = document.getElementById('topItemsList');
-        statsData.topItems.forEach(item => {
-            const listItem = document.createElement('li');
-            listItem.className = 'flex justify-between items-center bg-indigo-50 p-3 rounded-md shadow-sm clickable-item';
-            listItem.dataset.barcode = item.barcode;
-            listItem.innerHTML = `
-                <span class="font-semibold text-indigo-700">${item.quantity}</span>
-                <span>${item.name}</span>
-            `;
-            topItemsList.appendChild(listItem);
-        });
-        // Add click listener for top items
-        topItemsList.addEventListener('click', (event) => {
-            const li = event.target.closest('li.clickable-item');
-            if (li) {
-                const barcode = li.dataset.barcode;
-                window.location.href = `/product/${barcode}/stats`;
-            }
-        });
-
-        // Render the price increase list
-        const priceIncreaseList = document.getElementById('priceIncreaseList');
-        statsData.priceIncreaseData.forEach(item => {
-            const listItem = document.createElement('li');
-            listItem.className = 'flex justify-between items-center bg-white p-3 rounded-md shadow-sm clickable-item';
-            listItem.dataset.barcode = item.barcode;
-            listItem.innerHTML = `
-                <div class="flex flex-col items-center">
-                    <span class="font-bold text-red-600">+${item.increase.toFixed(1)}%</span>
-                    <span class="text-xs text-gray-500">
-                        מ-₪${item.oldPrice.toFixed(2)} ל-₪${item.newPrice.toFixed(2)}
-                    </span>
-                </div>
-                <span class="text-gray-800 font-medium">${item.name}</span>
-            `;
-            priceIncreaseList.appendChild(listItem);
-        });
-        // Add click listener for price increase items
-        priceIncreaseList.addEventListener('click', (event) => {
-            const li = event.target.closest('li.clickable-item');
-            if (li) {
-                const barcode = li.dataset.barcode;
-                window.location.href = `/product/${barcode}/stats`;
-            }
-        });
-
-
-        // Chart.js configuration for monthly expenses
-        const monthlyExpensesCtx = document.getElementById('monthlyExpensesChart').getContext('2d');
-        new Chart(monthlyExpensesCtx, {
-            type: 'bar',
-            data: {
-                labels: statsData.monthlyExpenses.labels,
-                datasets: [{
-                    label: 'הוצאות חודשיות (₪)',
-                    data: statsData.monthlyExpenses.data,
-                    backgroundColor: 'rgba(79, 70, 229, 0.6)',
-                    borderColor: 'rgb(79, 70, 229)',
-                    borderWidth: 1,
-                    borderRadius: 5,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: {
-                            font: {
-                                family: 'Inter',
-                                size: 14,
-                            },
-                        }
-                    },
-                    title: {
-                        display: false,
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '₪' + value;
-                            },
-                            font: {
-                                family: 'Inter'
-                            }
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            font: {
-                                family: 'Inter'
-                            }
-                        }
-                    }
-                },
-                layout: {
-                    padding: 10
-                }
-            }
-        });
-
         // Set the active link in the sidebar
         const links = document.querySelectorAll('.sidebar a');
         links.forEach(link => {
@@ -387,6 +254,189 @@
                 link.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-gray-700');
             }
         });
+
+        // Function to process receipts into monthly expenses for Chart.js
+        const calculateMonthlyExpenses = (receipts) => {
+            const monthlyData = {};
+            const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+
+            // Sort receipts by date to ensure the chart is chronological
+            const sortedReceipts = Object.values(receipts).sort((a, b) => {
+                const dateA = new Date(a.date_and_time);
+                const dateB = new Date(b.date_and_time);
+                return dateA - dateB;
+            });
+
+            sortedReceipts.forEach(receipt => {
+                const date = new Date(receipt.date_and_time);
+                const monthIndex = date.getMonth();
+                const year = date.getFullYear();
+                const monthLabel = `${months[monthIndex]} ${year}`;
+
+                if (monthlyData[monthLabel]) {
+                    monthlyData[monthLabel] += receipt.total_price;
+                } else {
+                    monthlyData[monthLabel] = receipt.total_price;
+                }
+            });
+
+            return {
+                labels: Object.keys(monthlyData),
+                data: Object.values(monthlyData)
+            };
+        };
+
+        // Function to fetch data and render the page
+        const fetchStatsAndRender = async () => {
+            try {
+                const response = await fetch('/api/stats');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const stats = await response.json();
+
+                // Hide loading spinner and show content
+                loading.classList.add('hidden');
+                content.classList.remove('hidden');
+
+                // 1. Populate the stats cards
+                document.getElementById('avgPrice').textContent = `₪${stats.average_spend_per_receipt.toFixed(2)}`;
+
+                // Calculate average shopping frequency
+                const receiptDates = Object.values(stats.receipts).map(r => new Date(r.date_and_time));
+                let avgFrequency = 'N/A';
+                if (receiptDates.length > 1) {
+                    const minDate = new Date(Math.min(...receiptDates));
+                    const maxDate = new Date(Math.max(...receiptDates));
+                    const monthsDiff = (maxDate.getFullYear() - minDate.getFullYear()) * 12 + (maxDate.getMonth() - minDate.getMonth()) + 1;
+                    avgFrequency = (stats.total_receipts / monthsDiff).toFixed(1);
+                }
+                document.getElementById('avgFrequency').textContent = avgFrequency;
+
+                document.getElementById('totalItems').textContent = stats.total_items;
+                document.getElementById('mostPurchasedItem').textContent = stats.top_10_product_purchased.length > 0 ? stats.top_10_product_purchased[0].name : 'N/A';
+
+                // Calculate average items per receipt
+                const avgItemsPerReceipt = stats.total_receipts > 0 ? (stats.total_items / stats.total_receipts).toFixed(1) : '0';
+                document.getElementById('avgItemsPerReceipt').textContent = avgItemsPerReceipt;
+
+                // 2. Render the top items list
+                const topItemsList = document.getElementById('topItemsList');
+                topItemsList.innerHTML = ''; // Clear mock data
+                stats.top_10_product_purchased.slice(0, 5).forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'flex justify-between items-center bg-indigo-50 p-3 rounded-md shadow-sm clickable-item';
+                    listItem.dataset.barcode = item.barcode;
+                    listItem.innerHTML = `
+                        <span class="font-semibold text-indigo-700">${item.total_quantity}</span>
+                        <span>${item.name}</span>
+                    `;
+                    topItemsList.appendChild(listItem);
+                });
+                // Add click listener for top items
+                topItemsList.addEventListener('click', (event) => {
+                    const li = event.target.closest('li.clickable-item');
+                    if (li) {
+                        const barcode = li.dataset.barcode;
+                        window.location.href = `/product/${barcode}/stats`;
+                    }
+                });
+
+                // 3. Render the price increase list
+                const priceIncreaseList = document.getElementById('priceIncreaseList');
+                priceIncreaseList.innerHTML = ''; // Clear mock data
+                stats.top_10_price_increase.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'flex justify-between items-center bg-white p-3 rounded-md shadow-sm clickable-item';
+                    listItem.dataset.barcode = item.barcode;
+                    listItem.innerHTML = `
+                        <div class="flex flex-col items-center">
+                            <span class="font-bold text-red-600">${item.price_increase > 0 ? `+${item.price_increase.toFixed(1)}%` : '0%'}</span>
+                            <span class="text-xs text-gray-500">
+                                מ-₪${item.old_price.toFixed(2)} ל-₪${item.new_price.toFixed(2)}
+                            </span>
+                        </div>
+                        <span class="text-gray-800 font-medium">${item.name}</span>
+                    `;
+                    priceIncreaseList.appendChild(listItem);
+                });
+                // Add click listener for price increase items
+                priceIncreaseList.addEventListener('click', (event) => {
+                    const li = event.target.closest('li.clickable-item');
+                    if (li) {
+                        const barcode = li.dataset.barcode;
+                        window.location.href = `/product/${barcode}/stats`;
+                    }
+                });
+
+                // 4. Render the monthly expenses chart
+                const monthlyExpenses = calculateMonthlyExpenses(stats.receipts);
+                const monthlyExpensesCtx = document.getElementById('monthlyExpensesChart').getContext('2d');
+                new Chart(monthlyExpensesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: monthlyExpenses.labels,
+                        datasets: [{
+                            label: 'הוצאות חודשיות (₪)',
+                            data: monthlyExpenses.data,
+                            backgroundColor: 'rgba(79, 70, 229, 0.6)',
+                            borderColor: 'rgb(79, 70, 229)',
+                            borderWidth: 1,
+                            borderRadius: 5,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    font: {
+                                        family: 'Inter',
+                                        size: 14,
+                                    },
+                                }
+                            },
+                            title: {
+                                display: false,
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '₪' + value;
+                                    },
+                                    font: {
+                                        family: 'Inter'
+                                    }
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    font: {
+                                        family: 'Inter'
+                                    }
+                                }
+                            }
+                        },
+                        layout: {
+                            padding: 10
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error('Failed to fetch statistics:', error);
+                // In a real application, you would show a user-friendly error message
+                loading.textContent = 'Failed to load statistics. Please try again later.';
+            }
+        };
+
+        fetchStatsAndRender();
     });
 </script>
 </body>
