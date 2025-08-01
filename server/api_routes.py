@@ -24,10 +24,21 @@ def get_stats():
     return jsonify(stats_data)
 
 
+@api_bp.route('/stats/<barcode>', methods=['GET'])
+def get__product_stats(barcode):
+    with open('../databases/products.json', 'r', encoding='utf-8') as f:
+        stats_data = json.load(f)
+    if barcode in stats_data.keys():
+        product_stats = stats_data[barcode]
+        # Return only the stats of the product with the given barcode
+        return jsonify(product_stats), 200
+    return jsonify({"error": f"Product with barcode '{barcode}' not found."}), 404
+
+
 @api_bp.route('/products', methods=['GET'])
 def get_products():
-    """Returns the content of products.json."""
-    # In a real app, you'd load this from your Products.json file
+    with open('../databases/products.json', 'r', encoding='utf-8') as f:
+        products_data = json.load(f)
     return jsonify(products_data)
 
 
@@ -80,33 +91,21 @@ def update_product_quantity():
     return jsonify({"error": "Product name and valid quantity are required."}), 400
 
 
-@api_bp.route('/product/settings', methods=['GET'])
-def get_product_settings():
-    """Returns the product with its settings."""
-    product_name = request.args.get('product')
-    if product_name:
-        # In a real app, you'd fetch settings from products.json or a dedicated settings store
-        product = next((p for p in products_data if p['name'] == product_name), None)
-        if product:
-            return jsonify(product), 200
-        return jsonify({"error": f"Product '{product_name}' not found."}), 404
-    return jsonify({"error": "Product name parameter is required."}), 400
-
-
-@api_bp.route('/product/settings', methods=['POST'])
-def update_product_settings():
-    """Updates the settings of a product."""
-    data = request.get_json()
-    product_name = data.get('productName')
-    settings = data.get('settings')
-    if product_name and settings:
-        # In a real app, you'd update settings in products.json
-        for product in products_data:
-            if product['name'] == product_name:
-                product.update(settings)  # Simple update, extend as needed
-                return jsonify({"message": f"Settings for '{product_name}' updated."}), 200
-        return jsonify({"error": f"Product '{product_name}' not found."}), 404
-    return jsonify({"error": "Product name and settings are required."}), 400
+@api_bp.route('/product/<barcode>/settings', methods=['GET'])
+def get_product_settings(barcode):
+    # from products.json return only the settings of the product with the given barcode
+    barcode = request.view_args.get('barcode')
+    if not barcode:
+        return jsonify({"error": "Barcode is required."}), 400
+    with open('../databases/products.json', 'r', encoding='utf-8') as f:
+        products_data = json.load(f)
+    if barcode in products_data.keys():
+        product = products_data[barcode]
+        settings = product.get('settings', {})
+        settings['barcode'] = product['barcode']
+        settings['name'] = product['name']
+        return jsonify(settings), 200
+    return jsonify({"error": f"Product with barcode '{barcode}' not found."}), 404
 
 
 @api_bp.route('/receipt/<receipt_name>', methods=['GET'])

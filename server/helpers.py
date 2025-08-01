@@ -135,6 +135,11 @@ def process_receipt_file(file_path):
                 "price": price
             })
             product_data['history'] = history
+
+            # calculate the average price
+            product_data['average_price'] = product_data['total_price'] / product_data['total_quantity']
+
+
         else:
             if barcode == "901046":
                 # Skip the product with barcode "901046"
@@ -154,7 +159,9 @@ def process_receipt_file(file_path):
                 "cheapest_price": price,
                 "highest_price": price,
                 "price_increase": 0.0,
-                "last_price": price
+                "last_price": price,
+                'settings': {"default_category": "", "alias": ""}
+
             }
 
     # Update stats.json
