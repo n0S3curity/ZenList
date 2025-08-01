@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מוצרים</title>
+    <title>קבלות</title>
+    <!-- Tailwind CSS CDN -->
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f46e5'><path d='M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.44C4.9 17.13 6.13 18.25 7.5 18.25h11.17v-2H7.5c-.55 0-1-.45-1-1s.45-1 1-1h12.17c.55 0 1.05-.27 1.34-.71L23.5 6.47c.23-.45-.06-.97-.57-.97H6.95l-.9-1.87c-.36-.73-1.09-1.2-1.92-1.2H1V2zm14 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z'/></svg>">
-    <!-- Tailwind CSS CDN -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -105,17 +106,81 @@
             100% { transform: rotate(360deg); }
         }
 
-        .product-card {
+        .supermarket-header {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #d1d5db;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .supermarket-header .supermarket-title-wrapper {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .supermarket-header svg.collapse-arrow {
+            transition: transform 0.2s ease-in-out;
+        }
+        .supermarket-header.collapsed svg.collapse-arrow {
+            transform: rotate(-90deg); /* Rotate arrow when collapsed */
+        }
+        .branch-header {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            margin-right: 1.5rem;
+        }
+        .branch-header .branch-title-wrapper {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .branch-header svg.collapse-arrow {
+            transition: transform 0.2s ease-in-out;
+        }
+        .branch-header.collapsed svg.collapse-arrow {
+            transform: rotate(-90deg); /* Rotate arrow when collapsed */
+        }
+        .receipt-card {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .product-details {
+        .receipt-details {
             display: flex;
             align-items: center;
         }
 
-        /* Modal styling (for barcode scanner) */
+        /* Floating Plus Button */
+        #addReceiptBtn {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 1000;
+            background-color: #4f46e5;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease-in-out;
+        }
+        #addReceiptBtn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Modal styling */
         .modal {
             position: fixed;
             z-index: 2000;
@@ -139,7 +204,6 @@
             max-width: 600px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             animation: slideIn 0.3s ease-in-out;
-            text-align: center;
         }
         .close-btn {
             color: #aaa;
@@ -152,6 +216,15 @@
         .close-btn:focus {
             color: black;
             text-decoration: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .success-toast {
@@ -171,15 +244,6 @@
         .success-toast.show {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -205,7 +269,8 @@
             </svg>
             רשימת קניות
         </a></li>
-        <li><a href="/products" class="flex items-center active-link p-2 rounded-md transition-colors duration-200">
+        <li><a href="/products"
+               class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-md transition-colors duration-200">
             <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -224,8 +289,7 @@
             </svg>
             סטטיסטיקה
         </a></li>
-        <li><a href="/receipts"
-               class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-md transition-colors duration-200">
+        <li><a href="/receipts" class="flex items-center active-link p-2 rounded-md transition-colors duration-200">
             <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -239,59 +303,54 @@
 <!-- Main Content Area -->
 <div class="main-content">
     <div class="container">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">רשימת מוצרים</h1>
-
-        <!-- Search and Filter Section -->
-        <div class="mb-6 flex items-center space-x-2 rtl:space-x-reverse">
-            <div class="flex-grow">
-                <input type="text" id="searchInput" placeholder="חפש לפי שם או ברקוד..."
-                       class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-right"
-                       dir="rtl">
-            </div>
-            <!-- Barcode Scanner Button (now next to search bar) -->
-            <button id="barcodeScannerBtn" title="סרוק ברקוד"
-                    class="p-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors duration-200 flex-shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.865-1.442A2 2 0 0110.456 2h3.088a2 2 0 011.664.89l.865 1.442A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-            </button>
-        </div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">קבלות</h1>
 
         <!-- Loading Spinner -->
         <div id="loadingSpinner" class="loading-spinner"></div>
 
-        <!-- Products List Container -->
-        <div id="productsContainer" class="space-y-4">
-            <!-- Product cards will be rendered here by JavaScript -->
+        <!-- Receipts List Container -->
+        <div id="receiptsContainer" class="space-y-6">
+            <!-- Receipts grouped by supermarket and branch will be rendered here by JavaScript -->
         </div>
 
         <!-- Empty List Message -->
         <div id="emptyListMessage" class="text-center text-gray-500 py-10 hidden">
-            <p class="text-xl">לא נמצאו מוצרים תואמים.</p>
-            <p class="mt-2">נא נסה חיפוש אחר או הוסף מוצר חדש.</p>
+            <p class="text-xl">לא נמצאו קבלות.</p>
+            <p class="mt-2">כדי להוסיף קבלה חדשה, יש לסרוק אותה.</p>
         </div>
     </div>
 </div>
 
-<!-- Modal for Barcode Scanning Simulation -->
-<div id="barcodeScannerModal" class="modal hidden">
+<!-- Floating Plus Button -->
+<button id="addReceiptBtn" title="הוסף קבלה חדשה">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    </svg>
+</button>
+
+<!-- Modal for Adding a Receipt -->
+<div id="addReceiptModal" class="modal hidden">
     <div class="modal-content">
-        <span class="close-btn" id="closeScannerModalBtn">&times;</span>
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">סריקת ברקוד</h2>
-        <p>מדמה סריקת ברקוד. נא הזן ברקוד למטה:</p>
-        <input type="text" id="simulatedBarcodeInput" class="w-full p-3 border rounded-lg text-center mt-4"
-               placeholder="הזן ברקוד כאן..." value="7290002872323">
-        <button id="scanButton"
-                class="mt-4 px-6 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors duration-200">
-            סרוק
-        </button>
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold text-gray-800">הוספת קבלה חדשה</h2>
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+        </div>
+        <p class="text-gray-600 mb-4">הדבק טקסט המכיל קישורים לקבלות, והמערכת תחלץ אותם עבורך.</p>
+        <textarea id="pasteArea"
+                  class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-right"
+                  rows="6" placeholder="הדבק טקסט כאן..."></textarea>
+
+        <div id="linksListContainer" class="mt-4">
+            <!-- Extracted links will be displayed here -->
+        </div>
     </div>
 </div>
 
-<script src="/static/products.js"></script>
+<!-- Success Toast Notification -->
+<div id="successToast" class="success-toast">
+    <p id="successMessage"></p>
+</div>
+
+<script src="/static/receipts.js"></script>
 </body>
 </html>

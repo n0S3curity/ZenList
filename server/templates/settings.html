@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מוצרים</title>
+    <title>הגדרות מוצר</title>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f46e5'><path d='M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.44C4.9 17.13 6.13 18.25 7.5 18.25h11.17v-2H7.5c-.55 0-1-.45-1-1s.45-1 1-1h12.17c.55 0 1.05-.27 1.34-.71L23.5 6.47c.23-.45-.06-.97-.57-.97H6.95l-.9-1.87c-.36-.73-1.09-1.2-1.92-1.2H1V2zm14 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z'/></svg>">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -105,55 +106,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        .product-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .product-details {
-            display: flex;
-            align-items: center;
-        }
-
-        /* Modal styling (for barcode scanner) */
-        .modal {
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            padding: 2rem;
-            border-radius: 1rem;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: slideIn 0.3s ease-in-out;
-            text-align: center;
-        }
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-btn:hover,
-        .close-btn:focus {
-            color: black;
-            text-decoration: none;
-        }
-
         .success-toast {
             position: fixed;
             bottom: 2rem;
@@ -173,14 +125,6 @@
             transform: translateY(0);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -205,7 +149,8 @@
             </svg>
             רשימת קניות
         </a></li>
-        <li><a href="/products" class="flex items-center active-link p-2 rounded-md transition-colors duration-200">
+        <li><a href="/products"
+               class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-md transition-colors duration-200">
             <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -239,59 +184,165 @@
 <!-- Main Content Area -->
 <div class="main-content">
     <div class="container">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">רשימת מוצרים</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">הגדרות מוצר</h1>
 
-        <!-- Search and Filter Section -->
-        <div class="mb-6 flex items-center space-x-2 rtl:space-x-reverse">
-            <div class="flex-grow">
-                <input type="text" id="searchInput" placeholder="חפש לפי שם או ברקוד..."
-                       class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-right"
-                       dir="rtl">
-            </div>
-            <!-- Barcode Scanner Button (now next to search bar) -->
-            <button id="barcodeScannerBtn" title="סרוק ברקוד"
-                    class="p-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors duration-200 flex-shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.865-1.442A2 2 0 0110.456 2h3.088a2 2 0 011.664.89l.865 1.442A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Loading Spinner -->
+        <!-- Loading Spinner for fetch -->
         <div id="loadingSpinner" class="loading-spinner"></div>
 
-        <!-- Products List Container -->
-        <div id="productsContainer" class="space-y-4">
-            <!-- Product cards will be rendered here by JavaScript -->
-        </div>
+        <!-- Product Settings Form -->
+        <form id="productSettingsForm" class="space-y-6 hidden">
+            <div>
+                <label for="barcode" class="block text-lg font-medium text-gray-700 mb-2">ברקוד</label>
+                <input type="text" id="barcode" name="barcode"
+                       class="w-full p-3 border rounded-lg bg-gray-100 cursor-not-allowed text-right" dir="rtl"
+                       disabled>
+            </div>
+            <div>
+                <label for="productName" class="block text-lg font-medium text-gray-700 mb-2">שם מוצר</label>
+                <input type="text" id="productName" name="productName"
+                       class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-right"
+                       dir="rtl">
+            </div>
+            <div>
+                <label for="category" class="block text-lg font-medium text-gray-700 mb-2">קטגוריה</label>
+                <select id="category" name="category"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-right"
+                        dir="rtl">
+                    <option value="none" disabled>בחר קטגוריה</option>
+                    <option value="dairy">מוצרי חלב</option>
+                    <option value="bakery">מאפים</option>
+                    <option value="vegetables">ירקות</option>
+                    <option value="drinks">שתיה</option>
+                    <option value="snacks">חטיפים</option>
+                    <option value="other">אחר</option>
+                </select>
+            </div>
+            <div class="flex justify-end">
+                <button type="submit"
+                        class="px-6 py-3 bg-indigo-500 text-white font-semibold rounded-lg hover:bg-indigo-600 transition-colors duration-200">
+                    שמור שינויים
+                </button>
+            </div>
+        </form>
 
-        <!-- Empty List Message -->
-        <div id="emptyListMessage" class="text-center text-gray-500 py-10 hidden">
-            <p class="text-xl">לא נמצאו מוצרים תואמים.</p>
-            <p class="mt-2">נא נסה חיפוש אחר או הוסף מוצר חדש.</p>
+        <!-- Success Toast Message -->
+        <div id="successToast" class="success-toast">
+            השינויים נשמרו בהצלחה!
         </div>
     </div>
 </div>
 
-<!-- Modal for Barcode Scanning Simulation -->
-<div id="barcodeScannerModal" class="modal hidden">
-    <div class="modal-content">
-        <span class="close-btn" id="closeScannerModalBtn">&times;</span>
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">סריקת ברקוד</h2>
-        <p>מדמה סריקת ברקוד. נא הזן ברקוד למטה:</p>
-        <input type="text" id="simulatedBarcodeInput" class="w-full p-3 border rounded-lg text-center mt-4"
-               placeholder="הזן ברקוד כאן..." value="7290002872323">
-        <button id="scanButton"
-                class="mt-4 px-6 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors duration-200">
-            סרוק
-        </button>
-    </div>
-</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const productSettingsForm = document.getElementById('productSettingsForm');
+        const barcodeInput = document.getElementById('barcode');
+        const productNameInput = document.getElementById('productName');
+        const categorySelect = document.getElementById('category');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const successToast = document.getElementById('successToast');
+        const sidebar = document.getElementById('sidebar');
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
 
-<script src="/static/products.js"></script>
+        const mockProductData = {
+            barcode: '7290002872323',
+            name: 'חלב 3%',
+            category: 'dairy'
+        };
+
+        // --- Utility Functions ---
+        function showLoading() {
+            loadingSpinner.style.display = 'block';
+            productSettingsForm.classList.add('hidden');
+        }
+
+        function hideLoading() {
+            loadingSpinner.style.display = 'none';
+            productSettingsForm.classList.remove('hidden');
+        }
+
+        function showSuccessToast() {
+            successToast.classList.add('show');
+            setTimeout(() => {
+                successToast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Function to fetch product settings
+        async function fetchProductSettings(productBarcode) {
+            showLoading();
+            // Simulating a network request delay
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // In a real application, you would use this logic:
+            // const response = await fetch(`/api/product/settings?product=${productBarcode}`);
+            // const data = await response.json();
+            // populateForm(data);
+
+            // Using mock data for this example
+            populateForm(mockProductData);
+            hideLoading();
+        }
+
+        // Function to populate the form with fetched data
+        function populateForm(product) {
+            barcodeInput.value = product.barcode;
+            productNameInput.value = product.name;
+            categorySelect.value = product.category;
+        }
+
+        // --- Event Listeners ---
+
+        // Sidebar toggle
+        hamburgerIcon.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        // Form submission handler
+        productSettingsForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            const updatedProduct = {
+                barcode: barcodeInput.value,
+                name: productNameInput.value,
+                category: categorySelect.value
+            };
+
+            // Simulate sending data to the server
+            console.log('Simulating update request with data:', updatedProduct);
+
+            showSuccessToast();
+
+            // In a real app, you would make an API call here:
+            // fetch('/api/product/settings', {
+            //     method: 'POST', // Or PUT
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(updatedProduct)
+            // }).then(response => {
+            //     if (response.ok) {
+            //         showSuccessToast();
+            //     } else {
+            //         console.error('Failed to save changes.');
+            //         // Show an error message to the user
+            //     }
+            // });
+        });
+
+        // On page load, get the barcode from the URL and fetch data
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/');
+        // Assumes a URL format like /product/{barcode}/settings
+        const productBarcode = pathParts[pathParts.length - 2];
+        if (productBarcode) {
+            fetchProductSettings(productBarcode);
+        } else {
+            // Handle case where no barcode is in the URL (e.g., redirect)
+            console.error('No product barcode found in URL.');
+            // For this example, we'll just fetch a default mock product
+            fetchProductSettings(mockProductData.barcode);
+        }
+    });
+</script>
 </body>
 </html>

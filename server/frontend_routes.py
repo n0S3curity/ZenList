@@ -1,5 +1,5 @@
 # frontend_routes.py
-from flask import Blueprint, request, redirect, url_for, render_template
+from flask import Blueprint, redirect, url_for, render_template
 
 # Create a Blueprint for frontend routes
 # We'll set a url_prefix of '/' to indicate these are root-level routes,
@@ -53,8 +53,7 @@ def receipts_list_page():
     In a real app, this would fetch data from /api/receipts
     and then render an HTML template.
     """
-    # return render_template('receipts_list.html')
-    return "<h1>Your Receipts</h1><p>Displaying list of available receipts. (Frontend)</p>"
+    return render_template('receipts.html')
 
 
 @frontend_bp.route('/receipts/<receipt_name>', methods=['GET'])
@@ -76,20 +75,30 @@ def products_list_page():
     In a real app, this would fetch data from /api/products
     and then render an HTML template.
     """
-    # return render_template('products_list.html')
-    return "<h1>Products List</h1><p>Displaying your product catalog with search and barcode scanner. (Frontend)</p>"
+    return render_template('products.html')
 
 
-@frontend_bp.route('/product/settings', methods=['GET'])
-def product_settings_page():
+# Assuming 'frontend_bp' is a Blueprint for your frontend routes
+@frontend_bp.route('/product/<product_barcode>/settings', methods=['GET'])
+def product_settings_page(product_barcode):
     """
     Lets the user update settings of a product.
-    Sends req to GET /api/product/settings?product=name.
+    This route captures the product barcode from the URL path.
     In a real app, this would fetch product settings from the backend
     and then render an HTML form for updating.
     """
-    product_name = request.args.get('product')
-    if product_name:
-        # return render_template('product_settings.html', product_name=product_name)
-        return f"<h1>Settings for Product: {product_name}</h1><p>Form to update product settings. (Frontend)</p>"
-    return "<h1>Product Settings</h1><p>Please specify a product to view/edit its settings. (Frontend)</p>"
+    if product_barcode:
+        # Here you would use the 'product_barcode' to fetch data,
+        # for example, by sending a request to your API.
+        # This is the correct way to access the barcode from the URL path.
+        #
+        # Example for a real app:
+        # product_data = get_product_data_by_barcode(product_barcode)
+        # return render_template('product_settings.html', product=product_data)
+
+        # For demonstration, we'll return a string with the captured barcode.
+        return render_template('settings.html', barcode=product_barcode)
+
+    # This return statement is now less likely to be reached,
+    # as the route requires a barcode in the URL.
+    return "<h1>Product Settings</h1><p>Please specify a product barcode to view/edit its settings. (Frontend)</p>"
