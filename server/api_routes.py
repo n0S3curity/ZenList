@@ -83,11 +83,14 @@ def set_item_as_done():
     with open('../databases/list.json', 'r', encoding='utf-8') as f:
         l = json.load(f)
     itemID = request.get_json()['itemID']
-    if itemID not in l:
+    print(f"Incoming itemID: {itemID}, Current list keys: {l.keys()}")
+    if itemID not in l.keys():
+        print(f"DEBUG: Item ID '{itemID}' not found in list, returning 404.")  # Add this line
         return jsonify({"error": "Item not found in the list."}), 404
     l[itemID]['done'] = True
     with open('../databases/list.json', 'w', encoding='utf-8') as f:
         json.dump(l, f, ensure_ascii=False, indent=4)
+    print(f"DEBUG: Item ID '{itemID}' marked as done, returning 200.")  # Add this line
     return jsonify({"message": f"Item marked as done."}), 200
 
 
