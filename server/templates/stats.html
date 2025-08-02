@@ -338,7 +338,7 @@
                     const li = event.target.closest('li.clickable-item');
                     if (li) {
                         const barcode = li.dataset.barcode;
-                        window.location.href = `/product/${barcode}/stats`;
+                        window.location.href = `/stats/${barcode}`;
                     }
                 });
 
@@ -365,7 +365,7 @@
                     const li = event.target.closest('li.clickable-item');
                     if (li) {
                         const barcode = li.dataset.barcode;
-                        window.location.href = `/product/${barcode}/stats`;
+                        window.location.href = `/stats/${barcode}`;
                     }
                 });
 

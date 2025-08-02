@@ -1,5 +1,6 @@
 import json
 import os
+import random
 
 
 def calculate_top_10_price_increase(products):
@@ -26,6 +27,10 @@ def calculate_top_10_price_increase(products):
     # Sort by price increase percentage in descending order and take the top 10
     return sorted(price_increases, key=lambda x: x['price_increase'], reverse=True)[:10]
 
+
+def generate_item_id():
+    # generate id from 1000 to 9999 as int
+    return random.randint(1000, 999999)
 
 # --- Main function to process a single receipt file ---
 def process_receipt_file(file_path):

@@ -10,11 +10,98 @@ from server.helpers import *
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
+
 @api_bp.route('/list', methods=['GET'])
 def get_shopping_list():
-    """Returns the content of list.json (the shopping list)."""
-    # In a real app, you'd load this from your List.json file
-    return jsonify(shopping_list_data)
+    with open('../databases/list.json', 'r', encoding='utf-8') as f:
+        shopping_list = json.load(f)
+    with open('../databases/categories.json', 'r', encoding='utf-8') as f:
+        categories = json.load(f)
+    shopping_list['categories'] = categories
+    return jsonify(shopping_list)
+
+
+@api_bp.route('/list/add', methods=['POST'])
+def add_item_to_list():
+    with open('../databases/list.json', 'r', encoding='utf-8') as f:
+        l = json.load(f)
+    itemName = request.get_json().get('item', '')
+    category = request.get_json().get('category', 'כללי')
+    if itemName in l:
+        return jsonify({"error": "Item already exists in the list."}), 400
+    else:
+        with open('../databases/categories.json', 'r', encoding='utf-8') as f:
+            categories = json.load(f)
+        if category not in categories:
+            categories[category] = category
+
+        item = {
+            "id": generate_item_id(),
+            "name": itemName.strip(),
+            "done": False,
+            "quantity": 1,
+            "category": category
+        }
+
+        l[item['id']] = item
+        with open('../databases/list.json', 'w', encoding='utf-8') as f:
+            json.dump(l, f, ensure_ascii=False, indent=4)
+    return jsonify({"message": f"Item '{item['id']}' added to the list."}), 201
+
+
+@api_bp.route('/list/remove', methods=['POST'])
+def remove_product_from_list():
+    with open('../databases/list.json', 'r', encoding='utf-8') as f:
+        l = json.load(f)
+    itemID = request.get_json()['itemID']
+    if itemID not in l:
+        return jsonify({"error": "Item not found in the list."}), 404
+    del l[itemID]
+    with open('../databases/list.json', 'w', encoding='utf-8') as f:
+        json.dump(l, f, ensure_ascii=False, indent=4)
+    return jsonify({"message": f"Item removed from the list."}), 200
+
+
+@api_bp.route('/list/quantity', methods=['POST'])
+def change_product_quantity():
+    with open('../databases/list.json', 'r', encoding='utf-8') as f:
+        l = json.load(f)
+    itemID = request.get_json()['itemID']
+    new_quantity = request.get_json()['quantity']
+    if itemID not in l:
+        return jsonify({"error": "Item not found in the list."}), 404
+    if not isinstance(new_quantity, int) or new_quantity < 0:
+        return jsonify({"error": "Quantity must be a non-negative integer."}), 400
+    l[itemID]['quantity'] = new_quantity
+    with open('../databases/list.json', 'w', encoding='utf-8') as f:
+        json.dump(l, f, ensure_ascii=False, indent=4)
+    return jsonify({"message": f"Quantity for item '{itemID}' updated to {new_quantity}."}), 200
+
+
+@api_bp.route('/list/done', methods=['POST'])
+def set_item_as_done():
+    with open('../databases/list.json', 'r', encoding='utf-8') as f:
+        l = json.load(f)
+    itemID = request.get_json()['itemID']
+    if itemID not in l:
+        return jsonify({"error": "Item not found in the list."}), 404
+    l[itemID]['done'] = True
+    with open('../databases/list.json', 'w', encoding='utf-8') as f:
+        json.dump(l, f, ensure_ascii=False, indent=4)
+    return jsonify({"message": f"Item marked as done."}), 200
+
+
+@api_bp.route('/list/undone', methods=['POST'])
+def set_item_as_undone():
+    with open('../databases/list.json', 'r', encoding='utf-8') as f:
+        l = json.load(f)
+    itemID = request.get_json()['itemID']
+    if itemID not in l:
+        return jsonify({"error": "Item not found in the list."}), 404
+    l[itemID]['done'] = False
+    with open('../databases/list.json', 'w', encoding='utf-8') as f:
+        json.dump(l, f, ensure_ascii=False, indent=4)
+    return jsonify({"message": f"Item marked as undone."}), 200
 
 
 @api_bp.route('/stats', methods=['GET'])
@@ -49,46 +136,7 @@ def get_receipts_list():
     return jsonify(receipts_folder_content)
 
 
-@api_bp.route('/product/add', methods=['POST'])
-def add_product_to_list():
-    """Adds a product name to the 'list.json' (shopping list)."""
-    data = request.get_json()
-    product_name = data.get('productName')
-    if product_name:
-        # In a real app, you'd update your List.json file
-        shopping_list_data.append({"productName": product_name, "quantity": 1, "done": False})
-        return jsonify({"message": f"Product '{product_name}' added to list."}), 201
-    return jsonify({"error": "Product name is required."}), 400
 
-
-@api_bp.route('/product/remove', methods=['POST'])
-def remove_product_from_list():
-    """Removes a product from the 'list.json' (shopping list)."""
-    data = request.get_json()
-    product_name = data.get('productName')
-    if product_name:
-        global shopping_list_data
-        initial_len = len(shopping_list_data)
-        shopping_list_data = [item for item in shopping_list_data if item['productName'] != product_name]
-        if len(shopping_list_data) < initial_len:
-            return jsonify({"message": f"Product '{product_name}' removed from list."}), 200
-        return jsonify({"error": f"Product '{product_name}' not found in list."}), 404
-    return jsonify({"error": "Product name is required."}), 400
-
-
-@api_bp.route('/product/quantity', methods=['POST'])
-def update_product_quantity():
-    """Updates the quantity of a product on the 'list.json' (shopping list)."""
-    data = request.get_json()
-    product_name = data.get('productName')
-    quantity = data.get('quantity')
-    if product_name and isinstance(quantity, int) and quantity >= 0:
-        for item in shopping_list_data:
-            if item['productName'] == product_name:
-                item['quantity'] = quantity
-                return jsonify({"message": f"Quantity for '{product_name}' updated to {quantity}."}), 200
-        return jsonify({"error": f"Product '{product_name}' not found in list."}), 404
-    return jsonify({"error": "Product name and valid quantity are required."}), 400
 
 
 @api_bp.route('/product/<barcode>/settings', methods=['GET'])
