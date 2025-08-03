@@ -26,6 +26,7 @@ def add_item_to_list():
     with open('../databases/list.json', 'r', encoding='utf-8') as f:
         l = json.load(f)
     itemName = request.get_json().get('item', '')
+    quantity = request.get_json().get('quantity', 1)
     category = request.get_json().get('category', 'כללי')
     if itemName in l:
         return jsonify({"error": "Item already exists in the list."}), 400
@@ -39,7 +40,7 @@ def add_item_to_list():
             "id": generate_item_id(),
             "name": itemName.strip(),
             "done": False,
-            "quantity": 1,
+            "quantity": quantity,
             "category": category
         }
 
@@ -306,10 +307,10 @@ def fetch_receipt():
 
             # Step 5: Save the receipt to the designated path
             save_path = f"../receipts/{company_name}/{city_english}/{receipt_filename}".lower()
-            # if os.path.exists(save_path):
-            #     # If the file already exists, we can either overwrite or skip
-            #     print(f"File {save_path} already exists. exiting")
-            #     return jsonify({"error": f"receipt number {receipt_filename} already exists."}), 400
+            if os.path.exists(save_path):
+                # If the file already exists, we can either overwrite or skip
+                print(f"File {save_path} already exists. exiting")
+                return jsonify({"error": f"receipt number {receipt_filename} already exists."}), 400
 
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
             with open(save_path, 'w', encoding='utf-8') as f:
