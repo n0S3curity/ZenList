@@ -1,16 +1,23 @@
 {
-  "735119": {
-    "id": 735119,
-    "name": "aaa",
-    "done": false,
-    "quantity": 1,
-    "category": "שתיה"
-  },
-  "385318": {
-    "id": 385318,
-    "name": "ssssssss",
-    "done": false,
-    "quantity": 1,
-    "category": "שימורים"
-  }
+    "619026": {
+        "id": 619026,
+        "name": "zDcvsVDcdszv",
+        "done": false,
+        "quantity": 1,
+        "category": "קטניות"
+    },
+    "802976": {
+        "id": 802976,
+        "name": "xcvbcxv",
+        "done": false,
+        "quantity": 8,
+        "category": "קפואים"
+    },
+    "692056": {
+        "id": 692056,
+        "name": "dfsadf",
+        "done": false,
+        "quantity": 6,
+        "category": "כללי"
+    }
 }

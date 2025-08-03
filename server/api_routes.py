@@ -82,7 +82,7 @@ def change_product_quantity():
 def set_item_as_done():
     with open('../databases/list.json', 'r', encoding='utf-8') as f:
         l = json.load(f)
-    itemID = request.get_json()['itemID']
+    itemID = str(request.get_json()['itemID'])
     print(f"Incoming itemID: {itemID}, Current list keys: {l.keys()}")
     if itemID not in l.keys():
         print(f"DEBUG: Item ID '{itemID}' not found in list, returning 404.")  # Add this line

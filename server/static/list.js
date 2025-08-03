@@ -102,104 +102,111 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Function to render the shopping list, now grouped by category
-    function renderShoppingList() {
-        const currentCollapsedState = new Set();
-        document.querySelectorAll('.category-header.collapsed').forEach(header => {
-            currentCollapsedState.add(header.dataset.categoryName);
-        });
+     // Function to render the shopping list, now grouped by category
+        function renderShoppingList() {
+            const currentCollapsedState = new Set();
+            document.querySelectorAll('.category-header.collapsed').forEach(header => {
+                currentCollapsedState.add(header.dataset.categoryName);
+            });
 
-        shoppingListContainer.innerHTML = ''; // Clear existing list
-        if (Object.keys(currentShoppingList).length === 0) {
-            showEmptyMessage();
-            return;
-        }
-        hideEmptyMessage();
-
-        // Group items by category
-        const categorizedItems = Object.values(currentShoppingList).reduce((acc, item) => {
-            const category = item.category || 'כללי'; // Default to 'כללי' if category is missing
-            if (!acc[category]) {
-                acc[category] = [];
+            shoppingListContainer.innerHTML = ''; // Clear existing list
+            if (Object.keys(currentShoppingList).length === 0) {
+                showEmptyMessage();
+                return;
             }
-            acc[category].push(item);
-            return acc;
-        }, {});
+            hideEmptyMessage();
 
-        // Sort categories alphabetically, put 'כללי' last
-        const sortedCategories = Object.keys(categorizedItems).sort((a, b) => {
-            if (a === 'כללי') return 1;
-            if (b === 'כללי') return -1;
-            return a.localeCompare(b);
-        });
-
-        let totalItemsCount = 0;
-
-        sortedCategories.forEach(category => {
-            const toDoItems = categorizedItems[category].filter(item => !item.done);
-            totalItemsCount += categorizedItems[category].length; // Count all items (done and not done)
-
-            // Create category header
-            const categoryHeaderDiv = document.createElement('div');
-            categoryHeaderDiv.className = 'category-header text-xl font-semibold text-gray-700 mt-6 mb-3 border-b pb-2 border-gray-300';
-            categoryHeaderDiv.dataset.categoryName = category;
-            categoryHeaderDiv.innerHTML = `
-                <div class="category-title-wrapper">
-                    <span>${category} (${toDoItems.length})</span>
-                </div>
-                <div class="category-actions">
-                    <button class="add-to-category-btn" data-category="${category}">+</button>
-                    <svg class="w-5 h-5 collapse-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </div>
-            `;
-            shoppingListContainer.appendChild(categoryHeaderDiv);
-
-            // Create a div for items within this category (collapsible content)
-            const categoryContentDiv = document.createElement('div');
-            categoryContentDiv.className = 'category-content space-y-4';
-            categoryContentDiv.dataset.categoryName = category;
-            shoppingListContainer.appendChild(categoryContentDiv);
-
-            // Set initial collapse state
-            if (collapsedCategories.has(category)) { // Use persisted state
-                categoryContentDiv.classList.add('hidden');
-                categoryHeaderDiv.classList.add('collapsed');
-            } else {
-                categoryContentDiv.classList.remove('hidden');
-                categoryHeaderDiv.classList.remove('collapsed');
-            }
-
-            // Attach click listener to header for collapsing (excluding the plus button)
-            categoryHeaderDiv.querySelector('.category-title-wrapper').addEventListener('click', () => {
-                const isHidden = categoryContentDiv.classList.toggle('hidden');
-                categoryHeaderDiv.classList.toggle('collapsed');
-
-                if (isHidden) {
-                    collapsedCategories.add(category);
-                } else {
-                    collapsedCategories.delete(category);
-                    categoryHeaderDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Group items by category
+            const categorizedItems = Object.values(currentShoppingList).reduce((acc, item) => {
+                const category = item.category || 'כללי'; // Default to 'כללי' if category is missing
+                if (!acc[category]) {
+                    acc[category] = [];
                 }
+                acc[category].push(item);
+                return acc;
+            }, {});
+
+            // Sort categories alphabetically, put 'כללי' last
+            const sortedCategories = Object.keys(categorizedItems).sort((a, b) => {
+                if (a === 'כללי') return 1;
+                if (b === 'כללי') return -1;
+                return a.localeCompare(b);
             });
 
-            // Attach click listener to the new "+" button
-            categoryHeaderDiv.querySelector('.add-to-category-btn').addEventListener('click', (event) => {
-                event.stopPropagation();
-                const targetCategory = event.currentTarget.dataset.category;
-                addProductModal.style.display = 'flex';
-                newProductNameInput.value = '';
-                newProductQuantityInput.value = '1';
-                populateCategoryDropdown();
-                newProductCategorySelect.value = targetCategory;
+            let totalItemsCount = 0;
+
+            // On initial render, collapse all categories by default
+            if (collapsedCategories.size === 0 && sortedCategories.length > 0) {
+                sortedCategories.forEach(category => collapsedCategories.add(category));
+            }
+
+
+            sortedCategories.forEach(category => {
+                const toDoItems = categorizedItems[category].filter(item => !item.done);
+                totalItemsCount += categorizedItems[category].length; // Count all items (done and not done)
+
+                // Create category header
+                const categoryHeaderDiv = document.createElement('div');
+                categoryHeaderDiv.className = 'category-header text-xl font-semibold text-gray-700 mt-6 mb-3 border-b pb-2 border-gray-300';
+                categoryHeaderDiv.dataset.categoryName = category;
+                categoryHeaderDiv.innerHTML = `
+                    <div class="category-title-wrapper">
+                        <span>${category} (${toDoItems.length})</span>
+                    </div>
+                    <div class="category-actions">
+                        <button class="add-to-category-btn" data-category="${category}">+</button>
+                        <svg class="w-5 h-5 collapse-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                `;
+                shoppingListContainer.appendChild(categoryHeaderDiv);
+
+                // Create a div for items within this category (collapsible content)
+                const categoryContentDiv = document.createElement('div');
+                categoryContentDiv.className = 'category-content space-y-4';
+                categoryContentDiv.dataset.categoryName = category;
+                shoppingListContainer.appendChild(categoryContentDiv);
+
+                // Set initial collapse state
+                if (collapsedCategories.has(category)) { // Use persisted state
+                    categoryContentDiv.classList.add('hidden');
+                    categoryHeaderDiv.classList.add('collapsed');
+                } else {
+                    categoryContentDiv.classList.remove('hidden');
+                    categoryHeaderDiv.classList.remove('collapsed');
+                }
+
+                // Attach click listener to header for collapsing (excluding the plus button)
+                categoryHeaderDiv.querySelector('.category-title-wrapper').addEventListener('click', () => {
+                    const isHidden = categoryContentDiv.classList.toggle('hidden');
+                    categoryHeaderDiv.classList.toggle('collapsed');
+
+                    if (isHidden) {
+                        collapsedCategories.add(category);
+                    } else {
+                        collapsedCategories.delete(category);
+                        categoryHeaderDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+
+                // Attach click listener to the new "+" button
+                categoryHeaderDiv.querySelector('.add-to-category-btn').addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const targetCategory = event.currentTarget.dataset.category;
+                    addProductModal.style.display = 'flex';
+                    newProductNameInput.value = '';
+                    newProductQuantityInput.value = '1';
+                    populateCategoryDropdown();
+                    newProductCategorySelect.value = targetCategory;
+                });
+
+                // Render the content for this category
+                renderCategoryContent(category);
             });
 
-            // Render the content for this category
-            renderCategoryContent(category);
-        });
-
-        totalItemsDisplay.textContent = `סה"כ פריטים ברשימה: ${totalItemsCount}`;
-    }
+            totalItemsDisplay.textContent = `סה"כ פריטים ברשימה: ${totalItemsCount}`;
+        }
 
     // Function to create a single list item HTML element
     function createListItem(item) {
@@ -280,6 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error fetching shopping list:', error);
             shoppingListContainer.innerHTML = '<p class="text-center text-red-500">שגיאה בטעינת רשימת הקניות. אנא נסה שוב מאוחר יותר.</p>';
+            showMessage('שגיאה בטעינת רשימת הקניות. אנא נסה שוב מאוחר יותר.', 'error');
             hideLoading();
             showEmptyMessage(); // Show empty message or an error message
         }
@@ -312,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/api/list/remove', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ itemID: itemID })
+                body: JSON.stringify({ itemID: itemID.toString() })
             });
 
             const result = await response.json();
@@ -334,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/api/list/quantity', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ itemID: itemID, quantity: quantity })
+                body: JSON.stringify({ itemID: itemID.toString(), quantity: quantity })
             });
 
             const result = await response.json();
@@ -359,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ itemID: itemID })
+                body: JSON.stringify({ itemID: itemID.toString() })
             });
 
             const result = await response.json();
@@ -378,7 +386,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Event Listeners ---
+function showMessage(message, level) {
+            // Check if a message container already exists to prevent stacking
+            let existingMessage = document.getElementById('message-container');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            // Create the main container for the message box
+            const messageContainer = document.createElement('div');
+            messageContainer.id = 'message-container';
+            messageContainer.className = 'fixed bottom-4 left-4 z-50 transition-transform transform-gpu duration-500 ease-out -translate-x-full';
+
+            // Create the inner message box element
+            const messageBox = document.createElement('div');
+            messageBox.textContent = message;
+            messageBox.className = 'rounded-lg p-4 text-white shadow-lg text-right rtl max-w-sm';
+
+            // Set the background color based on the message level
+            switch (level) {
+                case 'success':
+                    messageBox.classList.add('bg-green-500');
+                    break;
+                case 'error':
+                    messageBox.classList.add('bg-red-500');
+                    break;
+                case 'info':
+                default:
+                    messageBox.classList.add('bg-blue-500');
+                    break;
+            }
+
+            // Append the message box to the container
+            messageContainer.appendChild(messageBox);
+
+            // Append the container to the body to display it
+            document.body.appendChild(messageContainer);
+
+            // Animate the message box sliding in
+            setTimeout(() => {
+                messageContainer.classList.remove('-translate-x-full');
+            }, 100); // A small delay to allow the element to be rendered before starting the transition
+
+            // Automatically remove the message box after 1 second
+            setTimeout(() => {
+                messageContainer.classList.add('-translate-x-full'); // Animate the message box sliding out
+                messageContainer.addEventListener('transitionend', () => {
+                    messageContainer.remove();
+                });
+            }, 2000); // 2 seconds to allow the user to read the message. Transition is 0.5s.
+        }
+           // --- Event Listeners ---
 
     addFloatingButton.addEventListener('click', () => {
         addProductModal.style.display = 'flex';
