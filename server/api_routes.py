@@ -217,33 +217,6 @@ def get_product_settings(barcode):
     return jsonify({"error": f"Product with barcode '{barcode}' not found."}), 404
 
 
-@api_bp.route('/receipt/<receipt_name>', methods=['GET'])
-def get_receipt_by_name(receipt_name):
-    """Gets a receipt by its name and returns it as JSON."""
-    # In a real app, you'd load this from your Receipts folder
-    # For simplicity, let's just return a mock receipt structure
-    mock_receipt = {
-        "name": receipt_name,
-        "date": "2025-07-29",
-        "total": 100.00,
-        "items": [
-            {"product": "Milk", "price": 5.00, "quantity": 1},
-            {"product": "Bread", "price": 10.00, "quantity": 1}
-        ]
-    }
-    return jsonify(mock_receipt)
-
-
-@api_bp.route('/receipt/download', methods=['GET'])
-def download_receipt_pdf():
-    """Downloads the PDF of a receipt by its transaction ID."""
-    transaction_id = request.args.get('transactionID')
-    if transaction_id:
-        # In a real app, you'd generate or retrieve the PDF and send it
-        return jsonify({"message": f"Downloading PDF for transaction ID: {transaction_id}"}), 200
-    return jsonify({"error": "Transaction ID is required."}), 400
-
-
 @api_bp.route('/fetchReceipt', methods=['POST'])
 def fetch_receipt():
     data = request.get_json()
