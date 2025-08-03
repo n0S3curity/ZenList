@@ -6,7 +6,7 @@ import requests
 from flask import Blueprint, send_file
 from flask import request, jsonify
 
-from server.helpers import *
+from helpers import *
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
