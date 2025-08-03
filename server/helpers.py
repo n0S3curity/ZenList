@@ -13,6 +13,13 @@ def get_hebrew_city_name(city_name):
     # if no match is found, return the original city name
     return city_name
 
+
+def generate_receipt_filename():
+    # generate a random ID like asDFsadf-asd-f-sadf-w-afds-fsdfdsaf
+    random_id = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz0123456789', k=16))
+    return f"receipt_{random_id}"
+
+
 def calculate_top_10_price_increase(products):
     price_increases = []
     # Iterate over the values (the product dictionaries) of the products dictionary

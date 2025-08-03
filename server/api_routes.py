@@ -3,7 +3,7 @@ import traceback
 from urllib.parse import urlparse, parse_qs
 
 import requests
-from flask import Blueprint
+from flask import Blueprint, send_file
 from flask import request, jsonify
 
 from server.helpers import *
@@ -125,13 +125,6 @@ def get__product_stats(barcode):
     return jsonify({"error": f"Product with barcode '{barcode}' not found."}), 404
 
 
-@api_bp.route('/products', methods=['GET'])
-def get_products():
-    with open('../databases/products.json', 'r', encoding='utf-8') as f:
-        products_data = json.load(f)
-    return jsonify(products_data)
-
-
 @api_bp.route('/receipts', methods=['GET'])
 def get_receipts_list():
     """Returns a list of all receipts. list all files of the receipts folder, keep on hierarchy, and return as JSON.
@@ -165,6 +158,33 @@ def get_receipts_list():
     except Exception as e:
         return jsonify({"error": f"Error reading receipts directory: {str(e)}"}), 500
     return jsonify(receipts), 200
+
+
+@api_bp.route('/receipts/<receipt_number>/download', methods=['GET'])
+def download_receipt(receipt_number):
+    # download the receipt file from the receipts folder, first find the receipt file by its name, then return it as a file download
+    base_path = '../receipts'
+    try:
+        for company_name in os.listdir(base_path):
+            company_path = os.path.join(base_path, company_name)
+            if os.path.isdir(company_path):
+                for city_name in os.listdir(company_path):
+                    city_path = os.path.join(company_path, city_name)
+                    if os.path.isdir(city_path):
+                        receipt_file = f"{receipt_number}.json"
+                        receipt_path = os.path.join(city_path, receipt_file)
+                        if os.path.exists(receipt_path):
+                            return send_file(receipt_path, as_attachment=True,
+                                             download_name=generate_receipt_filename())
+    except Exception as e:
+        return jsonify({"error": f"Error reading receipts directory: {str(e)}"}), 500
+
+
+@api_bp.route('/products', methods=['GET'])
+def get_products():
+    with open('../databases/products.json', 'r', encoding='utf-8') as f:
+        products_data = json.load(f)
+    return jsonify(products_data)
 
 
 @api_bp.route('/product/<barcode>/settings', methods=['GET'])
@@ -238,6 +258,7 @@ def fetch_receipt():
         converted_url = f"{base_domain}/v1.0/documents/{doc_id}"
         if p_param:
             converted_url += f"?p={p_param}"
+        print(f"Converted URL: {converted_url}")
 
         # Step 4: Fetch the receipt data from the converted URL
         response = requests.get(converted_url)
@@ -262,6 +283,24 @@ def fetch_receipt():
                 # Handle cases where the key might not exist or the structure is different
                 return jsonify({"error": "Could not find 'additionalInfo.value' in receipt data."}), 500
             city_english = "Unknown City"  # Default value in case we can't determine the city
+
+            try:
+                # download original receipt for original_receipts_backup
+                original_receipt_path = f"https://pdf.pairzon.com/pdf/{doc_id}/{p_param}"
+                print(f"downloading original receipt for backup - {original_receipt_path}")
+                # save the original receipt as pdf to ../receipts/original_receipts_backup
+                original_receipt_response = requests.get(original_receipt_path)
+                if original_receipt_response.status_code == 200:
+                    original_receipt_filename = f"original_receipt_{doc_id}_{p_param}.pdf"
+                    original_receipt_save_path = f"../original_receipts_backup/{filename_value}.pdf"
+                    os.makedirs(os.path.dirname(original_receipt_save_path), exist_ok=True)
+                    with open(original_receipt_save_path, 'wb') as f:
+                        f.write(original_receipt_response.content)
+                    print(f"Original receipt saved to {original_receipt_save_path}")
+            except requests.exceptions.RequestException as e:
+                print(f"Error downloading original receipt: {str(e)}")
+                return jsonify({"error": f"Failed to download original receipt: {str(e)}"}), 500
+
             try:
                 # Identify the store name from the receipt
                 city_hebrew = receipt_json['store']['name']

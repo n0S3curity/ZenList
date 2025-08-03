@@ -44,7 +44,7 @@
 
         .main-content {
             flex-grow: 1; /* Allow main content to take remaining space */
-            padding: 1.5rem;
+            padding: 1rem; /* Adjust padding for mobile */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -53,6 +53,7 @@
         }
         @media (min-width: 768px) {
             .main-content {
+                padding: 1.5rem;
                 margin-right: 250px; /* Adjust for sidebar width when open */
             }
         }
@@ -63,15 +64,29 @@
             background-color: #ffffff;
             border-radius: 1rem; /* Rounded corners for the main card */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
+            padding: 1rem; /* Adjust padding for mobile */
+        }
+        @media (min-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+        }
+
+        .main-title {
+            font-size: 1.75rem; /* Smaller font on mobile */
+        }
+        @media (min-width: 768px) {
+            .main-title {
+                font-size: 3rem; /* Larger font on desktop */
+            }
         }
 
         /* Hamburger menu icon */
         .hamburger-icon {
             display: block; /* Show on mobile */
             position: fixed;
-            top: 1.5rem;
-            right: 1.5rem; /* Position on the right for RTL */
+            top: 1rem; /* Adjust position for mobile */
+            right: 1rem; /* Position on the right for RTL */
             z-index: 3000; /* Above sidebar */
             background-color: #4f46e5;
             color: white;
@@ -151,24 +166,56 @@
         }
         .receipt-card {
             display: flex;
-            align-items: center;
+            flex-direction: column; /* Stack details and actions on mobile */
+            align-items: flex-start;
             justify-content: space-between;
+            background-color: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        @media (min-width: 640px) { /* Adjust for larger screens */
+            .receipt-card {
+                flex-direction: row; /* Row layout on larger screens */
+                align-items: center;
+            }
         }
         .receipt-details {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        @media (min-width: 640px) {
+            .receipt-details {
+                flex-direction: row;
+                align-items: center;
+                margin-bottom: 0;
+            }
+        }
+        .receipt-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+        @media (min-width: 640px) {
+            .receipt-actions {
+                margin-top: 0;
+                width: auto;
+            }
         }
 
         /* Floating Plus Button */
         #addReceiptBtn {
             position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
+            bottom: 1rem; /* Adjust position for mobile */
+            left: 1rem;
             z-index: 1000;
             background-color: #4f46e5;
             color: white;
-            width: 56px;
-            height: 56px;
+            width: 50px; /* Adjust size for mobile */
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -195,15 +242,22 @@
             align-items: center;
             justify-content: center;
             animation: fadeIn 0.3s ease-in-out;
+            padding: 1rem; /* Add padding for mobile */
         }
         .modal-content {
             background-color: #fefefe;
-            padding: 2rem;
+            padding: 1.5rem; /* Adjust padding for mobile */
             border-radius: 1rem;
-            width: 90%;
+            width: 100%; /* Full width on mobile */
             max-width: 600px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             animation: slideIn 0.3s ease-in-out;
+        }
+        @media (min-width: 640px) {
+            .modal-content {
+                padding: 2rem;
+                width: 90%;
+            }
         }
         .close-btn {
             color: #aaa;
@@ -229,11 +283,11 @@
 
         .success-toast {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1rem; /* Adjust position for mobile */
+            right: 1rem;
             background-color: #10b981;
             color: white;
-            padding: 1rem 2rem;
+            padding: 0.75rem 1.5rem; /* Adjust padding for mobile */
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 5000;
@@ -303,7 +357,7 @@
 <!-- Main Content Area -->
 <div class="main-content">
     <div class="container">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">קבלות</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center main-title">קבלות</h1>
 
         <!-- Loading Spinner -->
         <div id="loadingSpinner" class="loading-spinner"></div>
@@ -332,10 +386,10 @@
 <div id="addReceiptModal" class="modal hidden">
     <div class="modal-content">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-bold text-gray-800">הוספת קבלה חדשה</h2>
+            <h2 class="text-xl font-bold text-gray-800 sm:text-2xl">הוספת קבלה חדשה</h2>
             <span class="close-btn" id="closeModalBtn">&times;</span>
         </div>
-        <p class="text-gray-600 mb-4">הדבק טקסט המכיל קישורים לקבלות, והמערכת תחלץ אותם עבורך.</p>
+        <p class="text-gray-600 mb-4 text-sm sm:text-base">הדבק טקסט המכיל קישורים לקבלות, והמערכת תחלץ אותם עבורך.</p>
         <textarea id="pasteArea"
                   class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-right"
                   rows="6" placeholder="הדבק טקסט כאן..."></textarea>
@@ -449,7 +503,7 @@
                     const branchHeader = document.createElement('div');
                     branchHeader.className = `branch-header flex items-center justify-between font-medium text-gray-700 transition-colors duration-200 rounded-lg p-3 my-2 cursor-pointer ${collapsedBranches.has(`${supermarket}-${branch}`) ? 'collapsed' : ''}`;
                     branchHeader.innerHTML = `
-                        <div class="branch-title-wrapper font-bold text-red-500 flex items-center flex-grow text-lg">
+                        <div class="branch-title-wrapper flex font-bold items-center text-red-600 flex-grow text-lg">
                             <span>${branch}</span>
                         </div>
                         <svg class="w-5 h-5 collapse-arrow text-gray-600 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -504,9 +558,9 @@
 
             card.innerHTML = `
                 <div class="receipt-details flex-grow">
-                    <span class="font-medium text-gray-800 ml-4">${formattedDate} | ${formattedTime}</span>
-                    <span class="font-bold text-green-600 ml-4"> סך הכל: ${receipt.total.toFixed(2)} ₪</span>
-                    <span class="text-sm text-gray-500"> (#${receipt.file})</span>
+                    <span class="font-medium text-gray-800 text-sm sm:text-base ml-4">${formattedDate} | ${formattedTime}</span>
+                    <span class="font-bold text-green-600 text-sm sm:text-base ml-4"> סך הכל: ${receipt.total.toFixed(2)} ₪</span>
+                    <span class="text-xs text-gray-500 sm:text-sm"> (#${receipt.file})</span>
                 </div>
                 <div class="receipt-actions space-x-2">
                     <a href="/api/receipts/${receipt.file}/show" target="_blank" title="הצג קבלה" class="show-btn inline-block bg-indigo-500 text-white p-2 text-sm rounded-md hover:bg-indigo-600 transition-colors duration-200">
@@ -553,7 +607,7 @@
         async function fetchReceipt(url) {
             showLoading(extractingSpinner);
             try {
-                const response = await fetch('/api/receipts/add', {
+                const response = await fetch('/api/fetchReceipt', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ url })

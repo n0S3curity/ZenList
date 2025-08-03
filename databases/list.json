@@ -17,7 +17,14 @@
         "id": 692056,
         "name": "dfsadf",
         "done": false,
-        "quantity": 6,
+      "quantity": 8,
+      "category": "כללי"
+    },
+  "713092": {
+    "id": 713092,
+    "name": "ו6טא",
+    "done": false,
+    "quantity": 1,
         "category": "כללי"
     }
 }
