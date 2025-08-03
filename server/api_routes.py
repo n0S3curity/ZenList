@@ -176,6 +176,23 @@ def download_receipt(receipt_number):
         return jsonify({"error": f"Error reading receipts directory: {str(e)}"}), 500
 
 
+@api_bp.route('/receipts/<receipt_number>/show', methods=['GET'])
+def show_receipt(receipt_number):
+    base_path = '../original_receipts_backup'
+    try:
+        print("Searching for receipt:", receipt_number + '.pdf', "in path:", os.listdir(base_path))
+        filename = receipt_number + '.pdf'
+        if filename in os.listdir(base_path):
+            receipt_path = os.path.join(base_path, filename)
+            # Return the PDF file directly
+            return send_file(receipt_path, as_attachment=False,
+                             download_name=f'{generate_receipt_filename()}.pdf')
+        else:
+            return jsonify({"error": f"Receipt '{receipt_number}' not found."}), 404
+    except Exception as e:
+        return jsonify({"error": f"Error reading receipts directory: {str(e)}"}), 500
+
+
 @api_bp.route('/products', methods=['GET'])
 def get_products():
     with open('../databases/products.json', 'r', encoding='utf-8') as f:
