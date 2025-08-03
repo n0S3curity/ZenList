@@ -162,20 +162,16 @@ def get_receipts_list():
 
 @api_bp.route('/receipts/<receipt_number>/download', methods=['GET'])
 def download_receipt(receipt_number):
-    # download the receipt file from the receipts folder, first find the receipt file by its name, then return it as a file download
-    base_path = '../receipts'
+    base_path = '../original_receipts_backup'
     try:
-        for company_name in os.listdir(base_path):
-            company_path = os.path.join(base_path, company_name)
-            if os.path.isdir(company_path):
-                for city_name in os.listdir(company_path):
-                    city_path = os.path.join(company_path, city_name)
-                    if os.path.isdir(city_path):
-                        receipt_file = f"{receipt_number}.json"
-                        receipt_path = os.path.join(city_path, receipt_file)
-                        if os.path.exists(receipt_path):
-                            return send_file(receipt_path, as_attachment=True,
-                                             download_name=generate_receipt_filename())
+        print("Searching for receipt:", receipt_number + '.pdf', "in path:", os.listdir(base_path))
+        filename = receipt_number + '.pdf'
+        if filename in os.listdir(base_path):
+            receipt_path = os.path.join(base_path, filename)
+            return send_file(receipt_path, as_attachment=True,
+                             download_name=f'{generate_receipt_filename()}.pdf')
+        else:
+            return jsonify({"error": f"Receipt '{receipt_number}' not found."}), 404
     except Exception as e:
         return jsonify({"error": f"Error reading receipts directory: {str(e)}"}), 500
 
