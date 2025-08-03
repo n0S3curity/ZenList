@@ -285,7 +285,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                      d="M20.488 9H15V3.512A9.025 25 0 0120.488 9z"></path>
             </svg>
             סטטיסטיקה
         </a></li>
@@ -339,10 +339,10 @@
         <textarea id="pasteArea"
                   class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-right"
                   rows="6" placeholder="הדבק טקסט כאן..."></textarea>
-
         <div id="linksListContainer" class="mt-4">
             <!-- Extracted links will be displayed here -->
         </div>
+        <div id="extractingSpinner" class="loading-spinner hidden"></div>
     </div>
 </div>
 
@@ -351,6 +351,307 @@
     <p id="successMessage"></p>
 </div>
 
-<script src="/static/receipts.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const receiptsContainer = document.getElementById('receiptsContainer');
+        const emptyListMessage = document.getElementById('emptyListMessage');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const sidebar = document.getElementById('sidebar');
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+        const addReceiptBtn = document.getElementById('addReceiptBtn');
+        const addReceiptModal = document.getElementById('addReceiptModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const pasteArea = document.getElementById('pasteArea');
+        const linksListContainer = document.getElementById('linksListContainer');
+        const successToast = document.getElementById('successToast');
+        const successMessage = document.getElementById('successMessage');
+        const extractingSpinner = document.getElementById('extractingSpinner');
+
+
+        // Store collapsed state for supermarkets and branches
+        const collapsedSupermarkets = new Set();
+        const collapsedBranches = new Set();
+
+        function showLoading(element) {
+            if (element) {
+                element.classList.remove('hidden');
+            }
+        }
+
+        function hideLoading(element) {
+            if (element) {
+                element.classList.add('hidden');
+            }
+        }
+
+        function showEmptyMessage() {
+            emptyListMessage.classList.remove('hidden');
+        }
+
+        function hideEmptyMessage() {
+            emptyListMessage.classList.add('hidden');
+        }
+
+        /**
+         * Groups receipts by supermarket and city (branch).
+         * @param {Array} receiptsList
+         * @returns {Object}
+         */
+        function groupReceipts(receiptsList) {
+            return receiptsList.reduce((acc, receipt) => {
+                const supermarket = receipt.company;
+                const branch = receipt.city;
+                if (!acc[supermarket]) {
+                    acc[supermarket] = {};
+                }
+                if (!acc[supermarket][branch]) {
+                    acc[supermarket][branch] = [];
+                }
+                acc[supermarket][branch].push(receipt);
+                return acc;
+            }, {});
+        }
+
+        /**
+         * Renders the receipt list from grouped data.
+         * @param {Object} groupedReceipts
+         */
+        function renderReceipts(groupedReceipts) {
+            receiptsContainer.innerHTML = ''; // Clear existing list
+
+            if (Object.keys(groupedReceipts).length === 0) {
+                showEmptyMessage();
+                return;
+            }
+            hideEmptyMessage();
+
+            const sortedSupermarkets = Object.keys(groupedReceipts).sort();
+            sortedSupermarkets.forEach(supermarket => {
+                const supermarketHeader = document.createElement('div');
+                supermarketHeader.className = `supermarket-header flex items-center justify-between font-semibold text-gray-800 transition-colors duration-200 rounded-lg p-4 mb-2 cursor-pointer ${collapsedSupermarkets.has(supermarket) ? 'collapsed' : ''}`;
+                supermarketHeader.innerHTML = `
+                    <div class="supermarket-title-wrapper flex items-center flex-grow text-xl">
+                        <span>${supermarket}</span>
+                    </div>
+                    <svg class="w-5 h-5 collapse-arrow text-gray-600 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                `;
+                supermarketHeader.onclick = () => toggleCollapse(supermarketHeader, supermarket, 'supermarket');
+                receiptsContainer.appendChild(supermarketHeader);
+
+                const supermarketContent = document.createElement('div');
+                supermarketContent.className = 'supermarket-content space-y-4 pr-4';
+                supermarketContent.style.display = collapsedSupermarkets.has(supermarket) ? 'none' : 'block';
+
+                const sortedBranches = Object.keys(groupedReceipts[supermarket]).sort();
+                sortedBranches.forEach(branch => {
+                    const branchHeader = document.createElement('div');
+                    branchHeader.className = `branch-header flex items-center justify-between font-medium text-gray-700 transition-colors duration-200 rounded-lg p-3 my-2 cursor-pointer ${collapsedBranches.has(`${supermarket}-${branch}`) ? 'collapsed' : ''}`;
+                    branchHeader.innerHTML = `
+                        <div class="branch-title-wrapper font-bold text-red-500 flex items-center flex-grow text-lg">
+                            <span>${branch}</span>
+                        </div>
+                        <svg class="w-5 h-5 collapse-arrow text-gray-600 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    `;
+                    branchHeader.onclick = () => toggleCollapse(branchHeader, `${supermarket}-${branch}`, 'branch');
+                    supermarketContent.appendChild(branchHeader);
+
+                    const branchContent = document.createElement('div');
+                    branchContent.className = 'branch-content space-y-3 pr-4';
+                    branchContent.style.display = collapsedBranches.has(`${supermarket}-${branch}`) ? 'none' : 'block';
+
+                    groupedReceipts[supermarket][branch].sort((a,b) => new Date(b.createdDate) - new Date(a.createdDate)).forEach(receipt => {
+                        const receiptCard = createReceiptCard(receipt);
+                        branchContent.appendChild(receiptCard);
+                    });
+                    supermarketContent.appendChild(branchContent);
+                });
+                receiptsContainer.appendChild(supermarketContent);
+            });
+        }
+
+        function toggleCollapse(header, key, type) {
+            const content = header.nextElementSibling;
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                header.classList.remove('collapsed');
+                if (type === 'supermarket') collapsedSupermarkets.delete(key);
+                if (type === 'branch') collapsedBranches.delete(key);
+            } else {
+                content.style.display = 'none';
+                header.classList.add('collapsed');
+                if (type === 'supermarket') collapsedSupermarkets.add(key);
+                if (type === 'branch') collapsedBranches.add(key);
+            }
+        }
+
+        /**
+         * Creates a single receipt card HTML element with original button icons and green price.
+         * @param {Object} receipt
+         * @returns {HTMLElement}
+         */
+        function createReceiptCard(receipt) {
+            const card = document.createElement('div');
+            card.className = 'receipt-card bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200';
+
+            // Format the date and time from the ISO string
+            const date = new Date(receipt.createdDate);
+            const formattedDate = date.toLocaleDateString('he-IL');
+            const formattedTime = date.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
+
+            card.innerHTML = `
+                <div class="receipt-details flex-grow">
+                    <span class="font-medium text-gray-800 ml-4">${formattedDate} | ${formattedTime}</span>
+                    <span class="font-bold text-green-600 ml-4"> סך הכל: ${receipt.total.toFixed(2)} ₪</span>
+                    <span class="text-sm text-gray-500"> (#${receipt.file})</span>
+                </div>
+                <div class="receipt-actions space-x-2">
+                    <a href="/api/receipts/${receipt.file}/show" target="_blank" title="הצג קבלה" class="show-btn inline-block bg-indigo-500 text-white p-2 text-sm rounded-md hover:bg-indigo-600 transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </a>
+                    <a href="/api/receipts/${receipt.file}/download" download title="הורד קבלה" class="download-btn inline-block bg-green-500 text-white p-2 text-sm rounded-md hover:bg-green-600 transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                    </a>
+                </div>
+            `;
+            return card;
+        }
+
+        // --- API Interaction Functions ---
+
+        async function fetchReceipts() {
+            showLoading(loadingSpinner);
+            try {
+                const response = await fetch('/api/receipts');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const receipts = await response.json();
+
+                // Group the data by supermarket and city
+                const groupedData = groupReceipts(receipts);
+
+                hideLoading(loadingSpinner);
+                renderReceipts(groupedData);
+
+            } catch (error) {
+                console.error('Error fetching receipts:', error);
+                hideLoading(loadingSpinner);
+                showEmptyMessage();
+                showToast('שגיאה בטעינת הקבלות. נסה שוב מאוחר יותר.', 'error');
+            }
+        }
+
+        async function fetchReceipt(url) {
+            showLoading(extractingSpinner);
+            try {
+                const response = await fetch('/api/receipts/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+
+                const result = await response.json();
+                hideLoading(extractingSpinner);
+                if (response.ok) {
+                    showToast('הקבלה נוספה בהצלחה!', 'success');
+                    fetchReceipts(); // Re-fetch the list to show the new receipt
+                } else {
+                    showToast(`שגיאה בהוספת קבלה: ${result.error || response.statusText}`, 'error');
+                }
+            } catch (error) {
+                console.error('Error fetching receipt from URL:', error);
+                hideLoading(extractingSpinner);
+                showToast('שגיאה בתקשורת עם השרת בעת הוספת קבלה.', 'error');
+            }
+        }
+
+        function extractLinks(text) {
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            return text.match(urlRegex) || [];
+        }
+
+        function renderLinks(links) {
+            linksListContainer.innerHTML = '';
+            if (links.length === 0) {
+                linksListContainer.innerHTML = '<p class="text-gray-500">לא נמצאו קישורים.</p>';
+                return;
+            }
+            links.forEach(url => {
+                const linkItem = document.createElement('div');
+                linkItem.className = 'flex items-center justify-between p-3 my-2 border rounded-lg bg-gray-50 text-sm';
+                linkItem.innerHTML = `
+                    <span class="truncate text-gray-700">${url}</span>
+                    <button class="choose-btn bg-indigo-500 text-white px-3 py-1 rounded-md hover:bg-indigo-600 transition-colors duration-200 mr-2" data-url="${url}">
+                        בחר
+                    </button>
+                `;
+                linksListContainer.appendChild(linkItem);
+            });
+        }
+
+        function showToast(message, type) {
+            successMessage.textContent = message;
+            successToast.className = 'success-toast show'; // Reset class to trigger transition
+            if (type === 'error') {
+                successToast.style.backgroundColor = '#ef4444'; // Red for error
+            } else {
+                successToast.style.backgroundColor = '#10b981'; // Green for success
+            }
+            setTimeout(() => {
+                successToast.classList.remove('show');
+            }, 3000); // Hide after 3 seconds
+        }
+
+        // --- Event Listeners ---
+        hamburgerIcon.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        addReceiptBtn.addEventListener('click', () => {
+            addReceiptModal.classList.remove('hidden');
+            pasteArea.value = ''; // Clear text area on open
+            linksListContainer.innerHTML = ''; // Clear links list
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            addReceiptModal.classList.add('hidden');
+        });
+
+        // Close modal if user clicks outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === addReceiptModal) {
+                addReceiptModal.classList.add('hidden');
+            }
+        });
+
+        pasteArea.addEventListener('input', (event) => {
+            const text = event.target.value;
+            const links = extractLinks(text);
+            renderLinks(links);
+        });
+
+        linksListContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('choose-btn')) {
+                const url = event.target.dataset.url;
+                if (url) {
+                    addReceiptModal.classList.add('hidden'); // Close modal
+                    fetchReceipt(url); // Call the API
+                }
+            }
+        });
+
+        // Initial fetch of receipts
+        fetchReceipts();
+    });
+</script>
 </body>
 </html>

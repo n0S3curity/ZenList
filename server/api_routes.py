@@ -134,12 +134,37 @@ def get_products():
 
 @api_bp.route('/receipts', methods=['GET'])
 def get_receipts_list():
-    """Returns a JSON list of the contents of the 'Receipts' folder."""
-    # In a real app, you'd scan the Receipts directory
-    return jsonify(receipts_folder_content)
-
-
-
+    """Returns a list of all receipts. list all files of the receipts folder, keep on hierarchy, and return as JSON.
+    :return as: {
+    "companyName": {"cityName": ["receipt1.json", "receipt2.json", ...], ...},....
+    for every receipt, open the file and select from the json the following fields:
+    total, createdDate. and attach it to the json
+    }
+    """
+    receipts = []
+    base_path = '../receipts'
+    try:
+        for company_name in os.listdir(base_path):
+            company_path = os.path.join(base_path, company_name)
+            if os.path.isdir(company_path):
+                for city_name in os.listdir(company_path):
+                    city_path = os.path.join(company_path, city_name)
+                    if os.path.isdir(city_path):
+                        for receipt_file in os.listdir(city_path):
+                            if receipt_file.endswith('.json'):
+                                receipt_path = os.path.join(city_path, receipt_file)
+                                with open(receipt_path, 'r', encoding='utf-8') as f:
+                                    receipt_data = json.load(f)
+                                    receipts.append({
+                                        "company": "אושר עד" if company_name == "osherad" else "יוחננוף" if company_name == "yohananof" else company_name,
+                                        "city": get_hebrew_city_name(city_name),
+                                        "file": receipt_file.replace('.json', ''),
+                                        "total": receipt_data.get('total', 0),
+                                        "createdDate": receipt_data.get('createdDate', 'Unknown')
+                                    })
+    except Exception as e:
+        return jsonify({"error": f"Error reading receipts directory: {str(e)}"}), 500
+    return jsonify(receipts), 200
 
 
 @api_bp.route('/product/<barcode>/settings', methods=['GET'])

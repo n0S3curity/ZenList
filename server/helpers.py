@@ -3,6 +3,16 @@ import os
 import random
 
 
+def get_hebrew_city_name(city_name):
+    with open('../databases/cities.json', 'r', encoding='utf-8') as f:
+        hebrew_cities = json.load(f)
+    # hebrew cities are the values of the dictionary, so we need to find the key that matches the city_name
+    for hebrew_city, english_city in hebrew_cities.items():
+        if english_city.lower() == city_name.lower():
+            return hebrew_city
+    # if no match is found, return the original city name
+    return city_name
+
 def calculate_top_10_price_increase(products):
     price_increases = []
     # Iterate over the values (the product dictionaries) of the products dictionary
