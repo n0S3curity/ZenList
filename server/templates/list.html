@@ -335,7 +335,7 @@
 
     // Store collapsed categories state
     const collapsedCategories = new Set();
-    let originalViewportHeight = window.innerHeight;
+
 
     // --- Utility Functions ---
 
@@ -777,6 +777,7 @@ function showMessage(message, level) {
         populateCategoryDatalist();
         newProductCategoryInput.value = 'כללי'; // Default to 'כללי'
         newProductNameInput.focus();
+        // Immediately scroll the input into view after showing the modal
         newProductNameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
@@ -814,19 +815,6 @@ function showMessage(message, level) {
 
     hamburgerIcon.addEventListener('click', () => {
         sidebar.classList.toggle('open');
-    });
-
-    // Handle viewport resize, useful for detecting virtual keyboard on mobile
-    window.addEventListener('resize', () => {
-        if (window.innerHeight < originalViewportHeight - 100) { // Assuming a drop of 100px or more indicates keyboard
-            // Keyboard is likely open, scroll the input into view
-            setTimeout(() => {
-                newProductNameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 300); // Small delay to allow keyboard to finish opening
-        } else {
-            // Keyboard is likely closed, reset to original height
-            originalViewportHeight = window.innerHeight;
-        }
     });
 
     // Initial fetch of shopping list
