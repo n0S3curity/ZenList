@@ -18,37 +18,61 @@ def get_shopping_list():
     with open('../databases/categories.json', 'r', encoding='utf-8') as f:
         categories = json.load(f)
     shopping_list['categories'] = categories
+    # add also the suggestions from suggestions.json
+    with open('../databases/suggestions.json', 'r', encoding='utf-8') as f:
+        suggestions = json.load(f)
+        # print(suggestions)
+    shopping_list['suggestions'] = suggestions["items"]
     return jsonify(shopping_list)
 
 
 @api_bp.route('/list/add', methods=['POST'])
 def add_item_to_list():
     with open('../databases/list.json', 'r', encoding='utf-8') as f:
-        l = json.load(f)
-    itemName = request.get_json().get('item', '')
+        item_list = json.load(f)
+
+    item_name = request.get_json().get('item', '').strip()
     quantity = request.get_json().get('quantity', 1)
     category = request.get_json().get('category', 'כללי')
-    if itemName in l:
-        return jsonify({"error": "Item already exists in the list."}), 400
-    else:
-        with open('../databases/categories.json', 'r', encoding='utf-8') as f:
-            categories = json.load(f)
-        if category not in categories:
-            categories[category] = category
 
-        item = {
-            "id": generate_item_id(),
-            "name": itemName.strip(),
-            "done": False,
-            "quantity": quantity,
-            "category": category
-        }
+    # Check if item name already exists in the list (by name, not by ID)
+    for item in item_list.values():
+        if item['name'] == item_name:
+            return jsonify({"error": f"Item already exists in the list. on {item['category']}"}), 400
 
-        l[item['id']] = item
-        with open('../databases/list.json', 'w', encoding='utf-8') as f:
-            json.dump(l, f, ensure_ascii=False, indent=4)
+    # --- Handle categories ---
+    with open('../databases/categories.json', 'r', encoding='utf-8') as f:
+        categories = json.load(f)
+
+    if category not in categories:
+        categories[category] = category
+        with open('../databases/categories.json', 'w', encoding='utf-8') as f:
+            json.dump(categories, f, ensure_ascii=False, indent=4)
+
+    # --- Handle suggestions ---
+    with open('../databases/suggestions.json', 'r', encoding='utf-8') as f:
+        suggestions = json.load(f)
+
+    if item_name not in suggestions["items"]:
+        suggestions["items"].append(item_name)
+        with open('../databases/suggestions.json', 'w', encoding='utf-8') as f:
+            json.dump(suggestions, f, ensure_ascii=False, indent=4)
+
+    # --- Create and add item ---
+    item = {
+        "id": generate_item_id(),
+        "name": item_name,
+        "done": False,
+        "quantity": quantity,
+        "category": category
+    }
+
+    item_list[item['id']] = item
+
+    with open('../databases/list.json', 'w', encoding='utf-8') as f:
+        json.dump(item_list, f, ensure_ascii=False, indent=4)
+
     return jsonify({"message": f"Item '{item['id']}' added to the list."}), 201
-
 
 @api_bp.route('/list/remove', methods=['POST'])
 def remove_product_from_list():

@@ -3,6 +3,39 @@ import os
 import random
 
 
+def create_db_files():
+    # Create directories if they do not exist
+    os.makedirs('../databases', exist_ok=True)
+    filenames = ['products.json', 'stats.json', 'cities.json', 'suggestions.json']
+    for name in filenames:
+        filepath = f'../databases/{name}'
+        if not os.path.exists(filepath):
+            with open(filepath, 'w', encoding='utf-8') as f:
+                if name == 'suggestions.json':
+                    # Initialize suggestions.json with an empty list
+                    json.dump({"items": []}, f, indent=4)
+                else:
+                    json.dump({}, f, indent=4)
+
+
+def add_to_suggestions(param):
+    # Load existing suggestions from file
+    suggestions_path = '../databases/suggestions.json'
+    with open(suggestions_path, 'r', encoding='utf-8') as f:
+        suggestions = json.load(f)
+
+    # Add the new suggestion to "items" list
+    if "items" not in suggestions:
+        suggestions["items"] = []
+
+    if param not in suggestions["items"]:
+        suggestions["items"].append(param)
+    # Save the updated suggestions back to file
+    with open(suggestions_path, 'w', encoding='utf-8') as f:
+        json.dump(suggestions, f, ensure_ascii=False, indent=4)
+    print("Suggestion added successfully.")
+
+
 def get_hebrew_city_name(city_name):
     with open('../databases/cities.json', 'r', encoding='utf-8') as f:
         hebrew_cities = json.load(f)
@@ -48,6 +81,7 @@ def calculate_top_10_price_increase(products):
 def generate_item_id():
     # generate id from 1000 to 9999 as int
     return random.randint(1000, 999999)
+
 
 # --- Main function to process a single receipt file ---
 def process_receipt_file(file_path):
