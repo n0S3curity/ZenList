@@ -9,7 +9,7 @@ services:
       - "8126:5000"
     # Mount the current directory into the container for live reloading during development
     volumes:
-      - .:/app
+      - /home/pi/databases:/app/databases  # Mount only the persistent data
     # Specify the command to run the application.
     # The CMD from the Dockerfile is used by default if this is not specified.
     command: python app.py
