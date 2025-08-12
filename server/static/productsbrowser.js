@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchProducts() {
         showLoading();
         try {
-            const response = await fetch('/api/products');
+            const response = await fetch('/api/productsbrowser');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

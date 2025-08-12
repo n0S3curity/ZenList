@@ -378,51 +378,8 @@
     </svg>
 </div>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-    <h2 class="text-2xl font-semibold mb-6 text-white text-left">תפריט</h2>
-    <ul class="space-y-4">
-        <li><a href="/list"
-               class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-md transition-colors duration-200">
-            <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-            </svg>
-            רשימת קניות
-        </a></li>
-        <li><a href="/products"
-               class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-md transition-colors duration-200">
-            <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
-            </svg>
-            מוצרים
-        </a></li>
-        <li><a href="/stats"
-               class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-md transition-colors duration-200">
-            <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-            </svg>
-            סטטיסטיקה
-        </a></li>
-        <li><a href="/receipts"
-               class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-md transition-colors duration-200">
-            <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-            קבלות
-        </a></li>
-    </ul>
-</div>
-
+<!-- include Sidebar from sidebar.html -->
+{% include "sidebar.html" %}
 <!-- Main Content Area -->
 <div class="main-content">
     <div class="container">
@@ -475,7 +432,7 @@
             <h2 class="text-2xl font-semibold mb-4 text-gray-800">הוסף פריט חדש</h2>
             <div class="mb-4">
                 <label for="newProductName" class="block text-sm font-medium text-gray-700 mb-1">שם פריט</label>
-                <input type="text" id="newProductName"
+                <input type="text" id="newProductName" autofocus
                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                        placeholder="לדוגמה: חלב, ביצים" list="productSuggestions">
                 <datalist id="productSuggestions"></datalist>
@@ -490,7 +447,7 @@
                 <label for="newProductCategory" class="block text-sm font-medium text-gray-700 mb-1">קטגוריה</label>
                 <input type="text" id="newProductCategory"
                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                       list="categorySuggestions" value="כללי">
+                       list="categorySuggestions" required>
                 <datalist id="categorySuggestions">
                     <!-- Categories will be dynamically loaded here by JavaScript -->
                 </datalist>
@@ -1036,7 +993,6 @@
             newProductNameInput.value = '';
             newProductQuantityInput.value = '1';
             populateCategoryDatalist();
-            newProductCategoryInput.value = 'כללי'; // Default to 'כללי'
             newProductNameInput.focus();
             // Immediately scroll the input into view after showing the modal
             newProductNameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1128,9 +1084,9 @@
                 // For now, let's assume a default or prompt the user later.
                 // For this implementation, we will add a placeholder item name and quantity.
                 // In a real app, you'd likely fetch product info by barcode or prompt the user.
-                const itemName = `פריט ברקוד ${barcode}`; // Placeholder name
+                const itemName = barcode; // Placeholder name
                 const quantity = 1;
-                const category = ''; // Default category
+                const category = 'כללי'; // Default category
 
                 await addItemToList(itemName, quantity, category, 'barcode', barcode);
             }

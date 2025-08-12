@@ -13,6 +13,16 @@ def home_page():
 def shopping_list_page():
     return render_template('list.html')
 
+
+@frontend_bp.route('/generalSettings', methods=['GET'])
+def general_settings_page():
+    return render_template('general_settings.html')
+
+
+@frontend_bp.route('/productsBrowser', methods=['GET'])
+def productsBrowser_page():
+    return render_template('productsBrowser.html')
+
 @frontend_bp.route('/stats', methods=['GET'])
 def overall_stats_page():
     return render_template('stats.html')

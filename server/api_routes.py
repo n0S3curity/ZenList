@@ -132,6 +132,111 @@ def set_item_as_undone():
     return jsonify({"message": f"Item marked as undone."}), 200
 
 
+@api_bp.route('/generalSettings', methods=['GET'])
+def get_general_settings():
+    """Returns the general settings from the settings.json file."""
+    try:
+        with open('../databases/general_settings.json', 'r', encoding='utf-8') as f:
+            settings_data = json.load(f)
+        return jsonify(settings_data), 200
+    except FileNotFoundError:
+        # If the file does not exist, create it with default values
+        default_settings = {
+            "supermarkets": {
+                "liked": {},
+                "available": {}
+            }
+        }
+        with open('../databases/general_settings.json', 'w', encoding='utf-8') as f:
+            json.dump(default_settings, f, ensure_ascii=False, indent=4)
+        return jsonify(default_settings), 200
+    except json.JSONDecodeError:
+        return jsonify({"error": "Error decoding settings file."}), 500
+
+
+@api_bp.route('/generalSettings/remove', methods=['POST'])
+def remove_general_setting():
+    """ gets storeid from body and removes it from the general settings file. at "liked" section."""
+    try:
+        # Check if the request payload contains 'storeId'
+        if not request.is_json:
+            return jsonify({"error": "Request must be JSON."}), 400
+        if 'StoreId' not in request.json:
+            return jsonify({"error": "storeId is required."}), 400
+        store_id = request.json.get('StoreId', '')
+        if not store_id:
+            return jsonify({"error": "storeId cannot be empty."}), 400
+        # Check if the request payload contains 'brandName'
+        supermarket_name = request.json.get('brandName', '').lower()  # Default to 'osherad' if not provided
+        if not supermarket_name:
+            return jsonify({"error": "brandName is required."}), 400
+        with open('../databases/general_settings.json', 'r', encoding='utf-8') as f:
+            settings_data = json.load(f)
+        liked_supermarkets = settings_data.get('supermarkets', {}).get('liked', {})
+        for branch in liked_supermarkets[supermarket_name]:
+            print(f"Checking branch: {branch['StoreId']} against store_id: {store_id}")
+            if store_id == branch['StoreId'] or store_id == int(branch['StoreId']):
+                print(f"Found matching branch: {branch['StoreId']}, removing it.")
+                # Remove the branch from the liked supermarkets and save the new object
+                liked_supermarkets[supermarket_name].remove(branch)
+
+                with open('../databases/general_settings.json', 'w', encoding='utf-8') as f:
+                    json.dump(settings_data, f, ensure_ascii=False, indent=4)
+                return jsonify({"message": f"Store {store_id} removed from liked settings."}), 200
+
+        return jsonify({"error": f"Store {store_id} not found in liked settings."}), 404
+    except FileNotFoundError:
+        return jsonify({"error": "file general settings not found."}), 500
+    except json.JSONDecodeError:
+        return jsonify({"error": "Error decoding settings file."}), 500
+
+
+@api_bp.route('/generalSettings/add', methods=['POST'])
+def add_general_setting():
+    """ gets storeid from body and removes it from the general settings file. at "liked" section."""
+    try:
+        StoreId = request.json.get('StoreId', 0)
+        print(f"Received StoreId: {StoreId}")
+        brandName = request.json.get('brandName', '').lower()
+        with open('../databases/general_settings.json', 'r', encoding='utf-8') as f:
+            settings_data = json.load(f)
+        liked_supermarkets = settings_data.get('supermarkets', {}).get('liked', {})
+        # find the supermarket in the available supermarkets, and add the full details to liked supermarkets
+        if brandName not in liked_supermarkets:
+            liked_supermarkets[brandName] = []
+        all_from_brand = settings_data.get('supermarkets', {}).get('available', {}).get(brandName, [])
+        # Check if the store exists in the available supermarkets, storeid can be string like "012" or number like 12,
+        # same as the store['StoreId'] which can be string or number
+        found_store = None
+        for store in all_from_brand:
+            print(
+                f"Checking store: {store['StoreId'], type(store['StoreId'])} against StoreId: {StoreId, type(StoreId)}")
+            if str(store['StoreId']) == str(StoreId):
+                found_store = store
+                break
+        if not found_store:
+            return jsonify({"error": f"Store with StoreId {StoreId} not found in available supermarkets."}), 404
+        # Add the store to the liked supermarkets
+        if brandName not in liked_supermarkets:
+            liked_supermarkets[brandName] = []
+        # Check if the store is already in the liked supermarkets
+        if any(store['StoreId'] == StoreId for store in liked_supermarkets[brandName]):
+            return jsonify({"error": f"Store with StoreId {StoreId} already exists in liked settings."}), 400
+        liked_supermarkets[brandName].append(found_store)
+        # Save the updated settings data back to the file
+        with open('../databases/general_settings.json', 'w', encoding='utf-8') as f:
+            json.dump(settings_data, f, ensure_ascii=False, indent=4)
+        # Return a success message
+        return jsonify({"message": f"Store {StoreId} added to liked settings."}), 200
+
+    except FileNotFoundError:
+        return jsonify({"error": "file general settings not found."}), 500
+    except json.JSONDecodeError:
+        return jsonify({"error": "Error decoding settings file."}), 500
+
+
+
+
 @api_bp.route('/stats', methods=['GET'])
 def get_stats():
     with open('../databases/stats.json', 'r', encoding='utf-8') as f:
@@ -140,7 +245,7 @@ def get_stats():
 
 
 @api_bp.route('/stats/<barcode>', methods=['GET'])
-def get__product_stats(barcode):
+def get_product_stats(barcode):
     with open('../databases/products.json', 'r', encoding='utf-8') as f:
         stats_data = json.load(f)
     if barcode in stats_data.keys():
@@ -223,6 +328,14 @@ def get_products():
     with open('../databases/products.json', 'r', encoding='utf-8') as f:
         products_data = json.load(f)
     return jsonify(products_data)
+
+
+@api_bp.route('/productsbrowser', methods=['GET'])
+def get_productsBrowser():
+    with open('../databases/products.json', 'r', encoding='utf-8') as f:
+        products_data = json.load(f)
+    return jsonify(products_data)
+
 
 
 @api_bp.route('/product/<barcode>/settings', methods=['GET'])

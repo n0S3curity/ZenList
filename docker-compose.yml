@@ -10,6 +10,7 @@ services:
     # Mount the current directory into the container for live reloading during development
     volumes:
       - ../zenlist_databases:/app/databases  # Mount only the persistent data
+      - ../zenlist_receipts:/app/receipts  # Mount only the persistent data
     # Specify the command to run the application.
     # The CMD from the Dockerfile is used by default if this is not specified.
     command: python app.py
