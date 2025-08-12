@@ -9,7 +9,7 @@ services:
       - "8126:5000"
     # Mount the current directory into the container for live reloading during development
     volumes:
-      - ../zenlist_databasses:/app/databases  # Mount only the persistent data
+      - ../zenlist_databases:/app/databases  # Mount only the persistent data
       - ../zenlist_receipts:/app/receipts  # Mount only the persistent data
       - ../zenlist_original_receipts_backup:/app/original_receipts_backup  # Mount only the persistent data
     # Specify the command to run the application.
