@@ -322,7 +322,6 @@ def show_receipt(receipt_number):
     except Exception as e:
         return jsonify({"error": f"Error reading receipts directory: {str(e)}"}), 500
 
-
 @api_bp.route('/products', methods=['GET'])
 def get_products():
     with open('../databases/products.json', 'r', encoding='utf-8') as f:
