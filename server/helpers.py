@@ -6,7 +6,8 @@ import random
 def create_db_files():
     # Create directories if they do not exist
     os.makedirs('../databases', exist_ok=True)
-    filenames = ['products.json', 'stats.json', 'cities.json', 'suggestions.json']
+    filenames = ['products.json', 'stats.json', 'cities.json', 'suggestions.json', 'categories.json',
+                 'general_settings.json']
     for name in filenames:
         filepath = f'../databases/{name}'
         if not os.path.exists(filepath):
@@ -14,6 +15,641 @@ def create_db_files():
                 if name == 'suggestions.json':
                     # Initialize suggestions.json with an empty list
                     json.dump({"items": []}, f, indent=4)
+                elif name == 'cities.json':
+                    # Initialize cities.json with an empty dictionary
+                    json.dump({
+                        "אילת": "Eilat",
+                        "אשדוד": "Ashdod",
+                        "אשקלון": "Ashkelon",
+                        "באר שבע": "Be'er Sheva",
+                        "בני ברק": "Bnei Brak",
+                        "בת ים": "Bat Yam",
+                        "גבעתיים": "Givatayim",
+                        "הוד השרון": "Hod HaSharon",
+                        "הרצליה": "Herzliya",
+                        "חדרה": "Hadera",
+                        "חולון": "Holon",
+                        "חיפה": "Haifa",
+                        "ירושלים": "Jerusalem",
+                        "כפר סבא": "Kfar Saba",
+                        "לוד": "Lod",
+                        "מודיעין": "Modi'in",
+                        "נהריה": "Nahariya",
+                        "נס ציונה": "Ness Ziona",
+                        "נתניה": "Netanya",
+                        "פתח תקווה": "Petah Tikva",
+                        "ראש העין": "Rosh Haayin",
+                        "ראשון לציון": "Rishon LeZion",
+                        "רחובות": "Rehovot",
+                        "רמת גן": "Ramat Gan",
+                        "רעננה": "Ra'anana",
+                        "שדרות": "Sderot",
+                        "רמלה": "Ramla",
+                        "טבריה": "Tiberias",
+                        "טירת כרמל": "Tirat Carmel",
+                        "יקנעם": "Yokneam",
+                        "קריית גת": "Kiryat Gat",
+                        "קריית שמונה": "Kiryat Shmona",
+                        "אופקים": "Ofakim",
+                        "אור יהודה": "Or Yehuda",
+                        "אור עקיבא": "Or Akiva",
+                        "אריאל": "Ariel",
+                        "בית שאן": "Beit She'an",
+                        "בית שמש": "Beit Shemesh",
+                        "דימונה": "Dimona",
+                        "זכרון יעקב": "Zichron Yaakov",
+                        "טייבה": "Tayibe",
+                        "יבנה": "Yavne",
+                        "כפר קאסם": "Kafr Qasim",
+                        "כרמיאל": "Karmiel",
+                        "מעלה אדומים": "Ma'ale Adumim",
+                        "מגדל העמק": "Migdal HaEmek",
+                        "מצפה רמון": "Mitzpe Ramon",
+                        "נצרת": "Nazareth",
+                        "נשר": "Nesher",
+                        "עכו": "Akko",
+                        "עפולה": "Afula",
+                        "צפת": "Safed",
+                        "קריית אונו": "Kiryat Ono",
+                        "קריית ביאליק": "Kiryat Bialik",
+                        "קריית ים": "Kiryat Yam",
+                        "קריית מוצקין": "Kiryat Motzkin",
+                        "קריית מלאכי": "Kiryat Malakhi",
+                        "שפרעם": "Shfaram",
+                        "אבן יהודה": "Even Yehuda",
+                        "אזור": "Azor",
+                        "אלעד": "Elad",
+                        "אליכין": "Elyakhin",
+                        "אעבלין": "I'billin",
+                        "גבעת שמואל": "Givat Shmuel",
+                        "ג'סר א זרקא": "Jisr az Zarqa",
+                        "ג'לג'וליה": "Jaljulya",
+                        "כפר יונה": "Kfar Yona",
+                        "כפר כנא": "Kafr Kanna",
+                        "כפר מנדא": "Kafr Manda",
+                        "כפר תבור": "Kfar Tavor",
+                        "מזכרת בתיה": "Mazkeret Batya",
+                        "מכבים": "Maccabim",
+                        "מטולה": "Metula",
+                        "מעלות תרשיחא": "Ma'alot Tarshiha",
+                        "נחף": "Nahf",
+                        "ערד": "Arad",
+                        "עין מאיר": "Ein Meir",
+                        "עספיא": "Isfiya",
+                        "פרדס חנה כרכור": "Pardes Hanna Karkur",
+                        "קדימה צורן": "Kadima Zoran",
+                        "רמת השרון": "Ramat HaSharon",
+                        "שדות ים": "Sdot Yam",
+                        "תל מונד": "Tel Mond",
+                        "בנימינה גבעת עדה": "Binyamina Giv'at Ada",
+                        "ג'ת": "Jatt",
+                        "חריש": "Harish",
+                        "ירוחם": "Yeruham",
+                        "להבים": "Lehavim",
+                        "מג'דל שמס": "Majdal Shams",
+                        "עתלית": "Atlit",
+                        "פרדס יהודה": "Pardes Yehuda",
+                        "צורן": "Zoran",
+                        "שוהם": "Shoham",
+                        "אורנית": "Oranit",
+                        "אלפי מנשה": "Alfei Menashe",
+                        "בית אל": "Beit El",
+                        "ביתר עילית": "Beitar Illit",
+                        "גבעת זאב": "Geva Binyamin",
+                        "היישוב היהודי": "Jewish Quarter",
+                        "הכפר הירוק": "Kfar HaYarok",
+                        "הר אדר": "Har Adar",
+                        "כפר אדומים": "Kfar Adumim",
+                        "כפר ורדים": "Kfar Vradim",
+                        "מבשרת ציון": "Mevasseret Zion",
+                        "קצרין": "Katzrin",
+                        "קרני שומרון": "Karnei Shomron",
+                        "שערי תקווה": "Sha'arei Tikva",
+                        "גוש עציון": "Gush Etzion",
+                        "קרית ארבע": "Kiryat Arba"
+                    }
+                        , f, indent=4)
+                elif name == 'general_settings.json':
+                    # Initialize general_settings.json with default settings
+                    json.dump({
+                        "supermarkets": {
+                            "liked": {
+                                "yohananof": [],
+                                "osherad": [
+                                ]
+                            },
+                            "available": {
+                                "osherad": [
+                                    {
+                                        "StoreId": 1,
+                                        "BikoretNo": 6,
+                                        "StoreType": 1,
+                                        "StoreName": "מגדל העמק",
+                                        "Address": "האיצטדיון 11",
+                                        "City": "מגדל העמק",
+                                        "ZipCode": "2303401"
+                                    },
+                                    {
+                                        "StoreId": 3,
+                                        "BikoretNo": 4,
+                                        "StoreType": 1,
+                                        "StoreName": "גבעת שאול",
+                                        "Address": "בית הדפוס 29",
+                                        "City": "ירושלים",
+                                        "ZipCode": "9548334"
+                                    },
+                                    {
+                                        "StoreId": 5,
+                                        "BikoretNo": 2,
+                                        "StoreType": 1,
+                                        "StoreName": "קרית ביאליק",
+                                        "Address": "הנס מולר 6, צור שלום",
+                                        "City": "קרית ביאליק",
+                                        "ZipCode": "2751206"
+                                    },
+                                    {
+                                        "StoreId": 6,
+                                        "BikoretNo": 1,
+                                        "StoreType": 1,
+                                        "StoreName": "כנות",
+                                        "Address": "אדום 24 פארק התעשיות כנות",
+                                        "City": "כנות",
+                                        "ZipCode": "7982500"
+                                    },
+                                    {
+                                        "StoreId": 9,
+                                        "BikoretNo": 8,
+                                        "StoreType": 1,
+                                        "StoreName": "אשדוד",
+                                        "Address": "בעלי המלאכה 4",
+                                        "City": "אשדוד",
+                                        "ZipCode": "7761205"
+                                    },
+                                    {
+                                        "StoreId": 10,
+                                        "BikoretNo": 4,
+                                        "StoreType": 1,
+                                        "StoreName": "פתח תקווה - סגולה",
+                                        "Address": "בן ציון גליס 30",
+                                        "City": "פתח תקווה",
+                                        "ZipCode": "4927930"
+                                    },
+                                    {
+                                        "StoreId": 11,
+                                        "BikoretNo": 3,
+                                        "StoreType": 1,
+                                        "StoreName": "בני ברק",
+                                        "Address": "הקישון 11",
+                                        "City": "בני ברק",
+                                        "ZipCode": "5120314"
+                                    },
+                                    {
+                                        "StoreId": 13,
+                                        "BikoretNo": 1,
+                                        "StoreType": 1,
+                                        "StoreName": "באר שבע",
+                                        "Address": "הקוצר 15 אזור תעשיה עמק שרה",
+                                        "City": "באר שבע",
+                                        "ZipCode": "8480904"
+                                    },
+                                    {
+                                        "StoreId": 14,
+                                        "BikoretNo": 0,
+                                        "StoreType": 1,
+                                        "StoreName": "חדרה",
+                                        "Address": "המסגר 22 אזה\"ת הצפוני",
+                                        "City": "חדרה",
+                                        "ZipCode": "3850169"
+                                    },
+                                    {
+                                        "StoreId": 16,
+                                        "BikoretNo": 8,
+                                        "StoreType": 1,
+                                        "StoreName": "בית שמש - גליל",
+                                        "Address": "מורדי הגיטאות 6",
+                                        "City": "בית שמש",
+                                        "ZipCode": "9958206"
+                                    },
+                                    {
+                                        "StoreId": 20,
+                                        "BikoretNo": 1,
+                                        "StoreType": 1,
+                                        "StoreName": "לוד",
+                                        "Address": "בת שבע 1 מתחם טלרד",
+                                        "City": "לוד",
+                                        "ZipCode": "7120101"
+                                    },
+                                    {
+                                        "StoreId": 22,
+                                        "BikoretNo": 9,
+                                        "StoreType": 1,
+                                        "StoreName": "אשקלון בת הדר",
+                                        "Address": "בת הדר",
+                                        "City": "אשקלון בת הדר",
+                                        "ZipCode": "7910300"
+                                    },
+                                    {
+                                        "StoreId": 23,
+                                        "BikoretNo": 8,
+                                        "StoreType": 1,
+                                        "StoreName": "נתניה",
+                                        "Address": "שדרות תום לנטוס",
+                                        "City": "נתניה",
+                                        "ZipCode": "4276019"
+                                    },
+                                    {
+                                        "StoreId": 24,
+                                        "BikoretNo": 7,
+                                        "StoreType": 1,
+                                        "StoreName": "תל אביב",
+                                        "Address": "קרמינצקי 3",
+                                        "City": "תל אביב",
+                                        "ZipCode": "6789903"
+                                    },
+                                    {
+                                        "StoreId": 25,
+                                        "BikoretNo": 6,
+                                        "StoreType": 1,
+                                        "StoreName": "ראשון לציון",
+                                        "Address": "אצל 26",
+                                        "City": "ראשון לציון",
+                                        "ZipCode": "7570630"
+                                    },
+                                    {
+                                        "StoreId": 26,
+                                        "BikoretNo": 5,
+                                        "StoreType": 1,
+                                        "StoreName": "תלפיות",
+                                        "Address": "פייר קניג 26 קניון הדר",
+                                        "City": "ירושלים",
+                                        "ZipCode": "9346934"
+                                    },
+                                    {
+                                        "StoreId": 28,
+                                        "BikoretNo": 3,
+                                        "StoreType": 1,
+                                        "StoreName": "שמגר",
+                                        "Address": "שמגר 16",
+                                        "City": "ירושלים",
+                                        "ZipCode": "9446116"
+                                    },
+                                    {
+                                        "StoreId": 29,
+                                        "BikoretNo": 2,
+                                        "StoreType": 1,
+                                        "StoreName": "קרית ים",
+                                        "Address": "גולדה מאיר 2",
+                                        "City": "קריית ים",
+                                        "ZipCode": "2905737"
+                                    },
+                                    {
+                                        "StoreId": 30,
+                                        "BikoretNo": 8,
+                                        "StoreType": 1,
+                                        "StoreName": "חיפה",
+                                        "Address": "דרך בר יהודה 31",
+                                        "City": "חיפה",
+                                        "ZipCode": "3262724"
+                                    },
+                                    {
+                                        "StoreId": 31,
+                                        "BikoretNo": 7,
+                                        "StoreType": 1,
+                                        "StoreName": "כפר סבא",
+                                        "Address": "דרך הים 9",
+                                        "City": "כפר סבא",
+                                        "ZipCode": "4418001"
+                                    },
+                                    {
+                                        "StoreId": 32,
+                                        "BikoretNo": 6,
+                                        "StoreType": 1,
+                                        "StoreName": "קרית אונו",
+                                        "Address": "שמירה אימבר גדיש 9",
+                                        "City": "קרית אונו",
+                                        "ZipCode": "5510101"
+                                    }
+                                ],
+                                "yohananof": [
+                                    {
+                                        "StoreId": "001",
+                                        "BikoretNo": 6,
+                                        "StoreType": 1,
+                                        "StoreName": "יוחננוף מפוח",
+                                        "Address": "רחוב המפוח 11, אזור התעשיה",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "002",
+                                        "BikoretNo": 5,
+                                        "StoreType": 1,
+                                        "StoreName": "יוחננוף ישן",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "004",
+                                        "BikoretNo": 3,
+                                        "StoreType": 1,
+                                        "StoreName": "בילו",
+                                        "Address": "צומת ביל\"ו",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "005",
+                                        "BikoretNo": 2,
+                                        "StoreType": 1,
+                                        "StoreName": "אשדוד",
+                                        "Address": "זבוטינסקי 27, סטאר סנטר",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "007",
+                                        "BikoretNo": 0,
+                                        "StoreType": 1,
+                                        "StoreName": "עקרון",
+                                        "Address": "המלך חסן 1",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "008",
+                                        "BikoretNo": 9,
+                                        "StoreType": 1,
+                                        "StoreName": "אחד העם",
+                                        "Address": "רחוב אחד העם 19",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "009",
+                                        "BikoretNo": 8,
+                                        "StoreType": 1,
+                                        "StoreName": "נתיבות",
+                                        "Address": "רחוב בעלי המלאכה 2, א.התעשיה",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "012",
+                                        "BikoretNo": 4,
+                                        "StoreType": 1,
+                                        "StoreName": "רמלה",
+                                        "Address": "שדרות ירושלים פינת נופי חמד",
+                                        "City": "רמלה",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "013",
+                                        "BikoretNo": 3,
+                                        "StoreType": 1,
+                                        "StoreName": "חוצות המפרץ",
+                                        "Address": "החרושת 10 חוצות המפרץ",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "015",
+                                        "BikoretNo": 1,
+                                        "StoreType": 1,
+                                        "StoreName": "אור יהודה",
+                                        "Address": "רחוב הפלדה 1",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "016",
+                                        "BikoretNo": 0,
+                                        "StoreType": 1,
+                                        "StoreName": "גן יבנה",
+                                        "Address": "דרך מנחם בגין פינת המגנים 57",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "017",
+                                        "BikoretNo": 9,
+                                        "StoreType": 1,
+                                        "StoreName": "מודיעין ישפרו",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "018",
+                                        "BikoretNo": 8,
+                                        "StoreType": 1,
+                                        "StoreName": "מודיעין כרמים",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "019",
+                                        "BikoretNo": 7,
+                                        "StoreType": 1,
+                                        "StoreName": "אור יהודה גדול",
+                                        "Address": "אור יהודה",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "020",
+                                        "BikoretNo": 3,
+                                        "StoreType": 1,
+                                        "StoreName": "ירושלים תלפיות",
+                                        "Address": "האומן",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "021",
+                                        "BikoretNo": 2,
+                                        "StoreType": 1,
+                                        "StoreName": "סגולה פתח תקווה",
+                                        "Address": "סגולה",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "022",
+                                        "BikoretNo": 1,
+                                        "StoreType": 1,
+                                        "StoreName": "חדרה",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "023",
+                                        "BikoretNo": 0,
+                                        "StoreType": 1,
+                                        "StoreName": "טבריה",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "024",
+                                        "BikoretNo": 9,
+                                        "StoreType": 1,
+                                        "StoreName": "כפר סבא",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "025",
+                                        "BikoretNo": 8,
+                                        "StoreType": 1,
+                                        "StoreName": "נס ציונה",
+                                        "Address": "נס ציונה",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "026",
+                                        "BikoretNo": 7,
+                                        "StoreType": 1,
+                                        "StoreName": "רמת השרון",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "027",
+                                        "BikoretNo": 6,
+                                        "StoreType": 1,
+                                        "StoreName": "יד אליהו",
+                                        "Address": "יגאל אלון 57",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "028",
+                                        "BikoretNo": 5,
+                                        "StoreType": 1,
+                                        "StoreName": "ראשלצ רמת אליהו",
+                                        "Address": "משורר השואה 15",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "029",
+                                        "BikoretNo": 4,
+                                        "StoreType": 1,
+                                        "StoreName": "בת ים",
+                                        "Address": "בת ים",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "030",
+                                        "BikoretNo": 0,
+                                        "StoreType": 1,
+                                        "StoreName": "נתניה",
+                                        "Address": "נתניה",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "031",
+                                        "BikoretNo": 9,
+                                        "StoreType": 1,
+                                        "StoreName": "מרכז סנטרו רחובות",
+                                        "Address": "רחובות",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "032",
+                                        "BikoretNo": 8,
+                                        "StoreType": 1,
+                                        "StoreName": "בן צבי תל אביב",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "033",
+                                        "BikoretNo": 7,
+                                        "StoreType": 1,
+                                        "StoreName": "איירפורט סיטי",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "034",
+                                        "BikoretNo": 6,
+                                        "StoreType": 1,
+                                        "StoreName": "מבקיעים אשקלון",
+                                        "Address": "מתחם גלובוס סנטר, מבקיעים",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "035",
+                                        "BikoretNo": 5,
+                                        "StoreType": 1,
+                                        "StoreName": "תל אביב נחלת יצחק",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "036",
+                                        "BikoretNo": 4,
+                                        "StoreType": 1,
+                                        "StoreName": "חדרה צפוני",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "037",
+                                        "BikoretNo": 3,
+                                        "StoreType": 1,
+                                        "StoreName": "עפולה",
+                                        "Address": "קהילת ציון 30",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "038",
+                                        "BikoretNo": 2,
+                                        "StoreType": 1,
+                                        "StoreName": "טבריה תחתית",
+                                        "Address": "יהודה הלוי 113",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "039",
+                                        "BikoretNo": 1,
+                                        "StoreType": 1,
+                                        "StoreName": "קרית שמונה",
+                                        "Address": "שדרות תל חי 93",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    },
+                                    {
+                                        "StoreId": "040",
+                                        "BikoretNo": 7,
+                                        "StoreType": 1,
+                                        "StoreName": "באר שבע",
+                                        "Address": "unknown",
+                                        "City": "0",
+                                        "ZipCode": "0000000"
+                                    }
+                                ]
+                            }
+                        }
+                    }, f, indent=4)
                 else:
                     json.dump({}, f, indent=4)
 

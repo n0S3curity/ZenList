@@ -1,9 +1,12 @@
 # main.py
+import threading
+
 from flask import Flask
 
 from api_routes import api_bp  # Import your blueprint
 from frontend_routes import frontend_bp  # Import your frontend blueprint
 from helpers import *
+from supermarkets_scrapper import Scrapper  # Import the scraper module
 
 
 def main():
@@ -15,6 +18,14 @@ def main():
     app.register_blueprint(frontend_bp)
     # create db files if they do not exist
     create_db_files()
+    # Initialize the scraper
+    scraper = Scrapper()
+    # Start the scraper in a separate thread
+    osherad_scraper_thread = threading.Thread(target=scraper.run_scraper_for_osher_ad(), daemon=True)
+    osherad_scraper_thread.start()
+    yohananof_scraper_thread = threading.Thread(target=scraper.run_scraper_for_yohananof(), daemon=True)
+    yohananof_scraper_thread.start()
+
     # listen on all ips
     app.run(host='0.0.0.0', debug=True, port=5000)
 
