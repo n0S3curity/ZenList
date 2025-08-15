@@ -60,7 +60,7 @@ class Scrapper:
                             print(
                                 f"Full prices parsed for {supermarket['StoreId']}, branch: {supermarket['BranchName']}")
                             # -----------------------continue from here-----------------------
-                            # parse full promos
+                            # parse full promos files (special and full) and update each item in full_price file with promo *object*
                             # self.parse_full_promos(full_prices_path=full_prices_path, branch=supermarket['StoreId'], name="yohananof")
                         else:
                             print(f"Failed to extract full prices for {supermarket}, skipping.")
@@ -105,15 +105,7 @@ class Scrapper:
             if not os.path.exists(folder_name):
                 print(f"Folder {folder_name} does not exist. Skipping extraction for {supermarket_name}.")
                 return "failed"
-            # find the file that has the following rules in its name:
-            # file pattern is like "pricefull123421342134-{supermarket['StoreId']}-timestamp.xml" example: PriceFull7290803800003-052-202508130010.xml
-            # contains "pricefull"
-            # the StoreId of the supermarket
-            # most updated timestamp.
-            print(f"price")
-            # files = [f.lower() for f in os.listdir(folder_name) if
-            #          f.startswith("pricefull") and str(supermarket['storeid']) in f and f.endswith(".xml")]
-            # now choose the most updated file by his timestamp
+
             files = []
             for f in os.listdir(folder_name):
                 f = f.lower()

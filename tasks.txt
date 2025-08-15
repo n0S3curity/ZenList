@@ -20,4 +20,10 @@ add:
 6. implement /api/productsbrowser
 
 
+overall final:
+    1 - replace all prints with logger
+    2 - add print(traceback.print_exc()) to all exceptions
+    3 - add sleeps in needed
+
+
 
