@@ -1,7 +1,17 @@
 {
   "supermarkets": {
     "liked": {
-      "yohananof": [],
+      "yohananof": [
+        {
+          "StoreId": "007",
+          "BikoretNo": 0,
+          "StoreType": 1,
+          "StoreName": "עקרון",
+          "Address": "המלך חסן 1",
+          "City": "0",
+          "ZipCode": "0000000"
+        }
+      ],
       "osherad": [
         {
           "StoreId": 25,

@@ -1,5 +1,4 @@
 # main.py
-import threading
 
 from flask import Flask
 
@@ -21,10 +20,10 @@ def main():
     # Initialize the scraper
     scraper = Scrapper()
     # Start the scraper in a separate thread
-    osherad_scraper_thread = threading.Thread(target=scraper.run_scraper_for_osher_ad, daemon=True)
-    osherad_scraper_thread.start()
-    yohananof_scraper_thread = threading.Thread(target=scraper.run_scraper_for_yohananof, daemon=True)
-    yohananof_scraper_thread.start()
+    # osherad_scraper_thread = threading.Thread(target=scraper.run_scraper_for_osher_ad, daemon=True)
+    # osherad_scraper_thread.start()
+    # yohananof_scraper_thread = threading.Thread(target=scraper.run_scraper_for_yohananof, daemon=True)
+    # yohananof_scraper_thread.start()
 
     # listen on all ips
     app.run(host='0.0.0.0', debug=True, port=5000)
