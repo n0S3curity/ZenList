@@ -1,5 +1,5 @@
 Flask==3.0.0
 xmltodict
 requests==2.32.4
-il-supermarket-scarper
+il-supermarket-scraper
 flask_cors
