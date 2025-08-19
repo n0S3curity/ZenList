@@ -1,6 +1,7 @@
 # main.py
 
 from flask import Flask
+from flask_cors import CORS  # New import for CORS
 
 from api_routes import api_bp  # Import your blueprint
 from frontend_routes import frontend_bp  # Import your frontend blueprint
@@ -10,6 +11,7 @@ from supermarkets_scrapper import Scrapper  # Import the scraper module
 
 def main():
     app = Flask(__name__)
+    CORS(app)  # Enable CORS for all routes
 
     # Register the Blueprint
     # All routes defined in api_bp will now be accessible under the /api prefix
