@@ -4,4 +4,4 @@ requests==2.32.4
 il-supermarket-scraper
 flask_cors
 urllib3
-requests
+requests==2.32.2
