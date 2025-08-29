@@ -714,12 +714,43 @@ def calculate_top_10_price_increase(products):
     return sorted(price_increases, key=lambda x: x['price_increase'], reverse=True)[:10]
 
 
+def calculate_top_10_price_drop(products):
+    # calculate the top 10 price drops from the products dictionary, without zeros. if none found, return empty list
+    # if less then 10 found, save only whats found
+    price_drops = []
+    for barcode, product in products.items():
+        if barcode == "901046":
+            # Skip the product with barcode "901046"
+            continue
+        cheapest_price = product.get('cheapest_price')
+        last_price = product.get('last_price')
+
+        # Calculate price drop only if both prices are valid and last_price is not zero
+        if cheapest_price is not None and last_price is not None and last_price > 0:
+            price_drop_percent = ((cheapest_price - last_price) / last_price) * 100
+            if price_drop_percent > 0:  # Only consider actual drops
+                price_drops.append({
+                    "name": product['name'],
+                    "barcode": barcode,
+                    "price_drop": price_drop_percent,
+                    "old_price": last_price,
+                    "new_price": cheapest_price
+                })
+    # Sort by price drop percentage in descending order and take the top 10
+    return sorted(price_drops, key=lambda x: x['price_drop'], reverse=True)[:10]
+
+
+# calculate the top 10 price drop, the opposite top_10_price_increase function does
+
+
 def generate_item_id():
     # generate id from 1000 to 9999 as int
     return random.randint(1000, 999999)
 
 
 # --- Main function to process a single receipt file ---
+
+
 def process_receipt_file(file_path):
     print(f"Processing receipt file: {file_path}")
 
@@ -800,6 +831,7 @@ def process_receipt_file(file_path):
                 continue
             # Update existing product
             product_data = products[barcode]
+            product_data['favorite'] = False
             product_data['total_quantity'] = int(product_data.get('total_quantity', 0)) + quantity
             product_data['total_price'] = float(product_data.get('total_price', 0.0)) + total
 
@@ -843,6 +875,7 @@ def process_receipt_file(file_path):
                 "price": price,
                 "total_quantity": quantity,
                 "total_price": total,
+                "favorite": False,
                 "history": [{
                     "date": date_and_time,
                     "quantity": quantity,
@@ -875,9 +908,11 @@ def process_receipt_file(file_path):
     )[:10]
     stats['top_10_product_purchased'] = top_10_product_purchased
 
-    # Calculate and update top 10 price increases
+    # Calculate and update top 10 price increases and drops
     top_10_price_increase = calculate_top_10_price_increase(products)
     stats['top_10_price_increase'] = top_10_price_increase
+    top_10_price_drop = calculate_top_10_price_drop(products)
+    stats['top_10_price_drop'] = top_10_price_drop
 
     stats['receipts'][receipt_barcode] = {
         "total_price": total_receipt_price,

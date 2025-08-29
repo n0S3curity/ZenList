@@ -1,1 +1,736 @@
-{}
+{
+  "total_receipts": 13,
+  "total_spent": 9698.790000000003,
+  "total_items": 663,
+  "average_spend_per_receipt": 746.0607692307694,
+  "top_10_product_purchased": [
+    {
+      "barcode": "7290112125514",
+      "cheapest_price": 0.6,
+      "highest_price": 0.6,
+      "history": [
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 0.6,
+          "quantity": 4
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 4,
+          "price": 0.6
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 4,
+          "price": 0.6
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 4,
+          "price": 0.6
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 4,
+          "price": 0.6
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 4,
+          "price": 0.6
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 4,
+          "price": 0.6
+        }
+      ],
+      "last_price": 0.6,
+      "name": "שקית ענק אושר עד",
+      "price": 0.6,
+      "price_increase": 0.0,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 16.8,
+      "total_quantity": 28,
+      "average_price": 0.6,
+      "favorite": false
+    },
+    {
+      "average_price": 27.07083333333333,
+      "barcode": "201863",
+      "cheapest_price": 26.66,
+      "highest_price": 29.9,
+      "history": [
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 26.67,
+          "quantity": 2
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 26.66,
+          "quantity": 1
+        },
+        {
+          "date": "2025-08-04 18:33:49",
+          "price": 29.9,
+          "quantity": 3
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 26.67
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 26.66
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 26.67
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 26.66
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 26.67
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 26.66
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 26.67
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 26.66
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 26.67
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 26.66
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 26.67
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 26.66
+        }
+      ],
+      "last_price": 26.66,
+      "name": "חיתולי טיטולים פרימי",
+      "price": 26.67,
+      "price_increase": 0.03750937734434195,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 649.6999999999999,
+      "total_quantity": 24,
+      "favorite": false
+    },
+    {
+      "average_price": 27.966666666666665,
+      "barcode": "263359",
+      "cheapest_price": 27.5,
+      "highest_price": 28.9,
+      "history": [
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 27.5,
+          "quantity": 2
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 28.9,
+          "quantity": 1
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 27.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 28.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 27.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 28.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 27.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 28.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 27.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 28.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 27.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 28.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 27.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 28.9
+        }
+      ],
+      "last_price": 28.9,
+      "name": "חיתולי האגיס 40 יח ש",
+      "price": 27.5,
+      "price_increase": 0.0,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 587.3,
+      "total_quantity": 21,
+      "favorite": false
+    },
+    {
+      "barcode": "4125455",
+      "cheapest_price": 2.8,
+      "highest_price": 2.8,
+      "history": [
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 2.8,
+          "quantity": 2
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 2.8
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 2.8
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 2.8
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 2.8
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 2.8
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 2.8
+        }
+      ],
+      "last_price": 2.8,
+      "name": "שמנת חמוצה 15% תנובה",
+      "price": 2.8,
+      "price_increase": 0.0,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 39.2,
+      "total_quantity": 14,
+      "average_price": 2.8000000000000003,
+      "favorite": false
+    },
+    {
+      "barcode": "7290019153702",
+      "cheapest_price": 4.7,
+      "highest_price": 4.7,
+      "history": [
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 4.7,
+          "quantity": 2
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 4.7
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 4.7
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 4.7
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 4.7
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 4.7
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 4.7
+        }
+      ],
+      "last_price": 4.7,
+      "name": "ספרינג לימונענע 1.5",
+      "price": 4.7,
+      "price_increase": 0.0,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 65.8,
+      "total_quantity": 14,
+      "average_price": 4.7,
+      "favorite": false
+    },
+    {
+      "barcode": "7290103705855",
+      "cheapest_price": 14.9,
+      "highest_price": 14.9,
+      "history": [
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 14.9,
+          "quantity": 2
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 14.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 14.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 14.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 14.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 14.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 14.9
+        }
+      ],
+      "last_price": 14.9,
+      "name": "מגבות נייר קשת 8 גלי",
+      "price": 14.9,
+      "price_increase": 0.0,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 208.60000000000002,
+      "total_quantity": 14,
+      "average_price": 14.900000000000002,
+      "favorite": false
+    },
+    {
+      "barcode": "7290110565527",
+      "cheapest_price": 6.0,
+      "highest_price": 6.0,
+      "history": [
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 6.0,
+          "quantity": 2
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.0
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.0
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.0
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.0
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.0
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.0
+        }
+      ],
+      "last_price": 6.0,
+      "name": "דנונה פרו טבעי 1.5%",
+      "price": 6.0,
+      "price_increase": 0.0,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 84.0,
+      "total_quantity": 14,
+      "average_price": 6.0,
+      "favorite": false
+    },
+    {
+      "barcode": "8975551",
+      "cheapest_price": 49.9,
+      "highest_price": 49.9,
+      "history": [
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 49.9,
+          "quantity": 2
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 49.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 49.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 49.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 49.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 49.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 49.9
+        }
+      ],
+      "last_price": 49.9,
+      "name": "מטרנה מהדרין שלב 3 7",
+      "price": 49.9,
+      "price_increase": 0.0,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 698.5999999999999,
+      "total_quantity": 14,
+      "average_price": 49.89999999999999,
+      "favorite": false
+    },
+    {
+      "barcode": "9009330",
+      "cheapest_price": 6.5,
+      "highest_price": 6.5,
+      "history": [
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 6.5,
+          "quantity": 2
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.5
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 2,
+          "price": 6.5
+        }
+      ],
+      "last_price": 6.5,
+      "name": "סלק עלים ערוגות המשק",
+      "price": 6.5,
+      "price_increase": 0.0,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 91.0,
+      "total_quantity": 14,
+      "average_price": 6.5,
+      "favorite": false
+    },
+    {
+      "average_price": 7.900000000000001,
+      "barcode": "7290013536471",
+      "cheapest_price": 7.9,
+      "highest_price": 7.9,
+      "history": [
+        {
+          "date": "2025-07-29 16:46:10",
+          "price": 7.9,
+          "quantity": 2
+        },
+        {
+          "date": "2025-07-23 18:33:53",
+          "price": 7.9,
+          "quantity": 3
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "price": 7.9,
+          "quantity": 1
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 7.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 7.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 7.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 7.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 7.9
+        },
+        {
+          "date": "2025-07-10 16:12:33",
+          "quantity": 1,
+          "price": 7.9
+        }
+      ],
+      "last_price": 7.9,
+      "name": "קמח פיצה מנופה הנחתו",
+      "price": 7.9,
+      "price_increase": 0.0,
+      "settings": {
+        "alias": "",
+        "default_category": ""
+      },
+      "total_price": 94.80000000000001,
+      "total_quantity": 12,
+      "favorite": false
+    }
+  ],
+  "top_10_price_increase": [
+    {
+      "name": "פלפל אדום",
+      "barcode": "9001501",
+      "price_increase": 40.81632653061224,
+      "old_price": 4.9,
+      "new_price": 6.9
+    },
+    {
+      "name": "כרוב לבן",
+      "barcode": "9000504",
+      "price_increase": 34.48275862068966,
+      "old_price": 2.9,
+      "new_price": 3.9
+    },
+    {
+      "name": "מנגו",
+      "barcode": "9006551",
+      "price_increase": 33.89830508474576,
+      "old_price": 5.9,
+      "new_price": 7.9
+    },
+    {
+      "name": "מיץ תפוזים משכוכית",
+      "barcode": "4030292",
+      "price_increase": 26.31578947368421,
+      "old_price": 7.6,
+      "new_price": 9.6
+    },
+    {
+      "name": "מלפפון",
+      "barcode": "9000207",
+      "price_increase": 25.641025641025657,
+      "old_price": 3.9,
+      "new_price": 4.9
+    },
+    {
+      "name": "עגבניות שרי",
+      "barcode": "9000115",
+      "price_increase": 14.388489208633093,
+      "old_price": 13.9,
+      "new_price": 15.9
+    },
+    {
+      "name": "פילה סלמון טרי אושר",
+      "barcode": "2345299",
+      "price_increase": 11.123470522803114,
+      "old_price": 89.9,
+      "new_price": 99.9
+    },
+    {
+      "name": "אפרסק",
+      "barcode": "9005950",
+      "price_increase": 6.7114093959731544,
+      "old_price": 14.9,
+      "new_price": 15.9
+    },
+    {
+      "name": "חיתולי האגיס 40 יח ש",
+      "barcode": "263359",
+      "price_increase": 5.0909090909090855,
+      "old_price": 27.5,
+      "new_price": 28.9
+    },
+    {
+      "name": "פטרוזיליה בוסתן",
+      "barcode": "7290016334579",
+      "price_increase": 0.30030030030029387,
+      "old_price": 3.33,
+      "new_price": 3.34
+    }
+  ],
+  "receipts": {
+    "0408250025124689": {
+      "date_and_time": "2025-08-04 18:33:49",
+      "total_price": 799.3
+    },
+    "1007250025096927": {
+      "total_price": 833.77,
+      "date_and_time": "2025-07-10 16:12:33"
+    },
+    "1308250020075977": {
+      "date_and_time": "2025-08-13 11:06:26",
+      "total_price": 129.0
+    },
+    "2008250020092688": {
+      "date_and_time": "2025-08-20 14:32:42",
+      "total_price": 764.99
+    },
+    "2307250025100141": {
+      "date_and_time": "2025-07-23 18:33:53",
+      "total_price": 938.94
+    },
+    "2808250025106099": {
+      "date_and_time": "2025-08-28 17:39:19",
+      "total_price": 529.96
+    },
+    "2907250020099080": {
+      "date_and_time": "2025-07-29 16:46:10",
+      "total_price": 700.21
+    }
+  },
+  "top_10_price_drop": []
+}

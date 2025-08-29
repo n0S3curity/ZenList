@@ -255,6 +255,45 @@ def get_product_stats(barcode):
     return jsonify({"error": f"Product with barcode '{barcode}' not found."}), 404
 
 
+@api_bp.route('/favorites/add', methods=['POST'])
+def add_product_to_favorites():
+    barcode = request.json.get('barcode', '')
+    if not barcode:
+        return jsonify({"error": "Barcode is required."}), 400
+    with open('../databases/products.json', 'r', encoding='utf-8') as f:
+        products_data = json.load(f)
+    if barcode not in products_data:
+        return jsonify({"error": f"Product with barcode '{barcode}' not found."}), 404
+    product = products_data[barcode]
+    product['favorite'] = True
+    with open('../databases/products.json', 'w', encoding='utf-8') as f:
+        json.dump(products_data, f, ensure_ascii=False, indent=4)
+    return jsonify({"message": f"Product '{barcode}' added to favorites."}), 200
+
+
+@api_bp.route('/favorites/remove', methods=['POST'])
+def remove_product_from_favorites():
+    barcode = request.json.get('barcode', '')
+    if not barcode:
+        return jsonify({"error": "Barcode is required."}), 400
+    with open('../databases/products.json', 'r', encoding='utf-8') as f:
+        products_data = json.load(f)
+    if barcode not in products_data:
+        return jsonify({"error": f"Product with barcode '{barcode}' not found."}), 404
+    product = products_data[barcode]
+    product['favorite'] = False
+    with open('../databases/products.json', 'w', encoding='utf-8') as f:
+        json.dump(products_data, f, ensure_ascii=False, indent=4)
+    return jsonify({"message": f"Product '{barcode}' removed from favorites."}), 200
+
+
+
+
+
+
+
+
+
 @api_bp.route('/receipts', methods=['GET'])
 def get_receipts_list():
     """Returns a list of all receipts. list all files of the receipts folder, keep on hierarchy, and return as JSON.
@@ -443,10 +482,10 @@ def fetch_receipt():
 
             # Step 5: Save the receipt to the designated path
             save_path = f"../receipts/{company_name}/{city_english}/{receipt_filename}".lower()
-            if os.path.exists(save_path):
-                # If the file already exists, we can either overwrite or skip
-                print(f"File {save_path} already exists. exiting")
-                return jsonify({"error": f"receipt number {receipt_filename} already exists."}), 400
+            # if os.path.exists(save_path):
+            #     # If the file already exists, we can either overwrite or skip
+            #     print(f"File {save_path} already exists. exiting")
+            #     return jsonify({"error": f"receipt number {receipt_filename} already exists."}), 400
 
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
             with open(save_path, 'w', encoding='utf-8') as f:
