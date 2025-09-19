@@ -517,6 +517,18 @@ def fetch_receipt():
 def get_prices():
     all_prices_data = []
     try:
+
+
+        # #____________________test_______________
+        # with open('../databases/liked_supermarkets_parsed_prices/example_res.json', 'r', encoding='utf-8') as f:
+        #     data = json.load(f)
+        # return jsonify(data)
+
+
+
+
+
+
         # 1. Read general settings to find liked supermarkets
         with open('../databases/general_settings.json', 'r', encoding='utf-8') as f:
             settings_data = json.load(f)
