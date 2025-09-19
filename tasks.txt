@@ -5,9 +5,7 @@
 
 add:
     1. add decreased prices support
-    2. add on stats.html yearly stats:
-        - total spent
-        - total inflation
+    2. a button to read all SMS and 1 by 1 send to scan
 
 
 

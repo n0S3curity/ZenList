@@ -5006,3 +5006,535 @@ Logger       2025-08-15 15:35:02,577 INFO     [MainThread] logger.py:info - file
 Logger       2025-08-15 15:35:02,577 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-095-202508150013.xml: size 366807757
 Logger       2025-08-15 15:35:02,577 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Stores7290803800003-000-20250813-010000.xml: size 366826265
 Logger       2025-08-15 15:35:02,578 INFO     [MainThread] logger.py:info Folder ../databases/yohananof_data\Yohananof: Num of Files= 228,Size= 349.8327875137329 MB
+Logger       2025-09-19 09:17:06,928 INFO     [MainThread] logger.py:info size_estimation_mode: False
+Logger       2025-09-19 09:17:06,928 INFO     [MainThread] logger.py:info Enabled scrapers: ['YOHANANOF']
+Logger       2025-09-19 09:17:06,928 INFO     [MainThread] logger.py:info Limit is None
+Logger       2025-09-19 09:17:06,928 INFO     [MainThread] logger.py:info files_types is None
+Logger       2025-09-19 09:17:06,928 INFO     [MainThread] logger.py:info Start scraping YOHANANOF.
+Logger       2025-09-19 09:17:07,528 INFO     [MainThread] logger.py:info Starting scrapper <class 'il_supermarket_scarper.scrappers.yohananof.Yohananof'>
+Logger       2025-09-19 09:17:07,530 INFO     [MainThread] logger.py:info scraping DumpFolderNames.YOHANANOF
+Logger       2025-09-19 09:17:07,531 INFO     [MainThread] logger.py:info Open connection to FTP server with url.retail.publishedprices.co.il , username: yohananof , password: 
+Logger       2025-09-19 09:17:07,762 INFO     [MainThread] logger.py:info Open connection to FTP server with url.retail.publishedprices.co.il , username: yohananof , password: 
+Logger       2025-09-19 09:17:07,982 INFO     [MainThread] logger.py:info Found 586 files
+Logger       2025-09-19 09:17:07,982 INFO     [MainThread] logger.py:info After filtering bad files: Found 586 files
+Logger       2025-09-19 09:17:07,982 INFO     [MainThread] logger.py:info After filtering by ['xml', 'gz']: Found 586 files
+Logger       2025-09-19 09:17:08,041 INFO     [MainThread] logger.py:info Number of entry after filter already downloaded is 586
+Logger       2025-09-19 09:17:08,041 INFO     [MainThread] logger.py:info Number of entry after filter unique links is 293
+Logger       2025-09-19 09:17:08,041 INFO     [MainThread] logger.py:info Number of entry after filter store id is 293
+Logger       2025-09-19 09:17:08,042 INFO     [MainThread] logger.py:info Number of entry after filter file type id is 293
+Logger       2025-09-19 09:17:08,042 INFO     [MainThread] logger.py:info Number of entry after filtering base on time is 127
+Logger       2025-09-19 09:17:08,042 INFO     [MainThread] logger.py:info Result length 127
+Logger       2025-09-19 09:17:08,042 INFO     [MainThread] logger.py:info After applying limit: Found 127 files
+Logger       2025-09-19 09:17:08,043 INFO     [MainThread] logger.py:info Running 127 tasks in parallel
+Logger       2025-09-19 09:17:08,057 DEBUG    [PullingThread_0] logger.py:debug Start persisting file Price7290803800003-004-202509190700.gz
+Logger       2025-09-19 09:17:08,058 DEBUG    [PullingThread_1] logger.py:debug Start persisting file Price7290803800003-007-202509190700.gz
+Logger       2025-09-19 09:17:08,058 DEBUG    [PullingThread_2] logger.py:debug Start persisting file Price7290803800003-008-202509190900.gz
+Logger       2025-09-19 09:17:08,058 DEBUG    [PullingThread_3] logger.py:debug Start persisting file Price7290803800003-012-202509190700.gz
+Logger       2025-09-19 09:17:08,059 DEBUG    [PullingThread_4] logger.py:debug Start persisting file Price7290803800003-016-202509190900.gz
+Logger       2025-09-19 09:17:08,264 DEBUG    [PullingThread_4] logger.py:debug File size is 674 bytes.
+Logger       2025-09-19 09:17:08,265 DEBUG    [PullingThread_4] logger.py:debug Done persisting file Price7290803800003-016-202509190900.gz
+Logger       2025-09-19 09:17:08,265 DEBUG    [PullingThread_4] logger.py:debug Start persisting file Price7290803800003-017-202509190700.gz
+Logger       2025-09-19 09:17:08,277 DEBUG    [PullingThread_1] logger.py:debug File size is 30304 bytes.
+Logger       2025-09-19 09:17:08,278 DEBUG    [PullingThread_2] logger.py:debug File size is 525 bytes.
+Logger       2025-09-19 09:17:08,279 DEBUG    [PullingThread_1] logger.py:debug Done persisting file Price7290803800003-007-202509190700.gz
+Logger       2025-09-19 09:17:08,279 DEBUG    [PullingThread_1] logger.py:debug Start persisting file Price7290803800003-020-202509190800.gz
+Logger       2025-09-19 09:17:08,279 DEBUG    [PullingThread_2] logger.py:debug Done persisting file Price7290803800003-008-202509190900.gz
+Logger       2025-09-19 09:17:08,279 DEBUG    [PullingThread_3] logger.py:debug File size is 6369 bytes.
+Logger       2025-09-19 09:17:08,281 DEBUG    [PullingThread_2] logger.py:debug Start persisting file Price7290803800003-021-202509190700.gz
+Logger       2025-09-19 09:17:08,281 DEBUG    [PullingThread_0] logger.py:debug File size is 30838 bytes.
+Logger       2025-09-19 09:17:08,282 DEBUG    [PullingThread_3] logger.py:debug Done persisting file Price7290803800003-012-202509190700.gz
+Logger       2025-09-19 09:17:08,282 DEBUG    [PullingThread_3] logger.py:debug Start persisting file Price7290803800003-022-202509190700.gz
+Logger       2025-09-19 09:17:08,283 DEBUG    [PullingThread_0] logger.py:debug Done persisting file Price7290803800003-004-202509190700.gz
+Logger       2025-09-19 09:17:08,283 DEBUG    [PullingThread_0] logger.py:debug Start persisting file Price7290803800003-023-202509190700.gz
+Logger       2025-09-19 09:17:08,475 DEBUG    [PullingThread_4] logger.py:debug File size is 33521 bytes.
+Logger       2025-09-19 09:17:08,477 DEBUG    [PullingThread_1] logger.py:debug File size is 37895 bytes.
+Logger       2025-09-19 09:17:08,478 DEBUG    [PullingThread_4] logger.py:debug Done persisting file Price7290803800003-017-202509190700.gz
+Logger       2025-09-19 09:17:08,478 DEBUG    [PullingThread_4] logger.py:debug Start persisting file Price7290803800003-024-202509190700.gz
+Logger       2025-09-19 09:17:08,479 DEBUG    [PullingThread_1] logger.py:debug Done persisting file Price7290803800003-020-202509190800.gz
+Logger       2025-09-19 09:17:08,479 DEBUG    [PullingThread_1] logger.py:debug Start persisting file Price7290803800003-026-202509190700.gz
+Logger       2025-09-19 09:17:08,492 DEBUG    [PullingThread_0] logger.py:debug File size is 32156 bytes.
+Logger       2025-09-19 09:17:08,492 DEBUG    [PullingThread_2] logger.py:debug File size is 33348 bytes.
+Logger       2025-09-19 09:17:08,494 DEBUG    [PullingThread_3] logger.py:debug File size is 28644 bytes.
+Logger       2025-09-19 09:17:08,494 DEBUG    [PullingThread_0] logger.py:debug Done persisting file Price7290803800003-023-202509190700.gz
+Logger       2025-09-19 09:17:08,494 DEBUG    [PullingThread_2] logger.py:debug Done persisting file Price7290803800003-021-202509190700.gz
+Logger       2025-09-19 09:17:08,494 DEBUG    [PullingThread_0] logger.py:debug Start persisting file Price7290803800003-027-202509190700.gz
+Logger       2025-09-19 09:17:08,494 DEBUG    [PullingThread_2] logger.py:debug Start persisting file Price7290803800003-028-202509190700.gz
+Logger       2025-09-19 09:17:08,496 DEBUG    [PullingThread_3] logger.py:debug Done persisting file Price7290803800003-022-202509190700.gz
+Logger       2025-09-19 09:17:08,496 DEBUG    [PullingThread_3] logger.py:debug Start persisting file Price7290803800003-029-202509190800.gz
+Logger       2025-09-19 09:17:08,677 DEBUG    [PullingThread_4] logger.py:debug File size is 32649 bytes.
+Logger       2025-09-19 09:17:08,679 DEBUG    [PullingThread_4] logger.py:debug Done persisting file Price7290803800003-024-202509190700.gz
+Logger       2025-09-19 09:17:08,679 DEBUG    [PullingThread_4] logger.py:debug Start persisting file Price7290803800003-030-202509190700.gz
+Logger       2025-09-19 09:17:08,705 DEBUG    [PullingThread_1] logger.py:debug File size is 34457 bytes.
+Logger       2025-09-19 09:17:08,707 DEBUG    [PullingThread_1] logger.py:debug Done persisting file Price7290803800003-026-202509190700.gz
+Logger       2025-09-19 09:17:08,707 DEBUG    [PullingThread_1] logger.py:debug Start persisting file Price7290803800003-031-202509190800.gz
+Logger       2025-09-19 09:17:08,710 DEBUG    [PullingThread_0] logger.py:debug File size is 54367 bytes.
+Logger       2025-09-19 09:17:08,712 DEBUG    [PullingThread_0] logger.py:debug Done persisting file Price7290803800003-027-202509190700.gz
+Logger       2025-09-19 09:17:08,712 DEBUG    [PullingThread_0] logger.py:debug Start persisting file Price7290803800003-032-202509190700.gz
+Logger       2025-09-19 09:17:08,724 DEBUG    [PullingThread_2] logger.py:debug File size is 31145 bytes.
+Logger       2025-09-19 09:17:08,724 DEBUG    [PullingThread_3] logger.py:debug File size is 28494 bytes.
+Logger       2025-09-19 09:17:08,725 DEBUG    [PullingThread_2] logger.py:debug Done persisting file Price7290803800003-028-202509190700.gz
+Logger       2025-09-19 09:17:08,725 DEBUG    [PullingThread_3] logger.py:debug Done persisting file Price7290803800003-029-202509190800.gz
+Logger       2025-09-19 09:17:08,725 DEBUG    [PullingThread_2] logger.py:debug Start persisting file Price7290803800003-033-202509190700.gz
+Logger       2025-09-19 09:17:08,725 DEBUG    [PullingThread_3] logger.py:debug Start persisting file Price7290803800003-034-202509190700.gz
+Logger       2025-09-19 09:17:08,894 DEBUG    [PullingThread_4] logger.py:debug File size is 36795 bytes.
+Logger       2025-09-19 09:17:08,896 DEBUG    [PullingThread_4] logger.py:debug Done persisting file Price7290803800003-030-202509190700.gz
+Logger       2025-09-19 09:17:08,897 DEBUG    [PullingThread_4] logger.py:debug Start persisting file Price7290803800003-035-202509190700.gz
+Logger       2025-09-19 09:17:08,908 DEBUG    [PullingThread_0] logger.py:debug File size is 5573 bytes.
+Logger       2025-09-19 09:17:08,909 DEBUG    [PullingThread_0] logger.py:debug Done persisting file Price7290803800003-032-202509190700.gz
+Logger       2025-09-19 09:17:08,909 DEBUG    [PullingThread_0] logger.py:debug Start persisting file Price7290803800003-037-202509190700.gz
+Logger       2025-09-19 09:17:08,910 DEBUG    [PullingThread_1] logger.py:debug File size is 34354 bytes.
+Logger       2025-09-19 09:17:08,912 DEBUG    [PullingThread_1] logger.py:debug Done persisting file Price7290803800003-031-202509190800.gz
+Logger       2025-09-19 09:17:08,912 DEBUG    [PullingThread_1] logger.py:debug Start persisting file Price7290803800003-038-202509190700.gz
+Logger       2025-09-19 09:17:08,939 DEBUG    [PullingThread_3] logger.py:debug File size is 34573 bytes.
+Logger       2025-09-19 09:17:08,941 DEBUG    [PullingThread_3] logger.py:debug Done persisting file Price7290803800003-034-202509190700.gz
+Logger       2025-09-19 09:17:08,941 DEBUG    [PullingThread_3] logger.py:debug Start persisting file Price7290803800003-039-202509190700.gz
+Logger       2025-09-19 09:17:08,942 DEBUG    [PullingThread_2] logger.py:debug File size is 7013 bytes.
+Logger       2025-09-19 09:17:08,944 DEBUG    [PullingThread_2] logger.py:debug Done persisting file Price7290803800003-033-202509190700.gz
+Logger       2025-09-19 09:17:08,944 DEBUG    [PullingThread_2] logger.py:debug Start persisting file Price7290803800003-042-202509190700.gz
+Logger       2025-09-19 09:17:09,095 DEBUG    [PullingThread_4] logger.py:debug File size is 23180 bytes.
+Logger       2025-09-19 09:17:09,096 DEBUG    [PullingThread_4] logger.py:debug Done persisting file Price7290803800003-035-202509190700.gz
+Logger       2025-09-19 09:17:09,097 DEBUG    [PullingThread_4] logger.py:debug Start persisting file Price7290803800003-046-202509190600.gz
+Logger       2025-09-19 09:17:09,125 DEBUG    [PullingThread_1] logger.py:debug File size is 28811 bytes.
+Logger       2025-09-19 09:17:09,126 DEBUG    [PullingThread_1] logger.py:debug Done persisting file Price7290803800003-038-202509190700.gz
+Logger       2025-09-19 09:17:09,126 DEBUG    [PullingThread_1] logger.py:debug Start persisting file Price7290803800003-053-202509190600.gz
+Logger       2025-09-19 09:17:09,143 DEBUG    [PullingThread_3] logger.py:debug File size is 8789 bytes.
+Logger       2025-09-19 09:17:09,143 DEBUG    [PullingThread_0] logger.py:debug File size is 31549 bytes.
+Logger       2025-09-19 09:17:09,145 DEBUG    [PullingThread_3] logger.py:debug Done persisting file Price7290803800003-039-202509190700.gz
+Logger       2025-09-19 09:17:09,145 DEBUG    [PullingThread_3] logger.py:debug Start persisting file Price7290803800003-054-202509190600.gz
+Logger       2025-09-19 09:17:09,146 DEBUG    [PullingThread_0] logger.py:debug Done persisting file Price7290803800003-037-202509190700.gz
+Logger       2025-09-19 09:17:09,146 DEBUG    [PullingThread_0] logger.py:debug Start persisting file Price7290803800003-055-202509190800.gz
+Logger       2025-09-19 09:17:09,169 DEBUG    [PullingThread_2] logger.py:debug File size is 37570 bytes.
+Logger       2025-09-19 09:17:09,171 DEBUG    [PullingThread_2] logger.py:debug Done persisting file Price7290803800003-042-202509190700.gz
+Logger       2025-09-19 09:17:09,172 DEBUG    [PullingThread_2] logger.py:debug Start persisting file Price7290803800003-059-202509190800.gz
+Logger       2025-09-19 09:17:09,329 DEBUG    [PullingThread_4] logger.py:debug File size is 40056 bytes.
+Logger       2025-09-19 09:17:09,331 DEBUG    [PullingThread_4] logger.py:debug Done persisting file Price7290803800003-046-202509190600.gz
+Logger       2025-09-19 09:17:09,331 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PriceFull7290803800003-001-202509190010.gz
+Logger       2025-09-19 09:17:09,343 DEBUG    [PullingThread_1] logger.py:debug File size is 18974 bytes.
+Logger       2025-09-19 09:17:09,344 DEBUG    [PullingThread_1] logger.py:debug Done persisting file Price7290803800003-053-202509190600.gz
+Logger       2025-09-19 09:17:09,345 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PriceFull7290803800003-004-202509190010.gz
+Logger       2025-09-19 09:17:09,357 DEBUG    [PullingThread_3] logger.py:debug File size is 7915 bytes.
+Logger       2025-09-19 09:17:09,358 DEBUG    [PullingThread_3] logger.py:debug Done persisting file Price7290803800003-054-202509190600.gz
+Logger       2025-09-19 09:17:09,358 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-005-202509190010.gz
+Logger       2025-09-19 09:17:09,361 DEBUG    [PullingThread_0] logger.py:debug File size is 24160 bytes.
+Logger       2025-09-19 09:17:09,363 DEBUG    [PullingThread_0] logger.py:debug Done persisting file Price7290803800003-055-202509190800.gz
+Logger       2025-09-19 09:17:09,363 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PriceFull7290803800003-007-202509190010.gz
+Logger       2025-09-19 09:17:09,386 DEBUG    [PullingThread_2] logger.py:debug File size is 32281 bytes.
+Logger       2025-09-19 09:17:09,388 DEBUG    [PullingThread_2] logger.py:debug Done persisting file Price7290803800003-059-202509190800.gz
+Logger       2025-09-19 09:17:09,388 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-008-202509190010.gz
+Logger       2025-09-19 09:17:11,202 DEBUG    [PullingThread_3] logger.py:debug File size is 567848 bytes.
+Logger       2025-09-19 09:17:11,217 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-005-202509190010.gz
+Logger       2025-09-19 09:17:11,217 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-009-202509190010.gz
+Logger       2025-09-19 09:17:12,392 DEBUG    [PullingThread_4] logger.py:debug File size is 496699 bytes.
+Logger       2025-09-19 09:17:12,403 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PriceFull7290803800003-001-202509190010.gz
+Logger       2025-09-19 09:17:12,404 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PriceFull7290803800003-012-202509190010.gz
+Logger       2025-09-19 09:17:12,408 DEBUG    [PullingThread_1] logger.py:debug File size is 499858 bytes.
+Logger       2025-09-19 09:17:12,420 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PriceFull7290803800003-004-202509190010.gz
+Logger       2025-09-19 09:17:12,421 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PriceFull7290803800003-013-202509190010.gz
+Logger       2025-09-19 09:17:15,650 DEBUG    [PullingThread_1] logger.py:debug File size is 586158 bytes.
+Logger       2025-09-19 09:17:15,663 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PriceFull7290803800003-013-202509190010.gz
+Logger       2025-09-19 09:17:15,664 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PriceFull7290803800003-015-202509190011.gz
+Logger       2025-09-19 09:17:16,521 DEBUG    [PullingThread_0] logger.py:debug File size is 529187 bytes.
+Logger       2025-09-19 09:17:16,533 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PriceFull7290803800003-007-202509190010.gz
+Logger       2025-09-19 09:17:16,534 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PriceFull7290803800003-016-202509190010.gz
+Logger       2025-09-19 09:17:16,656 DEBUG    [PullingThread_1] logger.py:debug File size is 174989 bytes.
+Logger       2025-09-19 09:17:16,662 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PriceFull7290803800003-015-202509190011.gz
+Logger       2025-09-19 09:17:16,662 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PriceFull7290803800003-017-202509190010.gz
+Logger       2025-09-19 09:17:16,685 DEBUG    [PullingThread_3] logger.py:debug File size is 517425 bytes.
+Logger       2025-09-19 09:17:16,698 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-009-202509190010.gz
+Logger       2025-09-19 09:17:16,699 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-018-202509190010.gz
+Logger       2025-09-19 09:17:16,906 DEBUG    [PullingThread_2] logger.py:debug File size is 291475 bytes.
+Logger       2025-09-19 09:17:16,913 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-008-202509190010.gz
+Logger       2025-09-19 09:17:16,914 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-019-202509190010.gz
+Logger       2025-09-19 09:17:16,958 DEBUG    [PullingThread_4] logger.py:debug File size is 498162 bytes.
+Logger       2025-09-19 09:17:16,969 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PriceFull7290803800003-012-202509190010.gz
+Logger       2025-09-19 09:17:16,970 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PriceFull7290803800003-020-202509190010.gz
+Logger       2025-09-19 09:17:19,073 DEBUG    [PullingThread_4] logger.py:debug File size is 516416 bytes.
+Logger       2025-09-19 09:17:19,085 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PriceFull7290803800003-020-202509190010.gz
+Logger       2025-09-19 09:17:19,086 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PriceFull7290803800003-021-202509190010.gz
+Logger       2025-09-19 09:17:20,016 DEBUG    [PullingThread_2] logger.py:debug File size is 551187 bytes.
+Logger       2025-09-19 09:17:20,030 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-019-202509190010.gz
+Logger       2025-09-19 09:17:20,030 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-022-202509190010.gz
+Logger       2025-09-19 09:17:20,856 DEBUG    [PullingThread_0] logger.py:debug File size is 553096 bytes.
+Logger       2025-09-19 09:17:20,868 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PriceFull7290803800003-016-202509190010.gz
+Logger       2025-09-19 09:17:20,869 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PriceFull7290803800003-023-202509190010.gz
+Logger       2025-09-19 09:17:21,216 DEBUG    [PullingThread_1] logger.py:debug File size is 578573 bytes.
+Logger       2025-09-19 09:17:21,230 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PriceFull7290803800003-017-202509190010.gz
+Logger       2025-09-19 09:17:21,230 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PriceFull7290803800003-024-202509190010.gz
+Logger       2025-09-19 09:17:21,605 DEBUG    [PullingThread_3] logger.py:debug File size is 395049 bytes.
+Logger       2025-09-19 09:17:21,613 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-018-202509190010.gz
+Logger       2025-09-19 09:17:21,615 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-025-202509190011.gz
+Logger       2025-09-19 09:17:22,138 DEBUG    [PullingThread_3] logger.py:debug File size is 230665 bytes.
+Logger       2025-09-19 09:17:22,145 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-025-202509190011.gz
+Logger       2025-09-19 09:17:22,146 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-026-202509190010.gz
+Logger       2025-09-19 09:17:25,487 DEBUG    [PullingThread_0] logger.py:debug File size is 500182 bytes.
+Logger       2025-09-19 09:17:25,498 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PriceFull7290803800003-023-202509190010.gz
+Logger       2025-09-19 09:17:25,499 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PriceFull7290803800003-027-202509190010.gz
+Logger       2025-09-19 09:17:25,990 DEBUG    [PullingThread_3] logger.py:debug File size is 588167 bytes.
+Logger       2025-09-19 09:17:26,004 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-026-202509190010.gz
+Logger       2025-09-19 09:17:26,004 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-028-202509190010.gz
+Logger       2025-09-19 09:17:26,011 DEBUG    [PullingThread_2] logger.py:debug File size is 583405 bytes.
+Logger       2025-09-19 09:17:26,015 DEBUG    [PullingThread_4] logger.py:debug File size is 555596 bytes.
+Logger       2025-09-19 09:17:26,027 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-022-202509190010.gz
+Logger       2025-09-19 09:17:26,028 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-029-202509190010.gz
+Logger       2025-09-19 09:17:26,031 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PriceFull7290803800003-021-202509190010.gz
+Logger       2025-09-19 09:17:26,031 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PriceFull7290803800003-030-202509190010.gz
+Logger       2025-09-19 09:17:28,252 DEBUG    [PullingThread_0] logger.py:debug File size is 543101 bytes.
+Logger       2025-09-19 09:17:28,264 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PriceFull7290803800003-027-202509190010.gz
+Logger       2025-09-19 09:17:28,265 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PriceFull7290803800003-031-202509190444.gz
+Logger       2025-09-19 09:17:28,993 DEBUG    [PullingThread_2] logger.py:debug File size is 442566 bytes.
+Logger       2025-09-19 09:17:29,003 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-029-202509190010.gz
+Logger       2025-09-19 09:17:29,003 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-032-202509190010.gz
+Logger       2025-09-19 09:17:29,538 DEBUG    [PullingThread_4] logger.py:debug File size is 578726 bytes.
+Logger       2025-09-19 09:17:29,551 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PriceFull7290803800003-030-202509190010.gz
+Logger       2025-09-19 09:17:29,552 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PriceFull7290803800003-033-202509190010.gz
+Logger       2025-09-19 09:17:32,532 DEBUG    [PullingThread_0] logger.py:debug File size is 581962 bytes.
+Logger       2025-09-19 09:17:32,545 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PriceFull7290803800003-031-202509190444.gz
+Logger       2025-09-19 09:17:32,546 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PriceFull7290803800003-034-202509190404.gz
+Logger       2025-09-19 09:17:32,708 DEBUG    [PullingThread_2] logger.py:debug File size is 531456 bytes.
+Logger       2025-09-19 09:17:32,720 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-032-202509190010.gz
+Logger       2025-09-19 09:17:32,720 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-035-202509190010.gz
+Logger       2025-09-19 09:17:33,259 DEBUG    [PullingThread_3] logger.py:debug File size is 444125 bytes.
+Logger       2025-09-19 09:17:33,270 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-028-202509190010.gz
+Logger       2025-09-19 09:17:33,270 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-036-202509190011.gz
+Logger       2025-09-19 09:17:33,965 DEBUG    [PullingThread_1] logger.py:debug File size is 642383 bytes.
+Logger       2025-09-19 09:17:33,979 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PriceFull7290803800003-024-202509190010.gz
+Logger       2025-09-19 09:17:33,979 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PriceFull7290803800003-037-202509190509.gz
+Logger       2025-09-19 09:17:34,540 DEBUG    [PullingThread_4] logger.py:debug File size is 479954 bytes.
+Logger       2025-09-19 09:17:34,551 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PriceFull7290803800003-033-202509190010.gz
+Logger       2025-09-19 09:17:34,552 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PriceFull7290803800003-038-202509190010.gz
+Logger       2025-09-19 09:17:35,596 DEBUG    [PullingThread_3] logger.py:debug File size is 305170 bytes.
+Logger       2025-09-19 09:17:35,606 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-036-202509190011.gz
+Logger       2025-09-19 09:17:35,606 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-039-202509190010.gz
+Logger       2025-09-19 09:17:36,222 DEBUG    [PullingThread_4] logger.py:debug File size is 321930 bytes.
+Logger       2025-09-19 09:17:36,230 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PriceFull7290803800003-038-202509190010.gz
+Logger       2025-09-19 09:17:36,230 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PriceFull7290803800003-040-202509190010.gz
+Logger       2025-09-19 09:17:36,627 DEBUG    [PullingThread_1] logger.py:debug File size is 444475 bytes.
+Logger       2025-09-19 09:17:36,637 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PriceFull7290803800003-037-202509190509.gz
+Logger       2025-09-19 09:17:36,637 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PriceFull7290803800003-041-202509190011.gz
+Logger       2025-09-19 09:17:36,656 DEBUG    [PullingThread_2] logger.py:debug File size is 329749 bytes.
+Logger       2025-09-19 09:17:36,665 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-035-202509190010.gz
+Logger       2025-09-19 09:17:36,665 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-042-202509190010.gz
+Logger       2025-09-19 09:17:38,080 DEBUG    [PullingThread_1] logger.py:debug File size is 222081 bytes.
+Logger       2025-09-19 09:17:38,086 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PriceFull7290803800003-041-202509190011.gz
+Logger       2025-09-19 09:17:38,086 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PriceFull7290803800003-046-202509190010.gz
+Logger       2025-09-19 09:17:38,306 DEBUG    [PullingThread_2] logger.py:debug File size is 272607 bytes.
+Logger       2025-09-19 09:17:38,314 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-042-202509190010.gz
+Logger       2025-09-19 09:17:38,314 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-048-202509190010.gz
+Logger       2025-09-19 09:17:38,382 DEBUG    [PullingThread_0] logger.py:debug File size is 512945 bytes.
+Logger       2025-09-19 09:17:38,395 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PriceFull7290803800003-034-202509190404.gz
+Logger       2025-09-19 09:17:38,395 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PriceFull7290803800003-050-202509190010.gz
+Logger       2025-09-19 09:17:38,548 DEBUG    [PullingThread_3] logger.py:debug File size is 395347 bytes.
+Logger       2025-09-19 09:17:38,558 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-039-202509190010.gz
+Logger       2025-09-19 09:17:38,558 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-051-202509190011.gz
+Logger       2025-09-19 09:17:39,658 DEBUG    [PullingThread_2] logger.py:debug File size is 280205 bytes.
+Logger       2025-09-19 09:17:39,666 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-048-202509190010.gz
+Logger       2025-09-19 09:17:39,666 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-052-202509190011.gz
+Logger       2025-09-19 09:17:41,452 DEBUG    [PullingThread_0] logger.py:debug File size is 462879 bytes.
+Logger       2025-09-19 09:17:41,467 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PriceFull7290803800003-050-202509190010.gz
+Logger       2025-09-19 09:17:41,468 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PriceFull7290803800003-053-202509190010.gz
+Logger       2025-09-19 09:17:41,497 DEBUG    [PullingThread_2] logger.py:debug File size is 281416 bytes.
+Logger       2025-09-19 09:17:41,508 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-052-202509190011.gz
+Logger       2025-09-19 09:17:41,508 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PriceFull7290803800003-054-202509190010.gz
+Logger       2025-09-19 09:17:42,788 DEBUG    [PullingThread_3] logger.py:debug File size is 255705 bytes.
+Logger       2025-09-19 09:17:42,796 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-051-202509190011.gz
+Logger       2025-09-19 09:17:42,796 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PriceFull7290803800003-055-202509190010.gz
+Logger       2025-09-19 09:17:42,833 DEBUG    [PullingThread_4] logger.py:debug File size is 507600 bytes.
+Logger       2025-09-19 09:17:42,844 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PriceFull7290803800003-040-202509190010.gz
+Logger       2025-09-19 09:17:42,845 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PriceFull7290803800003-059-202509190010.gz
+Logger       2025-09-19 09:17:42,940 DEBUG    [PullingThread_1] logger.py:debug File size is 443185 bytes.
+Logger       2025-09-19 09:17:42,952 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PriceFull7290803800003-046-202509190010.gz
+Logger       2025-09-19 09:17:42,952 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PriceFull7290803800003-060-202509190010.gz
+Logger       2025-09-19 09:17:43,122 DEBUG    [PullingThread_0] logger.py:debug File size is 257860 bytes.
+Logger       2025-09-19 09:17:43,129 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PriceFull7290803800003-053-202509190010.gz
+Logger       2025-09-19 09:17:43,129 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PriceFull7290803800003-7999-202405211349.gz
+Logger       2025-09-19 09:17:44,619 DEBUG    [PullingThread_2] logger.py:debug File size is 82391 bytes.
+Logger       2025-09-19 09:17:44,622 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PriceFull7290803800003-054-202509190010.gz
+Logger       2025-09-19 09:17:44,623 DEBUG    [PullingThread_2] logger.py:debug Start persisting file Promo7290803800003-007-202509190600.gz
+Logger       2025-09-19 09:17:44,801 DEBUG    [PullingThread_2] logger.py:debug File size is 676 bytes.
+Logger       2025-09-19 09:17:44,801 DEBUG    [PullingThread_2] logger.py:debug Done persisting file Promo7290803800003-007-202509190600.gz
+Logger       2025-09-19 09:17:44,802 DEBUG    [PullingThread_2] logger.py:debug Start persisting file Promo7290803800003-042-202509190900.gz
+Logger       2025-09-19 09:17:44,854 DEBUG    [PullingThread_4] logger.py:debug File size is 207682 bytes.
+Logger       2025-09-19 09:17:44,861 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PriceFull7290803800003-059-202509190010.gz
+Logger       2025-09-19 09:17:44,861 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull0000000000000-00-1-202411010501.gz
+Logger       2025-09-19 09:17:44,924 DEBUG    [PullingThread_3] logger.py:debug File size is 277676 bytes.
+Logger       2025-09-19 09:17:44,931 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PriceFull7290803800003-055-202509190010.gz
+Logger       2025-09-19 09:17:44,931 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PromoFull7290803800003-001-202509190010.gz
+Logger       2025-09-19 09:17:45,019 DEBUG    [PullingThread_2] logger.py:debug File size is 664 bytes.
+Logger       2025-09-19 09:17:45,020 DEBUG    [PullingThread_2] logger.py:debug Done persisting file Promo7290803800003-042-202509190900.gz
+Logger       2025-09-19 09:17:45,020 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PromoFull7290803800003-004-202509190010.gz
+Logger       2025-09-19 09:17:45,305 DEBUG    [PullingThread_4] logger.py:debug File size is 99831 bytes.
+Logger       2025-09-19 09:17:45,309 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull0000000000000-00-1-202411010501.gz
+Logger       2025-09-19 09:17:45,310 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-005-202509190011.gz
+Logger       2025-09-19 09:17:45,788 DEBUG    [PullingThread_0] logger.py:debug File size is 506196 bytes.
+Logger       2025-09-19 09:17:45,800 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PriceFull7290803800003-7999-202405211349.gz
+Logger       2025-09-19 09:17:45,801 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-007-202509190010.gz
+Logger       2025-09-19 09:17:45,819 DEBUG    [PullingThread_2] logger.py:debug File size is 171387 bytes.
+Logger       2025-09-19 09:17:45,826 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PromoFull7290803800003-004-202509190010.gz
+Logger       2025-09-19 09:17:45,826 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PromoFull7290803800003-008-202509190010.gz
+Logger       2025-09-19 09:17:46,010 DEBUG    [PullingThread_0] logger.py:debug File size is 154333 bytes.
+Logger       2025-09-19 09:17:46,017 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-007-202509190010.gz
+Logger       2025-09-19 09:17:46,017 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-009-202509190010.gz
+Logger       2025-09-19 09:17:46,372 DEBUG    [PullingThread_2] logger.py:debug File size is 129537 bytes.
+Logger       2025-09-19 09:17:46,379 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PromoFull7290803800003-008-202509190010.gz
+Logger       2025-09-19 09:17:46,379 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PromoFull7290803800003-012-202509190010.gz
+Logger       2025-09-19 09:17:47,134 DEBUG    [PullingThread_2] logger.py:debug File size is 153922 bytes.
+Logger       2025-09-19 09:17:47,140 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PromoFull7290803800003-012-202509190010.gz
+Logger       2025-09-19 09:17:47,140 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PromoFull7290803800003-013-202509190011.gz
+Logger       2025-09-19 09:17:47,208 DEBUG    [PullingThread_1] logger.py:debug File size is 253944 bytes.
+Logger       2025-09-19 09:17:47,216 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PriceFull7290803800003-060-202509190010.gz
+Logger       2025-09-19 09:17:47,216 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-015-202509190011.gz
+Logger       2025-09-19 09:17:47,747 DEBUG    [PullingThread_2] logger.py:debug File size is 172196 bytes.
+Logger       2025-09-19 09:17:47,753 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PromoFull7290803800003-013-202509190011.gz
+Logger       2025-09-19 09:17:47,753 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PromoFull7290803800003-016-202509190010.gz
+Logger       2025-09-19 09:17:47,769 DEBUG    [PullingThread_1] logger.py:debug File size is 111149 bytes.
+Logger       2025-09-19 09:17:47,774 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-015-202509190011.gz
+Logger       2025-09-19 09:17:47,774 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-017-202509190010.gz
+Logger       2025-09-19 09:17:47,793 DEBUG    [PullingThread_0] logger.py:debug File size is 175167 bytes.
+Logger       2025-09-19 09:17:47,799 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-009-202509190010.gz
+Logger       2025-09-19 09:17:47,800 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-018-202509190010.gz
+Logger       2025-09-19 09:17:48,222 DEBUG    [PullingThread_3] logger.py:debug File size is 147809 bytes.
+Logger       2025-09-19 09:17:48,227 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PromoFull7290803800003-001-202509190010.gz
+Logger       2025-09-19 09:17:48,228 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PromoFull7290803800003-019-202509190011.gz
+Logger       2025-09-19 09:17:48,545 DEBUG    [PullingThread_4] logger.py:debug File size is 126577 bytes.
+Logger       2025-09-19 09:17:48,551 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-005-202509190011.gz
+Logger       2025-09-19 09:17:48,551 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-020-202509190011.gz
+Logger       2025-09-19 09:17:49,011 DEBUG    [PullingThread_1] logger.py:debug File size is 172171 bytes.
+Logger       2025-09-19 09:17:49,019 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-017-202509190010.gz
+Logger       2025-09-19 09:17:49,019 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-021-202509190011.gz
+Logger       2025-09-19 09:17:49,126 DEBUG    [PullingThread_4] logger.py:debug File size is 157323 bytes.
+Logger       2025-09-19 09:17:49,136 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-020-202509190011.gz
+Logger       2025-09-19 09:17:49,137 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-022-202509190011.gz
+Logger       2025-09-19 09:17:49,323 DEBUG    [PullingThread_2] logger.py:debug File size is 156027 bytes.
+Logger       2025-09-19 09:17:49,333 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PromoFull7290803800003-016-202509190010.gz
+Logger       2025-09-19 09:17:49,334 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PromoFull7290803800003-023-202509190011.gz
+Logger       2025-09-19 09:17:49,775 DEBUG    [PullingThread_4] logger.py:debug File size is 167108 bytes.
+Logger       2025-09-19 09:17:49,781 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-022-202509190011.gz
+Logger       2025-09-19 09:17:49,781 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-024-202509190011.gz
+Logger       2025-09-19 09:17:50,123 DEBUG    [PullingThread_1] logger.py:debug File size is 169370 bytes.
+Logger       2025-09-19 09:17:50,129 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-021-202509190011.gz
+Logger       2025-09-19 09:17:50,129 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-025-202509190011.gz
+Logger       2025-09-19 09:17:50,608 DEBUG    [PullingThread_2] logger.py:debug File size is 154066 bytes.
+Logger       2025-09-19 09:17:50,682 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PromoFull7290803800003-023-202509190011.gz
+Logger       2025-09-19 09:17:50,683 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PromoFull7290803800003-026-202509190011.gz
+Logger       2025-09-19 09:17:50,699 DEBUG    [PullingThread_1] logger.py:debug File size is 111139 bytes.
+Logger       2025-09-19 09:17:50,712 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-025-202509190011.gz
+Logger       2025-09-19 09:17:50,713 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-027-202509190011.gz
+Logger       2025-09-19 09:17:50,739 DEBUG    [PullingThread_4] logger.py:debug File size is 170801 bytes.
+Logger       2025-09-19 09:17:50,748 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-024-202509190011.gz
+Logger       2025-09-19 09:17:50,749 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-028-202509190010.gz
+Logger       2025-09-19 09:17:51,553 DEBUG    [PullingThread_2] logger.py:debug File size is 160459 bytes.
+Logger       2025-09-19 09:17:51,558 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PromoFull7290803800003-026-202509190011.gz
+Logger       2025-09-19 09:17:51,559 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PromoFull7290803800003-029-202509190011.gz
+Logger       2025-09-19 09:17:51,602 DEBUG    [PullingThread_0] logger.py:debug File size is 134655 bytes.
+Logger       2025-09-19 09:17:51,608 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-018-202509190010.gz
+Logger       2025-09-19 09:17:51,608 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-030-202509190011.gz
+Logger       2025-09-19 09:17:51,616 DEBUG    [PullingThread_1] logger.py:debug File size is 140243 bytes.
+Logger       2025-09-19 09:17:51,622 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-027-202509190011.gz
+Logger       2025-09-19 09:17:51,622 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-031-202509190445.gz
+Logger       2025-09-19 09:17:52,109 DEBUG    [PullingThread_2] logger.py:debug File size is 114839 bytes.
+Logger       2025-09-19 09:17:52,114 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PromoFull7290803800003-029-202509190011.gz
+Logger       2025-09-19 09:17:52,114 DEBUG    [PullingThread_2] logger.py:debug Start persisting file PromoFull7290803800003-032-202509190011.gz
+Logger       2025-09-19 09:17:52,168 DEBUG    [PullingThread_3] logger.py:debug File size is 172148 bytes.
+Logger       2025-09-19 09:17:52,174 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PromoFull7290803800003-019-202509190011.gz
+Logger       2025-09-19 09:17:52,174 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PromoFull7290803800003-033-202509190010.gz
+Logger       2025-09-19 09:17:52,532 DEBUG    [PullingThread_0] logger.py:debug File size is 170202 bytes.
+Logger       2025-09-19 09:17:52,540 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-030-202509190011.gz
+Logger       2025-09-19 09:17:52,540 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-034-202509190405.gz
+Logger       2025-09-19 09:17:52,692 DEBUG    [PullingThread_3] logger.py:debug File size is 152528 bytes.
+Logger       2025-09-19 09:17:52,699 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PromoFull7290803800003-033-202509190010.gz
+Logger       2025-09-19 09:17:52,699 DEBUG    [PullingThread_3] logger.py:debug Start persisting file PromoFull7290803800003-035-202509190010.gz
+Logger       2025-09-19 09:17:53,110 DEBUG    [PullingThread_0] logger.py:debug File size is 165537 bytes.
+Logger       2025-09-19 09:17:53,116 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-034-202509190405.gz
+Logger       2025-09-19 09:17:53,116 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-036-202509190011.gz
+Logger       2025-09-19 09:17:53,365 DEBUG    [PullingThread_0] logger.py:debug File size is 125620 bytes.
+Logger       2025-09-19 09:17:53,371 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-036-202509190011.gz
+Logger       2025-09-19 09:17:53,371 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-037-202509190321.gz
+Logger       2025-09-19 09:17:53,587 DEBUG    [PullingThread_0] logger.py:debug File size is 171113 bytes.
+Logger       2025-09-19 09:17:53,592 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-037-202509190321.gz
+Logger       2025-09-19 09:17:53,593 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-038-202509190010.gz
+Logger       2025-09-19 09:17:54,128 DEBUG    [PullingThread_0] logger.py:debug File size is 167436 bytes.
+Logger       2025-09-19 09:17:54,134 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-038-202509190010.gz
+Logger       2025-09-19 09:17:54,134 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-039-202509190011.gz
+Logger       2025-09-19 09:17:54,252 DEBUG    [PullingThread_4] logger.py:debug File size is 166369 bytes.
+Logger       2025-09-19 09:17:54,259 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-028-202509190010.gz
+Logger       2025-09-19 09:17:54,259 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-040-202509190010.gz
+Logger       2025-09-19 09:17:54,670 DEBUG    [PullingThread_0] logger.py:debug File size is 154000 bytes.
+Logger       2025-09-19 09:17:54,676 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-039-202509190011.gz
+Logger       2025-09-19 09:17:54,677 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-041-202509190011.gz
+Logger       2025-09-19 09:17:55,153 DEBUG    [PullingThread_4] logger.py:debug File size is 176742 bytes.
+Logger       2025-09-19 09:17:55,160 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-040-202509190010.gz
+Logger       2025-09-19 09:17:55,160 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-042-202509190010.gz
+Logger       2025-09-19 09:17:55,266 DEBUG    [PullingThread_1] logger.py:debug File size is 172617 bytes.
+Logger       2025-09-19 09:17:55,272 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-031-202509190445.gz
+Logger       2025-09-19 09:17:55,272 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-046-202509190010.gz
+Logger       2025-09-19 09:17:55,715 DEBUG    [PullingThread_1] logger.py:debug File size is 153434 bytes.
+Logger       2025-09-19 09:17:55,720 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-046-202509190010.gz
+Logger       2025-09-19 09:17:55,721 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-048-202509190010.gz
+Logger       2025-09-19 09:17:55,779 DEBUG    [PullingThread_4] logger.py:debug File size is 141703 bytes.
+Logger       2025-09-19 09:17:55,784 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-042-202509190010.gz
+Logger       2025-09-19 09:17:55,784 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-050-202509190011.gz
+Logger       2025-09-19 09:17:56,513 DEBUG    [PullingThread_1] logger.py:debug File size is 149045 bytes.
+Logger       2025-09-19 09:17:56,520 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-048-202509190010.gz
+Logger       2025-09-19 09:17:56,520 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-051-202509190011.gz
+Logger       2025-09-19 09:17:56,563 DEBUG    [PullingThread_4] logger.py:debug File size is 156861 bytes.
+Logger       2025-09-19 09:17:56,571 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-050-202509190011.gz
+Logger       2025-09-19 09:17:56,571 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-052-202509190011.gz
+Logger       2025-09-19 09:17:56,744 DEBUG    [PullingThread_1] logger.py:debug File size is 125861 bytes.
+Logger       2025-09-19 09:17:56,749 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-051-202509190011.gz
+Logger       2025-09-19 09:17:56,749 DEBUG    [PullingThread_1] logger.py:debug Start persisting file PromoFull7290803800003-053-202509190010.gz
+Logger       2025-09-19 09:17:57,127 DEBUG    [PullingThread_4] logger.py:debug File size is 125454 bytes.
+Logger       2025-09-19 09:17:57,132 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-052-202509190011.gz
+Logger       2025-09-19 09:17:57,132 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-054-202509190010.gz
+Logger       2025-09-19 09:17:57,139 DEBUG    [PullingThread_0] logger.py:debug File size is 113646 bytes.
+Logger       2025-09-19 09:17:57,144 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-041-202509190011.gz
+Logger       2025-09-19 09:17:57,144 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-055-202509190010.gz
+Logger       2025-09-19 09:17:57,337 DEBUG    [PullingThread_4] logger.py:debug File size is 37224 bytes.
+Logger       2025-09-19 09:17:57,338 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-054-202509190010.gz
+Logger       2025-09-19 09:17:57,339 DEBUG    [PullingThread_4] logger.py:debug Start persisting file PromoFull7290803800003-059-202509190010.gz
+Logger       2025-09-19 09:17:57,773 DEBUG    [PullingThread_0] logger.py:debug File size is 144504 bytes.
+Logger       2025-09-19 09:17:57,778 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-055-202509190010.gz
+Logger       2025-09-19 09:17:57,778 DEBUG    [PullingThread_0] logger.py:debug Start persisting file PromoFull7290803800003-060-202509190010.gz
+Logger       2025-09-19 09:17:57,858 DEBUG    [PullingThread_4] logger.py:debug File size is 130176 bytes.
+Logger       2025-09-19 09:17:57,863 DEBUG    [PullingThread_4] logger.py:debug Done persisting file PromoFull7290803800003-059-202509190010.gz
+Logger       2025-09-19 09:17:57,864 DEBUG    [PullingThread_4] logger.py:debug Start persisting file Stores7290803800003-000-20250917-010000.xml
+Logger       2025-09-19 09:17:58,212 DEBUG    [PullingThread_1] logger.py:debug File size is 141781 bytes.
+Logger       2025-09-19 09:17:58,218 DEBUG    [PullingThread_1] logger.py:debug Done persisting file PromoFull7290803800003-053-202509190010.gz
+Logger       2025-09-19 09:17:58,351 DEBUG    [PullingThread_0] logger.py:debug File size is 140772 bytes.
+Logger       2025-09-19 09:17:58,356 DEBUG    [PullingThread_0] logger.py:debug Done persisting file PromoFull7290803800003-060-202509190010.gz
+Logger       2025-09-19 09:17:58,615 DEBUG    [PullingThread_4] logger.py:debug Done persisting file Stores7290803800003-000-20250917-010000.xml
+Logger       2025-09-19 09:17:58,742 DEBUG    [PullingThread_2] logger.py:debug File size is 160740 bytes.
+Logger       2025-09-19 09:17:58,748 DEBUG    [PullingThread_2] logger.py:debug Done persisting file PromoFull7290803800003-032-202509190011.gz
+Logger       2025-09-19 09:17:58,980 DEBUG    [PullingThread_3] logger.py:debug File size is 149307 bytes.
+Logger       2025-09-19 09:17:58,986 DEBUG    [PullingThread_3] logger.py:debug Done persisting file PromoFull7290803800003-035-202509190010.gz
+Logger       2025-09-19 09:17:58,987 INFO     [MainThread] logger.py:info Done with 127 tasks in parallel
+Logger       2025-09-19 09:17:58,992 INFO     [MainThread] logger.py:info Found the following files in ../databases/yohananof_data\Yohananof
+Logger       2025-09-19 09:17:58,993 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-004-202509190700.xml: size 305359
+Logger       2025-09-19 09:17:58,993 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-007-202509190700.xml: size 604393
+Logger       2025-09-19 09:17:58,993 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-008-202509190900.xml: size 605425
+Logger       2025-09-19 09:17:58,993 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-012-202509190700.xml: size 672975
+Logger       2025-09-19 09:17:58,993 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-016-202509190900.xml: size 674889
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-017-202509190700.xml: size 1009175
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-020-202509190800.xml: size 1432550
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-021-202509190700.xml: size 1767950
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-022-202509190700.xml: size 2085291
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-023-202509190700.xml: size 2438590
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-024-202509190700.xml: size 2766147
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-026-202509190700.xml: size 3117035
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-027-202509190700.xml: size 3673155
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-028-202509190700.xml: size 3982821
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-029-202509190800.xml: size 4291435
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-030-202509190700.xml: size 4659771
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-031-202509190800.xml: size 5009907
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-032-202509190700.xml: size 5065952
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-033-202509190700.xml: size 5137563
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-034-202509190700.xml: size 5485205
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-035-202509190700.xml: size 5742379
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-037-202509190700.xml: size 6092202
+Logger       2025-09-19 09:17:58,994 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-038-202509190700.xml: size 6413941
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-039-202509190700.xml: size 6520964
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-042-202509190700.xml: size 6936175
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-046-202509190600.xml: size 7348210
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-053-202509190600.xml: size 7570099
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-054-202509190600.xml: size 7645953
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-055-202509190800.xml: size 7925771
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Price7290803800003-059-202509190800.xml: size 8254414
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-001-202509190010.xml: size 14080410
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-004-202509190010.xml: size 20227716
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-005-202509190010.xml: size 26718889
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-007-202509190010.xml: size 33058697
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-008-202509190010.xml: size 36506858
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-009-202509190010.xml: size 42090930
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-012-202509190010.xml: size 48110802
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-013-202509190010.xml: size 55045394
+Logger       2025-09-19 09:17:58,997 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-015-202509190011.xml: size 58407557
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-016-202509190010.xml: size 64775742
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-017-202509190010.xml: size 72005069
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-018-202509190010.xml: size 76632700
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-019-202509190010.xml: size 83072419
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-020-202509190010.xml: size 89137769
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-021-202509190010.xml: size 95508835
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-022-202509190010.xml: size 102640295
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-023-202509190010.xml: size 108384428
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-024-202509190010.xml: size 115326647
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-025-202509190011.xml: size 119695930
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-026-202509190010.xml: size 126627934
+Logger       2025-09-19 09:17:58,998 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-027-202509190010.xml: size 132531729
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-028-202509190010.xml: size 138149786
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-029-202509190010.xml: size 143444937
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-030-202509190010.xml: size 150083368
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-031-202509190444.xml: size 156947797
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-032-202509190010.xml: size 163418817
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-033-202509190010.xml: size 169388814
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-034-202509190404.xml: size 175989205
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-035-202509190010.xml: size 180085208
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-036-202509190011.xml: size 186098764
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-037-202509190509.xml: size 191640600
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-038-202509190010.xml: size 195556838
+Logger       2025-09-19 09:17:58,999 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-039-202509190010.xml: size 200636889
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-040-202509190010.xml: size 207376176
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-041-202509190011.xml: size 211674077
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-042-202509190010.xml: size 215254291
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-046-202509190010.xml: size 221613690
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-048-202509190010.xml: size 224936463
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-050-202509190010.xml: size 231155080
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-051-202509190011.xml: size 236117678
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-052-202509190011.xml: size 241616850
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-053-202509190010.xml: size 244803836
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-054-202509190010.xml: size 245883023
+Logger       2025-09-19 09:17:59,000 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-055-202509190010.xml: size 249394138
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-059-202509190010.xml: size 251751180
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-060-202509190010.xml: size 255439272
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PriceFull7290803800003-7999-202405211349.xml: size 261687947
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Promo7290803800003-007-202509190600.xml: size 261690395
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Promo7290803800003-042-202509190900.xml: size 261692022
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull0000000000000-00-1-202411010501.xml: size 263620111
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-001-202509190010.xml: size 266639708
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-004-202509190010.xml: size 269734122
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-005-202509190011.xml: size 272830034
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-007-202509190010.xml: size 275922126
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-008-202509190010.xml: size 278529477
+Logger       2025-09-19 09:17:59,001 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-009-202509190010.xml: size 281706089
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-012-202509190010.xml: size 284569243
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-013-202509190011.xml: size 287682360
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-015-202509190011.xml: size 290385353
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-016-202509190010.xml: size 293198199
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-017-202509190010.xml: size 296324657
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-018-202509190010.xml: size 299057597
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-019-202509190011.xml: size 302170896
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-020-202509190011.xml: size 305314184
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-021-202509190011.xml: size 308391866
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-022-202509190011.xml: size 311491100
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-023-202509190011.xml: size 314594552
+Logger       2025-09-19 09:17:59,002 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-024-202509190011.xml: size 317684719
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-025-202509190011.xml: size 320396218
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-026-202509190011.xml: size 323299952
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-027-202509190011.xml: size 326160650
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-028-202509190010.xml: size 329179966
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-029-202509190011.xml: size 331970764
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-030-202509190011.xml: size 335043136
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-031-202509190445.xml: size 338137290
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-032-202509190011.xml: size 341050159
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-033-202509190010.xml: size 343811649
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-034-202509190405.xml: size 346882622
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-035-202509190010.xml: size 349586104
+Logger       2025-09-19 09:17:59,003 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-036-202509190011.xml: size 352666432
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-037-202509190321.xml: size 355755717
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-038-202509190010.xml: size 358828843
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-039-202509190011.xml: size 361892483
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-040-202509190010.xml: size 365108507
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-041-202509190011.xml: size 367872130
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-042-202509190010.xml: size 370604961
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-046-202509190010.xml: size 373740554
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-048-202509190010.xml: size 376445841
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-050-202509190011.xml: size 379517745
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-051-202509190011.xml: size 382604821
+Logger       2025-09-19 09:17:59,004 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-052-202509190011.xml: size 385675157
+Logger       2025-09-19 09:17:59,005 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-053-202509190010.xml: size 388375066
+Logger       2025-09-19 09:17:59,005 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-054-202509190010.xml: size 389026565
+Logger       2025-09-19 09:17:59,005 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-055-202509190010.xml: size 391945108
+Logger       2025-09-19 09:17:59,005 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-059-202509190010.xml: size 394583983
+Logger       2025-09-19 09:17:59,005 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\PromoFull7290803800003-060-202509190010.xml: size 397374664
+Logger       2025-09-19 09:17:59,005 INFO     [MainThread] logger.py:info - file ../databases/yohananof_data\Yohananof\Stores7290803800003-000-20250917-010000.xml: size 397393558
+Logger       2025-09-19 09:17:59,005 INFO     [MainThread] logger.py:info Folder ../databases/yohananof_data\Yohananof: Num of Files= 127,Size= 378.98402976989746 MB
+Logger       2025-09-19 09:17:59,008 INFO     [MainThread] logger.py:info done scraping DumpFolderNames.YOHANANOF
+Logger       2025-09-19 09:17:59,014 INFO     [MainThread] logger.py:info Done scraping all supermarkets.

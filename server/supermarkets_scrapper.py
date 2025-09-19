@@ -2,6 +2,7 @@ import datetime
 import json
 import os
 import time
+import glob
 import traceback
 
 import xmltodict
@@ -35,9 +36,9 @@ class Scrapper:
             try:
                 start_time = datetime.datetime.now()
                 print(f"Starting yohananof scraper, date and time: {datetime.datetime.now()}")
-                # scraper = MainScrapperRunner(enabled_scrapers=["YOHANANOF"], dump_folder_name=self.yohananof_folder,
-                #                              lookup_in_db=True)
-                # scraper.run(limit=None, files_types=None, when_date="latest", suppress_exception=False)
+                scraper = MainScrapperRunner(enabled_scrapers=["YOHANANOF"], dump_folder_name=self.yohananof_folder,
+                                             lookup_in_db=True)
+                scraper.run(limit=None, files_types=None, when_date="latest", suppress_exception=False)
                 self.yohananof_scan_count += 1
                 print(
                     f"yohananof scraper scan {self.yohananof_scan_count} completed successfully. sleeping for 2 hours.")
@@ -61,7 +62,8 @@ class Scrapper:
                                 f"Full prices parsed for {supermarket['StoreId']}, branch: {supermarket['BranchName']}")
                             # -----------------------continue from here-----------------------
                             # parse full promos files (special and full) and update each item in full_price file with promo *object*
-                            # self.parse_full_promos(full_prices_path=full_prices_path, branch=supermarket['StoreId'], name="yohananof")
+                            self.parse_full_promos(full_prices_path=full_prices_path, branch=supermarket['StoreId'],
+                                                   name="yohananof")
                         else:
                             print(f"Failed to extract full prices for {supermarket}, skipping.")
                             pass
@@ -202,7 +204,90 @@ class Scrapper:
         except Exception as e:
             print(f"Error parsing full prices: {e}\n {traceback.print_exc()}")
 
+    def parse_full_promos(self, full_promos_path, branch, name):
+        """
+        Parses the full promos XML file and extracts relevant data.
+        It then updates each item in the full_price file with a promo object.
+        """
+        try:
+            time.sleep(1)
 
+            print(f"Found most updated promo file: {full_promos_path}")
+
+            # 2. Parse the promo XML file
+            with open(full_promos_path, 'r', encoding='utf-8') as file:
+                xml_content = file.read()
+
+            data = xmltodict.parse(xml_content)
+            json_data = json.dumps(data, indent=4, ensure_ascii=False)
+            promos_dict = json.loads(json_data)
+
+            # 3. Process the promos data
+            promos_by_item_code = {}
+            if 'Root' in promos_dict and 'Promotions' in promos_dict['Root'] and 'Promotion' in promos_dict['Root'][
+                'Promotions']:
+                promo_list = promos_dict['Root']['Promotions']['Promotion']
+                if not isinstance(promo_list, list):
+                    promo_list = [promo_list]
+
+                for promo in promo_list:
+                    # Get all the requested promotion data to be stored
+                    promo_data = {
+                        'PromotionId': promo.get('PromotionId'),
+                        'PromotionDescription': promo.get('PromotionDescription'),
+                        'PromotionUpdateDate': promo.get('PromotionUpdateDate'),
+                        'PromotionEndDate': promo.get('PromotionEndDate'),
+                        'MinQty': promo.get('MinQty'),
+                        'DiscountedPrice': promo.get('DiscountedPrice'),
+                        'DiscountedPricePerMida': promo.get('DiscountedPricePerMida'),
+                    }
+
+                    promo_items = promo.get('PromotionItems')
+                    if promo_items and 'Item' in promo_items:
+                        promo_item_list = promo_items.get('Item')
+                        if not isinstance(promo_item_list, list):
+                            promo_item_list = [promo_item_list]
+
+                        for item in promo_item_list:
+                            item_code = item.get('ItemCode')
+                            if item_code:
+                                promos_by_item_code[item_code] = promo_data
+
+            # 4. Open and update the existing full prices JSON file
+            parsed_prices_folder = "../databases/liked_supermarkets_parsed_prices"
+            prices_json_path = os.path.join(parsed_prices_folder, f"{name}_{branch}_full_prices.json")
+
+            if not os.path.exists(prices_json_path):
+                print(f"Prices JSON file not found at {prices_json_path}. Cannot link promos.")
+                return
+
+            with open(prices_json_path, 'r', encoding='utf-8') as json_file:
+                prices_data = json.load(json_file)
+
+            # 5. Add promo information to each item in the prices data
+            promo_counter = 0
+            if 'Root' in prices_data and 'Items' in prices_data['Root'] and 'Item' in prices_data['Root']['Items']:
+                items_list = prices_data['Root']['Items']['Item']
+                if not isinstance(items_list, list):
+                    items_list = [items_list]
+
+                for item in items_list:
+                    item_code = item.get('ItemCode')
+                    if item_code and item_code in promos_by_item_code:
+                        item['promo'] = promos_by_item_code[item_code]
+                        promo_counter += 1
+
+                prices_data['total_items_with_promos'] = promo_counter
+
+            # 6. Save the updated JSON file
+            with open(prices_json_path, 'w', encoding='utf-8') as json_file:
+                json.dump(prices_data, json_file, indent=4, ensure_ascii=False)
+
+            print(
+                f"Successfully parsed promos from {full_promos_path} and updated {promo_counter} items in {prices_json_path}.")
+
+        except Exception as e:
+            print(f"Error parsing full promos: {e}\n{traceback.print_exc()}")
 
 
 if __name__ == '__main__':
@@ -210,7 +295,9 @@ if __name__ == '__main__':
         scrap = Scrapper()
         # scrap.run_scraper_for_osher_ad()
         # scrap.run_scraper_for_yohananof()
-        scrap.parse_full_prices("../databases/yohananof_data/Yohananof/PriceFull7290803800003-007-202508150010.xml",
+        # scrap.parse_full_prices("../databases/yohananof_data/Yohananof/PriceFull7290803800003-007-202509190010.xml",
+        #                         "007", "yohananof")
+        scrap.parse_full_promos("../databases/yohananof_data/Yohananof/PromoFull7290803800003-007-202509190010.xml",
                                 "007", "yohananof")
     except Exception as e:
         print(f"scraper failed: {e}\n{traceback.print_exc()}")

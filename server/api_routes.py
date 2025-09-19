@@ -511,3 +511,43 @@ def fetch_receipt():
     except Exception as e:
         # Catch any other unexpected errors
         return jsonify({"error": f"Error processing receipt: {str(e)}", "stacktrace": traceback.format_exc()}), 500
+
+
+@api_bp.route('/prices', methods=['GET'])
+def get_prices():
+    all_prices_data = []
+    try:
+        # 1. Read general settings to find liked supermarkets
+        with open('../databases/general_settings.json', 'r', encoding='utf-8') as f:
+            settings_data = json.load(f)
+            liked = settings_data.get('supermarkets', {}).get('liked', {})
+
+        # 2. For every liked supermarket, search for and read its price file
+        parsed_prices_folder = '../databases/liked_supermarkets_parsed_prices'
+
+        for supermarket_name, branches in liked.items():
+            for branch in branches:
+                branch_id = branch.get('StoreId')
+                # Construct the expected filename based on the pattern
+                filename = f"{supermarket_name}_{branch_id}_full_prices.json"
+                file_path = os.path.join(parsed_prices_folder, filename)
+
+                if os.path.exists(file_path):
+                    with open(file_path, 'r', encoding='utf-8') as price_file:
+                        price_data = json.load(price_file)
+                        price_data[supermarket_name] = branch
+                        all_prices_data.append(price_data)
+                else:
+                    print(f"File not found: {file_path}")
+
+    except FileNotFoundError:
+        return jsonify({"error": "general_settings.json file not found"}), 404
+    except json.JSONDecodeError:
+        return jsonify({"error": "Failed to decode JSON from one of the files"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    return jsonify(all_prices_data)
+
+
+
