@@ -979,6 +979,8 @@ def calculate_total_spent():
     stats_path = base_dir / "databases" / "stats.json"
     with stats_path.open('r', encoding='utf-8') as f:
         stats = json.load(f)
+    average_spend_per_receipt = stats['total_spent'] / stats['total_receipts'] if stats['total_receipts'] > 0 else 0.0
+    print(average_spend_per_receipt)
     return sum(float(r.get('total_price', 0) or 0) for r in (stats.get('receipts') or {}).values())  
     
 
