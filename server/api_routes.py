@@ -482,10 +482,10 @@ def fetch_receipt():
 
             # Step 5: Save the receipt to the designated path
             save_path = f"../receipts/{company_name}/{city_english}/{receipt_filename}".lower()
-            # if os.path.exists(save_path):
+            if os.path.exists(save_path):
             #     # If the file already exists, we can either overwrite or skip
             #     print(f"File {save_path} already exists. exiting")
-            #     return jsonify({"error": f"receipt number {receipt_filename} already exists."}), 400
+                return jsonify({"error": f"receipt number {receipt_filename} already exists."}), 400
 
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
             with open(save_path, 'w', encoding='utf-8') as f:

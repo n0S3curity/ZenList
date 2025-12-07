@@ -691,56 +691,85 @@ def generate_receipt_filename():
 
 def calculate_top_10_price_increase(products):
     price_increases = []
-    # Iterate over the values (the product dictionaries) of the products dictionary
     for barcode, product in products.items():
         if barcode == "901046":
-            # Skip the product with barcode "901046"
             continue
-        cheapest_price = product.get('cheapest_price')
-        last_price = product.get('last_price')
 
-        # Calculate price increase only if both prices are valid and cheapest_price is not zero
-        if cheapest_price is not None and last_price is not None and cheapest_price > 0:
-            price_increase_percent = ((last_price - cheapest_price) / cheapest_price) * 100
-            price_increases.append({
-                "name": product['name'],
-                "barcode": barcode,
-                "price_increase": price_increase_percent,
-                "old_price": cheapest_price,
-                "new_price": last_price
-            })
+        # Need at least 3 history entries: two previous purchases + the last purchase
+        history = product.get('history', [])
+        if len(history) < 3:
+            continue
 
-    # Sort by price increase percentage in descending order and take the top 10
+        # Get last purchase and two purchases before it
+        last_raw = history[-1].get('price')
+        prev1_raw = history[-2].get('price')
+        prev2_raw = history[-3].get('price')
+
+        # Convert to floats, skip invalid
+        try:
+            last_price = float(last_raw)
+            prev1_price = float(prev1_raw)
+            prev2_price = float(prev2_raw)
+        except (TypeError, ValueError):
+            continue
+
+        avg_prev = (prev1_price + prev2_price) / 2.0
+        if avg_prev > 0:
+            increase_percent = ((last_price - avg_prev) / avg_prev) * 100
+            if increase_percent > 0:
+                price_increases.append({
+                    "name": product.get('name', 'Unknown'),
+                    "barcode": barcode,
+                    "price_increase": increase_percent,
+                    "old_price": avg_prev,
+                    "new_price": last_price
+                })
+
     return sorted(price_increases, key=lambda x: x['price_increase'], reverse=True)[:10]
 
 
 def calculate_top_10_price_drop(products):
-    # calculate the top 10 price drops from the products dictionary, without zeros. if none found, return empty list
-    # if less then 10 found, save only whats found
     price_drops = []
     for barcode, product in products.items():
         if barcode == "901046":
             # Skip the product with barcode "901046"
             continue
-        cheapest_price = product.get('cheapest_price')
-        last_price = product.get('last_price')
 
-        # Calculate price drop only if both prices are valid and last_price is not zero
-        if cheapest_price is not None and last_price is not None and last_price > 0:
-            price_drop_percent = ((cheapest_price - last_price) / last_price) * 100
-            if price_drop_percent > 0:  # Only consider actual drops
+        # Need at least 3 history entries: two previous purchases + the last purchase
+        history = product.get('history', [])
+        if len(history) < 3:
+            continue
+
+        # Get the last purchase price and the two purchases before it
+        last_raw = history[-1].get('price')
+        prev1_raw = history[-2].get('price')
+        prev2_raw = history[-3].get('price')
+
+        # Convert to floats, skip if values are missing or invalid
+        try:
+            last_price = float(last_raw)
+            prev1_price = float(prev1_raw)
+            prev2_price = float(prev2_raw)
+        except (TypeError, ValueError):
+            continue
+
+        avg_prev = (prev1_price + prev2_price) / 2.0
+
+        # Only calculate if average of previous prices is > 0
+        if avg_prev > 0:
+            price_drop_percent = ((avg_prev - last_price) / avg_prev) * 100
+            # Only include actual drops
+            if price_drop_percent > 0:
                 price_drops.append({
-                    "name": product['name'],
+                    "name": product.get('name', 'Unknown'),
                     "barcode": barcode,
                     "price_drop": price_drop_percent,
-                    "old_price": last_price,
-                    "new_price": cheapest_price
+                    "old_price": avg_prev,
+                    "new_price": last_price
                 })
-    # Sort by price drop percentage in descending order and take the top 10
+
     return sorted(price_drops, key=lambda x: x['price_drop'], reverse=True)[:10]
 
-
-# calculate the top 10 price drop, the opposite top_10_price_increase function does
 
 
 def generate_item_id():
@@ -894,7 +923,7 @@ def process_receipt_file(file_path):
     number_of_items = int(receipt_content.get('numberOfItems', 0))
     receipt_barcode = receipt_content.get('barcode', 'Unknown Barcode')
 
-    stats['total_receipts'] += 1
+    stats['total_receipts'] = len(stats.get('receipts', {})) + 1
     stats['total_spent'] += total_receipt_price
     stats['total_items'] += number_of_items
     stats['average_spend_per_receipt'] = stats['total_spent'] / stats['total_receipts'] if stats[
@@ -930,3 +959,20 @@ def process_receipt_file(file_path):
         print("Updated stats.json successfully.")
     except IOError as e:
         print(f"Error saving database files: {e}")
+
+
+
+if __name__ == "__main__":    # Example usage of process_receipt_file
+    import pathlib
+    base_dir = pathlib.Path(__file__).resolve().parent.parent
+    products_path = base_dir / "databases" / "products.json"
+    with products_path.open('r', encoding='utf-8') as f:
+        products = json.load(f)
+    print(calculate_top_10_price_drop(products))
+    print("""
+
+---------------------------------------------------------
+
+
+""")
+    print(calculate_top_10_price_increase(products))
