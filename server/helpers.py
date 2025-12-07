@@ -1,6 +1,7 @@
 import json
 import os
 import random
+import pathlib
 
 
 def create_db_files():
@@ -924,8 +925,9 @@ def process_receipt_file(file_path):
     receipt_barcode = receipt_content.get('barcode', 'Unknown Barcode')
 
     stats['total_receipts'] = len(stats.get('receipts', {})) + 1
-    stats['total_spent'] += total_receipt_price
-    stats['total_items'] += number_of_items
+    stats['total_spent'] = sum(float(r.get('total_price', 0) or 0) for r in (stats.get('receipts') or {}).values()) + float(total_receipt_price or 0) 
+
+    stats['total_items'] = calculate_total_items() + number_of_items
     stats['average_spend_per_receipt'] = stats['total_spent'] / stats['total_receipts'] if stats[
                                                                                                'total_receipts'] > 0 else 0.0
 
@@ -960,10 +962,27 @@ def process_receipt_file(file_path):
     except IOError as e:
         print(f"Error saving database files: {e}")
 
+def calculate_total_items():
+    total_items = 0
+    base_dir = pathlib.Path(__file__).resolve().parent.parent
+    products_path = base_dir / "databases" / "products.json"
+    with products_path.open('r', encoding='utf-8') as f:
+        products = json.load(f)
+    # iterate and sum all total_quantity fields from all products
+    for product in products.values():
+        total_items += product.get('total_quantity', 0)
+    return total_items
 
+
+def calculate_total_spent():
+    base_dir = pathlib.Path(__file__).resolve().parent.parent
+    stats_path = base_dir / "databases" / "stats.json"
+    with stats_path.open('r', encoding='utf-8') as f:
+        stats = json.load(f)
+    return sum(float(r.get('total_price', 0) or 0) for r in (stats.get('receipts') or {}).values())  
+    
 
 if __name__ == "__main__":    # Example usage of process_receipt_file
-    import pathlib
     base_dir = pathlib.Path(__file__).resolve().parent.parent
     products_path = base_dir / "databases" / "products.json"
     with products_path.open('r', encoding='utf-8') as f:
@@ -976,3 +995,7 @@ if __name__ == "__main__":    # Example usage of process_receipt_file
 
 """)
     print(calculate_top_10_price_increase(products))
+
+
+    print(calculate_total_items())
+    print(calculate_total_spent())

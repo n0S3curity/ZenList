@@ -562,4 +562,3 @@ def get_prices():
     return jsonify(all_prices_data)
 
 
-
