@@ -1,6 +1,6 @@
 services:
   web:
-    container_name: zenlist
+    container_name: zenlist-backend
     # Build the image from the Dockerfile in the current directory
     build: .
     # Map port 8126 on the host to port 5000 in the container
@@ -16,3 +16,9 @@ services:
     # The CMD from the Dockerfile is used by default if this is not specified.
     command: python app.py
     restart: always
+    networks:
+      - zenlist-network
+
+networks:
+  zenlist-network:
+    driver: bridge
